@@ -1,0 +1,31 @@
+name: Java CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: '13.0.1'
+        java-package: jdk
+    
+    - name: Compile sources
+      run: |
+        find -type f -name *.java > source_list.txt
+        javac -cp libs/junit/junit-platform-console-standalone-1.5.2.jar @source_list.txt -d out/ci
+
+    - name: Run project
+      run: |
+        java -cp out/ci Main
+    
+    - name: Run unit tests
+      run: |
+        java -jar libs/junit/junit-platform-console-standalone-1.5.2.jar --fail-if-no-tests --class-path out/ci --scan-class-path
+        
