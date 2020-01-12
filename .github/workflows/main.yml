@@ -18,9 +18,9 @@ jobs:
     
     - name: Compile sources
       run: |
-        find -name *.java > source_list.txt
-        javac @source_list.txt -d out/ci
+        find -type f -name *.java > source_list.txt
+        javac -cp libs/junit/junit-platform-console-standalone-1.5.2.jar @source_list.txt -d out/ci
 
     - name: Run project
       run: |
-        java out/ci/Main
+        java -cp out/ci Main
