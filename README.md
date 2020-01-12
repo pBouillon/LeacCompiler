@@ -8,7 +8,7 @@ The project it built with the help of:
 
 - [Florian Vogt](https://github.com/TaosGit)
 - [Pierre Bouillon](https://pbouillon.github.io/)
-- Victor Varnier
+- [Victor Varnier](https://github.com/VVarnier)
 
 ## Project
 
