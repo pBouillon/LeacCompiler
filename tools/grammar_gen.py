@@ -8,8 +8,13 @@ from pathlib2 import Path
 from subprocess import call
 
 
+"""ANTLR jar file"""
 ANTLR_PATH = 'libs/antlr/antlr-3.5.2-complete.jar'
+
+"""ANTLR output folder"""
 ANTLR_OUT_PATH = 'src/antlr/'
+
+"""Grammar source folder"""
 SOURCE_PATH = 'assets/'
 
 
@@ -18,6 +23,8 @@ def fetch_grammar_file() -> Path:
 
     :return: return its path as a Path object
     """
+
+    # locate source folder
     source_folder = Path(__file__)\
         .parent\
         .parent\
@@ -26,6 +33,7 @@ def fetch_grammar_file() -> Path:
     if not source_folder.exists():
         exit(f'Missing source folder at {source_folder}')
 
+    # extract grammar file
     sources = list(source_folder.glob('**/*.g'))
 
     if len(sources) != 1:
@@ -43,9 +51,9 @@ def fetch_grammar_file() -> Path:
 
 def exec_antlr(grammar_file: Path) -> None:
     """Execute ANTLR .jar for the given grammar
-
-    :return:
     """
+
+    # locate the .jar file
     jar_path = Path(__file__)\
         .parent\
         .parent\
@@ -54,11 +62,13 @@ def exec_antlr(grammar_file: Path) -> None:
     if not jar_path.exists():
         exit(f'Missing .jar `{jar_path}`')
 
+    # generate output folder
     out_path = Path(__file__) \
         .parent \
         .parent \
         .joinpath(ANTLR_OUT_PATH)
 
+    # execute ANTLR on grammar file
     call(['java', '-jar', f"{str(jar_path)}", str(grammar_file), '-o', str(out_path)])
 
 
