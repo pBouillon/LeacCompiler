@@ -32,7 +32,7 @@ jobs:
 
     - name: Run project
       run: |
-        java -cp libs\antlr\antlr-3.5.2-runtime.jar:out/ci Main
+        java -cp libs/antlr/antlr-3.5.2-runtime.jar:out/ci Main
     
     - name: Run unit tests
       run: |
