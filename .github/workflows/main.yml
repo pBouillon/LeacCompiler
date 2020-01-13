@@ -1,6 +1,6 @@
 name: Java CI
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
@@ -22,8 +22,10 @@ jobs:
     
     - name: Compile sources
       run: |
-        find -type f -name *.java > source_list.txt
-        javac -cp libs/junit/junit-platform-console-standalone-1.5.2.jar @source_list.txt -d out/ci
+        find -type f -name *.java src/ > source_list.txt
+        javac -cp libs\antlr\antlr-3.5.2-complete.jar @source_list.txt -d out/ci
+        find -type f -name *.java tests/ > test_list.txt
+        javac -cp libs/junit/junit-platform-console-standalone-1.5.2.jar @test_list.txt -d out/ci
 
     - name: Run project
       run: |
