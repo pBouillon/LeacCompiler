@@ -16,6 +16,10 @@ jobs:
         java-version: '13.0.1'
         java-package: jdk
     
+    - name: Generate ANTLR files
+      run: |
+        java -jar ./libs/antlr/antlr-3.5.2-complete.jar assets\Grammar.g -o ./src/antlr/
+    
     - name: Compile sources
       run: |
         find -type f -name *.java > source_list.txt
