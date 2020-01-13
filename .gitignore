@@ -1,7 +1,6 @@
 # Custom ignored files
 GrammarLexer.java
 GrammarParser.java
-GrammarConstants.java
 Grammar.tokens
 
 # Created by https://www.gitignore.io/api/java,eclipse,intellij+all,visualstudio,visualstudiocode
