@@ -1,6 +1,11 @@
 grammar Grammar;
 
-@header {
+@lexer::header {
+    package antlr.assets;
+}
+
+@parser::header {
+    package antlr.assets;
     import java.util.HashMap;
 }
 
