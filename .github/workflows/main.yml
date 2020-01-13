@@ -23,7 +23,7 @@ jobs:
     - name: Compile sources
       run: |
         find src/ -type f -name *.java > source_list.txt
-        javac -cp libs\antlr\antlr-3.5.2-complete.jar @source_list.txt -d out/ci
+        javac -cp libs/antlr/antlr-3.5.2-complete.jar @source_list.txt -d out/ci
 
     - name: Compile tests
       run: |
