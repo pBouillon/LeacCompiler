@@ -11,7 +11,14 @@ grammar Grammar;
     HashMap<String,Integer>  memory = new HashMap<String,Integer>();
 }
 
-prog: WS* NEWLINE*;
+prog
+	: greetings WS* NEWLINE*
+	;
+	
+greetings
+	: 'Hello World !'
+	;	
+
 
 NEWLINE: '\r'? '\n';
 WS: (' ' | '\t')+ {$channel=HIDDEN;};
