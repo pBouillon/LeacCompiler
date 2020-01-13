@@ -1,3 +1,7 @@
+package compiler;
+
+import antlr.assets.GrammarLexer;
+import antlr.assets.GrammarParser;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
@@ -7,7 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * Compiler object
+ * compiler.Compiler object
  * Core object of the project, used to compile sources
  *
  * @author Florian Vogt

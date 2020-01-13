@@ -1,9 +1,11 @@
+import compiler.Compiler;
+import org.antlr.runtime.RecognitionException;
 import utils.GrammarConstants;
 
- import java.io.File;
+import java.io.File;
 
  /**
-  * Compiler project's entry point
+  * compiler.Compiler project's entry point
   *
   * @author Florian Vogt
   * @author Pierre Bouillon
