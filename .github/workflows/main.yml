@@ -18,7 +18,7 @@ jobs:
     
     - name: Generate ANTLR files
       run: |
-        java -jar ./libs/antlr/antlr-3.5.2-complete.jar assets\Grammar.g -o ./src/antlr/
+        java -jar ./libs/antlr/antlr-3.5.2-complete.jar assets/Grammar.g -o ./src/antlr/
     
     - name: Compile sources
       run: |
