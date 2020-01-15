@@ -2,16 +2,14 @@ grammar Grammar;
 
 /*
  * --------------------
- ANTLR options
- --------------------
+ * ANTLR options
+ * --------------------
  */
 
 options {
     // Grammar LL(1)
-    k = 1;
     
-    // Adding ignoring rule
-	ignore = IGNORE;
+    k = 1;
 
     // Configure generation AST as output
     output = AST;
@@ -19,8 +17,8 @@ options {
 
 /*
  * --------------------
- Headers
- --------------------
+ * Headers
+ * --------------------
  */
 
 @lexer::header {
@@ -35,8 +33,8 @@ options {
 
 /*
  * --------------------
- Parser rules
- --------------------
+ * Parser rules
+ * --------------------
  */
 
 @members {
@@ -51,13 +49,13 @@ program
 	;
 
 vardeclist
-    : varsuitdecl vardeclist_1
+    : vardeclist_1 vardeclist_1
     | 
     ;
     
 vardeclist_1
-    : 
-    | varsuitdecl 
+    : varsuitdecl 
+    | 
     ;
 
 varsuitdecl
@@ -67,7 +65,6 @@ varsuitdecl
 identlist
     : IDF identlist_1
     ;
-
 identlist_1
     : ',' identlist
     | 
@@ -83,9 +80,8 @@ typename
  */
 
 // Globals
-NEWLINE: '\r'? '\n';
-WS: (' ' | '\t')+ {$channel=HIDDEN;};
-IGNORE : (NEWLINE | WS)*;
+NEWLINE: '\r'? '\n' {skip();};
+WS: (' ' | '\t')+ {skip();};
 
 // Keywords
 ARRAY: 'array';
