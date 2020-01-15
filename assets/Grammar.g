@@ -117,13 +117,12 @@ arg
 	;
 	
 instr
-	: IF expr THEN instr ELSE instr { greedy = true}
-	| IF expr THEN instr
+	: IF expr THEN instr
 	| WHILE expr DO instr
 	| lvalue '=' expr
 	| RETURN ret_1 
 	| IDF '(' param
-	| '{' pre_sequence
+	| '{' end_sequence
 	| READ lvalue
 	| WRITE write_param
 	;
@@ -143,7 +142,7 @@ write_param
 	| CSTE
 	; 
 	
-pre_sequence
+end_sequence
 	: sequence '}'
 	| '}'
 	;
@@ -163,7 +162,7 @@ sequence_2
 	;
 	
 lvalue
-	:	IDF lvalue_1
+	: IDF lvalue_1
 	;
 	
 lvalue_1 
@@ -172,22 +171,32 @@ lvalue_1
 	;
 
 exprList
-	:	expr exprList_1
+	: expr exprList_1
 	;
 	
 exprList_1
-	:	',' exprList
+	: ',' exprList
 	|
 	;
 	
 expr 
-	: CSTE
-	| '(' expr ')' 
-	| expr opb expr
+	: expr_prime (plusminOps expr_prime)*
+	;
+
+expr_prime
+	: expr_prime_bis (muldivOps expr_prime_bis)*
+	;
+
+expr_prime_bis
+	: expr_final (compareOps expr_final)*
+	;
+	
+expr_final
+	: CSTE 
+	| '(' expr ')'
 	| opun expr
 	| IDF expr_1
 	;
-
 
 expr_1
 	: '(' expr_2
@@ -200,9 +209,9 @@ expr_2
 	| ')'
 	;
 		
-	
-opb :	
-	'+'
+/*
+opb 
+    : '+'
 	| '-'
 	| '*'
 	| '/'
@@ -215,6 +224,31 @@ opb :
 	| '!='
 	| 'and'
 	| 'or'
+	;
+	*/
+compareOps
+	: '<'
+	| '<='
+	| '>'
+	| '>='
+	| '=='
+	| '!='
+	;
+
+muldivOps
+	: '*'
+	| '/'
+	| '^'
+	;
+
+logicOps 
+	: 'and'
+	| 'or'
+	;
+
+plusminOps
+	: '+'
+	| '-'
 	;
 
 opun 
