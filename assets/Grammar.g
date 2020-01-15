@@ -57,25 +57,49 @@ greetings
  * --------------------
  */
 
-// Keywords
-ARRAY    = 'array';
-BOOL     = 'bool';
-DO		 = 'do';
-ELSE     = 'else';
-FUNCTION = 'function';
-IF       = 'if';
-INT      = 'int';
-OF       = 'of';
-PROGRAM  = 'program';
-READ     = 'read';
-REF      = 'ref';
-RETURN   = 'return';
-THEN     = 'then';
-VAR  	 = 'var';
-VOID     = 'void';
-WHILE    = 'while';
-WRITE    = 'write';
-
 // Globals
 NEWLINE: '\r'? '\n';
 WS: (' ' | '\t')+ {$channel=HIDDEN;};
+
+// Keywords
+ARRAY    : 'array';
+BOOL     : 'bool';
+DO		 : 'do';
+ELSE     : 'else';
+FUNCTION : 'function';
+IF       : 'if';
+INT      : 'int';
+OF       : 'of';
+PROGRAM  : 'program';
+READ     : 'read';
+REF      : 'ref';
+RETURN   : 'return';
+THEN     : 'then';
+VAR  	 : 'var';
+VOID     : 'void';
+WHILE    : 'while';
+WRITE    : 'write';
+
+// Lexical aspects
+// Represent an identifier
+fragment CHARACTER : 'a'..'z' | 'A'..'Z';
+IDF : CHARACTER (CHARACTER | DIGIT)*;
+
+// Represent a constant of any kind
+CSTE : CSTE_BOOL | CSTE_NUM | CSTE_STR;
+
+// Represent a boolean constant
+CSTE_BOOL : 'true' | 'false';
+
+// Represent a numeric constant
+fragment DIGIT: '0'..'9';
+CSTE_NUM  : DIGIT+;
+
+// Represent a text constant
+fragment ESCAPED_DOUBLE_QUOTES : '\\"';
+fragment ESCAPED_SINGLE_QUOTES : '\\\'';
+
+CSTE_STR  
+    : '"' (. | ESCAPED_DOUBLE_QUOTES)*? '"' 
+    | '\'' (. | ESCAPED_SINGLE_QUOTES)*? '\''
+    ;
