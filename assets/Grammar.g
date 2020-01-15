@@ -153,6 +153,7 @@ sequence
 
 sequence_1
 	: ';' sequence_2
+	| '}' sequence_2
 	| 
 	;
 
