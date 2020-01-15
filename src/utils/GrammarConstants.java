@@ -14,6 +14,6 @@ public class GrammarConstants {
     /**
      * Default source file to be compiled
      */
-    public static final String LANG_SOURCE = "./assets/code.lang";
+    public static final String LANG_SOURCE = "./assets/code.leac";
 
 }
