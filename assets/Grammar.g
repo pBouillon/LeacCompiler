@@ -9,6 +9,9 @@ grammar Grammar;
 options {
     // Grammar LL(1)
     k = 1;
+
+    // Configure generation AST as output
+    output = AST;
 }
 
 /*
