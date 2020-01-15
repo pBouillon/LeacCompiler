@@ -7,11 +7,14 @@ grammar Grammar;
  */
 
 options {
-	// Grammar LL(1)
-	k = 1;
+    // Grammar LL(1)
+    k = 1;
+    
+    // Adding ignoring rule
+	ignore = IGNORE;
 
-	// Configure generation AST as output
-	output = AST;
+    // Configure generation AST as output
+    output = AST;
 }
 
 /*
@@ -43,10 +46,36 @@ options {
     HashMap<String,Integer>  memory = new HashMap<String,Integer>();
 }
 
-prog: CSTE;
+program
+	: PROGRAM IDF vardeclist WS* NEWLINE*
+	;
 
-greetings: 'Hello World !';
+vardeclist
+    : varsuitdecl vardeclist_1
+    | 
+    ;
+    
+vardeclist_1
+    : 
+    | varsuitdecl 
+    ;
 
+varsuitdecl
+    : VAR identlist ':' typename ';'
+    ;
+
+identlist
+    : IDF identlist_1
+    ;
+
+identlist_1
+    : ',' identlist
+    | 
+    ;
+
+typename
+	: 'int'
+	;
 /*
  * --------------------
  Lexer rules
@@ -56,6 +85,7 @@ greetings: 'Hello World !';
 // Globals
 NEWLINE: '\r'? '\n';
 WS: (' ' | '\t')+ {$channel=HIDDEN;};
+IGNORE : (NEWLINE | WS)*;
 
 // Keywords
 ARRAY: 'array';
