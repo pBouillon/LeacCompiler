@@ -1,5 +1,10 @@
 grammar Grammar;
 
+options {
+    // Grammar LL(1)
+    k = 1;
+}
+
 @lexer::header {
     package antlr.assets;
 }
