@@ -57,5 +57,9 @@ greetings
  * --------------------
  */
 
+// Keywords
+
+
+// Globals
 NEWLINE: '\r'? '\n';
 WS: (' ' | '\t')+ {$channel=HIDDEN;};
