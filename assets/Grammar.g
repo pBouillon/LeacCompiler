@@ -45,7 +45,7 @@ options {
 }
 
 program
-	: PROGRAM IDF vardeclist WS* NEWLINE*
+	: PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE*
 	;
 
 vardeclist
@@ -70,9 +70,157 @@ identlist_1
     | 
     ;
 
-typename
-	: 'int'
+typename 
+	: atomtype
+	| arraytype
 	;
+
+atomtype 
+	:	VOID
+	|	BOOL
+	|	INT
+	;
+	
+arraytype
+	:	ARRAY '[' rangelist ']' OF atomtype
+	;
+
+rangelist
+	:	CSTE '..' CSTE rangelist_1
+	;
+
+rangelist_1
+	: ',' rangelist
+	|
+	;
+	
+funcdeclist
+	: funcdecl funcdeclist
+	;
+	
+funcdecl
+	: FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist instr
+	;
+	
+arglist
+	: arg arglist_1
+	;
+
+arglist_1
+	: ',' arglist
+	|
+	;
+	
+arg	
+	: IDF ':' typename
+	| REF IDF ':' typename
+	;
+	
+instr
+	: IF expr THEN instr ELSE instr { greedy = true}
+	| IF expr THEN instr
+	| WHILE expr DO instr
+	| lvalue '=' expr
+	| RETURN ret_1 
+	| IDF '(' param
+	| '{' pre_sequence
+	| READ lvalue
+	| WRITE write_param
+	;
+
+ret_1
+	: expr
+	| 
+	;
+	
+param 
+	: ')'
+	| exprList ')'
+	;
+
+write_param
+	: lvalue
+	| CSTE
+	; 
+	
+pre_sequence
+	: sequence '}'
+	| '}'
+	;
+	
+sequence
+	: instr sequence_1
+	;
+
+sequence_1
+	: ';' sequence_2
+	| 
+	;
+
+sequence_2
+	: sequence 
+	| 
+	;
+	
+lvalue
+	:	IDF lvalue_1
+	;
+	
+lvalue_1 
+	: '[' exprList ']'
+	| 
+	;
+
+exprList
+	:	expr exprList_1
+	;
+	
+exprList_1
+	:	',' exprList
+	|
+	;
+	
+expr 
+	: CSTE
+	| '(' expr ')' 
+	| expr opb expr
+	| opun expr
+	| IDF expr_1
+	;
+
+
+expr_1
+	: '(' expr_2
+	| '[' exprList ']'
+	|
+	;
+
+expr_2
+	: exprList ')'
+	| ')'
+	;
+		
+	
+opb :	
+	'+'
+	| '-'
+	| '*'
+	| '/'
+	| '^'
+	| '<'
+	| '<='
+	| '>'
+	| '>='
+	| '=='
+	| '!='
+	| 'and'
+	| 'or'
+	;
+
+opun 
+	: '-'
+	| 'not';
+		
 /*
  * --------------------
  Lexer rules
@@ -113,7 +261,7 @@ fragment CSTE_BOOL: 'true' | 'false';
 // Represent a numeric constant
 CSTE: CSTE_BOOL | CSTE_NUM | CSTE_STR;
 
-fragment DIGIT: '0' ..'9';
+fragment DIGIT: '-'? '0'..'9';
 
 fragment CSTE_NUM: DIGIT+;
 
