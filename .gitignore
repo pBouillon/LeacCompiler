@@ -3,6 +3,8 @@ GrammarLexer.java
 GrammarParser.java
 Grammar.tokens
 
+assets/output/
+
 # Created by https://www.gitignore.io/api/java,eclipse,intellij+all,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=java,eclipse,intellij+all,visualstudio,visualstudiocode
 
