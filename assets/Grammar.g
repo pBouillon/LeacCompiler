@@ -2,23 +2,25 @@ grammar Grammar;
 
 /*
  * --------------------
- * ANTLR options
- * --------------------
+ ANTLR options
+ --------------------
  */
 
 options {
-    // Grammar LL(1)
-    
-    k = 1;
+	// Grammar LL(1)
+	k =;
 
-    // Configure generation AST as output
-    output = AST;
+	// Adding ignoring rule
+	ignore = IGNORE;
+
+	// Configure generation AST as output
+	output = AST;
 }
 
 /*
  * --------------------
- * Headers
- * --------------------
+ Headers
+ --------------------
  */
 
 @lexer::header {
@@ -33,8 +35,8 @@ options {
 
 /*
  * --------------------
- * Parser rules
- * --------------------
+ Parser rules
+ --------------------
  */
 
 @members {
@@ -128,15 +130,7 @@ instr
 	| WRITE write_param
 	;
 
-ret_1
-	: expr
-	| 
-	;
-	
-param 
-	: ')'
-	| exprList ')'
-	;
+vardeclist_1: | varsuitdecl;
 
 write_param
 	: lvalue
@@ -265,8 +259,9 @@ opun
  */
 
 // Globals
-NEWLINE: '\r'? '\n' {skip();};
-WS: (' ' | '\t')+ {skip();};
+NEWLINE: '\r'? '\n';
+WS: (' ' | '\t')+ {$channel=HIDDEN;};
+IGNORE: (NEWLINE | WS)*;
 
 // Keywords
 ARRAY: 'array';
@@ -288,25 +283,46 @@ WHILE: 'while';
 WRITE: 'write';
 
 // Lexical aspects Represent an identifier
-fragment CHARACTER: 'a' ..'z' | 'A' ..'Z';
+fragment CHARACTER
+    : 'a'..'z' 
+    | 'A'..'Z'
+    ;
 
-IDF: CHARACTER (CHARACTER | DIGIT)*;
+IDF
+    : CHARACTER (CHARACTER | DIGIT)*
+    ;
 
 // Represent a constant of any kind
-fragment CSTE_BOOL: 'true' | 'false';
+fragment CSTE_BOOL
+    : 'true' 
+    | 'false'
+    ;
 
 // Represent a numeric constant
-CSTE: CSTE_BOOL | CSTE_NUM | CSTE_STR;
+CSTE
+    : CSTE_BOOL 
+    | CSTE_NUM 
+    | CSTE_STR
+    ;
 
-fragment DIGIT: '-'? '0'..'9';
+fragment DIGIT
+    : '0'..'9'
+    ;
 
-fragment CSTE_NUM: DIGIT+;
+fragment CSTE_NUM
+    : DIGIT+
+    ;
 
 // Represent a text constant
-fragment CSTE_STR: DOUBLE_QUOTES_STR | SINGLE_QUOTE_STR;
+fragment CSTE_STR
+    : DOUBLE_QUOTES_STR 
+    | SINGLE_QUOTE_STR
+    ;
 
-fragment DOUBLE_QUOTES_STR:
-	'"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
+fragment DOUBLE_QUOTES_STR
+    : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"'
+    ;
 
-fragment SINGLE_QUOTE_STR:
-	'\'' (~('\'' | '\\' | '\r' | '\n') | '\\' ('\'' | '\\'))* '\'';
+fragment SINGLE_QUOTE_STR
+    : '\'' (~('\'' | '\\' | '\r' | '\n') | '\\' ('\'' | '\\'))* '\''
+    ;
