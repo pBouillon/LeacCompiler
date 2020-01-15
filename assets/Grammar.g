@@ -96,6 +96,7 @@ rangelist_1
 	
 funcdeclist
 	: funcdecl funcdeclist
+	|
 	;
 	
 funcdecl
@@ -117,7 +118,7 @@ arg
 	;
 	
 instr
-	: IF expr THEN instr
+	: IF expr THEN instr (options{greedy=true;}: ELSE instr )*
 	| WHILE expr DO instr
 	| lvalue '=' expr
 	| RETURN ret_1 
@@ -148,18 +149,18 @@ end_sequence
 	;
 	
 sequence
-	: instr sequence_1
+	: instr sequence_1 
 	;
 
 sequence_1
 	: ';' sequence_2
-	| '}' sequence_2
+	| end_sequence sequence_2
 	| 
 	;
 
 sequence_2
 	: sequence 
-	| 
+	|
 	;
 	
 lvalue
@@ -227,6 +228,7 @@ opb
 	| 'or'
 	;
 	*/
+	
 compareOps
 	: '<'
 	| '<='
