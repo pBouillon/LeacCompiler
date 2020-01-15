@@ -8,7 +8,7 @@ grammar Grammar;
 
 options {
 	// Grammar LL(1)
-	k =;
+	k = 1;
 
 	// Configure generation AST as output
 	output = AST;
