@@ -27,15 +27,21 @@ public class Compiler {
      * Compile the given sources
      *
      * @param source the file to be compiled
+     * @return the generated AST if successful
+     *         null otherwise
      */
-    public void compileTarget(File source) {
+    public Tree compileTarget(File source) {
+        Tree generatedAst = null;
+
         // Compile source from its streaming content
         try (FileInputStream fileInputStream = new FileInputStream(source)) {
             // Perform compilation from the streaming sources
-            performCompilation(fileInputStream);
+            generatedAst = performCompilation(fileInputStream);
         } catch (IOException | RecognitionException e) {
             e.printStackTrace();
         }
+
+        return generatedAst;
     }
 
     /**

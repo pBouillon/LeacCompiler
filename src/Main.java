@@ -1,5 +1,6 @@
 import compiler.Compiler;
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.tree.Tree;
 import utils.GrammarConstants;
 
 import java.io.File;
@@ -27,8 +28,11 @@ import java.io.File;
          // Locate source file
          File source = new File(GrammarConstants.LANG_SOURCE);
 
-         // Compile the source file
-         compiler.compileTarget(source);
+         // Compile the source file and fetch the generated AST
+         Tree ast = compiler.compileTarget(source);
+
+         // Display result
+         System.out.println(ast.toStringTree());
      }
 
  }
