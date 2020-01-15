@@ -2,23 +2,25 @@ grammar Grammar;
 
 /*
  * --------------------
- * ANTLR options
- * --------------------
+ ANTLR options
+ --------------------
  */
 
 options {
-    // Grammar LL(1)
-    
-    k = 1;
+	// Grammar LL(1)
+	k =;
 
-    // Configure generation AST as output
-    output = AST;
+	// Adding ignoring rule
+	ignore = IGNORE;
+
+	// Configure generation AST as output
+	output = AST;
 }
 
 /*
  * --------------------
- * Headers
- * --------------------
+ Headers
+ --------------------
  */
 
 @lexer::header {
@@ -33,8 +35,8 @@ options {
 
 /*
  * --------------------
- * Parser rules
- * --------------------
+ Parser rules
+ --------------------
  */
 
 @members {
@@ -44,220 +46,19 @@ options {
     HashMap<String,Integer>  memory = new HashMap<String,Integer>();
 }
 
-program
-	: PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE*
-	;
+program: PROGRAM IDF vardeclist WS* NEWLINE*;
 
-vardeclist
-    : vardeclist_1 vardeclist_1
-    | 
-    ;
-    
-vardeclist_1
-    : varsuitdecl 
-    | 
-    ;
+vardeclist: varsuitdecl vardeclist_1 |;
 
-varsuitdecl
-    : VAR identlist ':' typename ';'
-    ;
+vardeclist_1: | varsuitdecl;
 
-identlist
-    : IDF identlist_1
-    ;
-identlist_1
-    : ',' identlist
-    | 
-    ;
+varsuitdecl: VAR identlist ':' typename ';';
 
-typename 
-	: atomtype
-	| arraytype
-	;
+identlist: IDF identlist_1;
 
-atomtype 
-	:	VOID
-	|	BOOL
-	|	INT
-	;
-	
-arraytype
-	:	ARRAY '[' rangelist ']' OF atomtype
-	;
+identlist_1: ',' identlist |;
 
-rangelist
-	:	CSTE '..' CSTE rangelist_1
-	;
-
-rangelist_1
-	: ',' rangelist
-	|
-	;
-	
-funcdeclist
-	: funcdecl funcdeclist
-	;
-	
-funcdecl
-	: FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist instr
-	;
-	
-arglist
-	: arg arglist_1
-	;
-
-arglist_1
-	: ',' arglist
-	|
-	;
-	
-arg	
-	: IDF ':' typename
-	| REF IDF ':' typename
-	;
-	
-instr
-	: IF expr THEN instr
-	| WHILE expr DO instr
-	| lvalue '=' expr
-	| RETURN ret_1 
-	| IDF '(' param
-	| '{' end_sequence
-	| READ lvalue
-	| WRITE write_param
-	;
-
-ret_1
-	: expr
-	| 
-	;
-	
-param 
-	: ')'
-	| exprList ')'
-	;
-
-write_param
-	: lvalue
-	| CSTE
-	; 
-	
-end_sequence
-	: sequence '}'
-	| '}'
-	;
-	
-sequence
-	: instr sequence_1
-	;
-
-sequence_1
-	: ';' sequence_2
-	| '}' sequence_2
-	| 
-	;
-
-sequence_2
-	: sequence 
-	| 
-	;
-	
-lvalue
-	: IDF lvalue_1
-	;
-	
-lvalue_1 
-	: '[' exprList ']'
-	| 
-	;
-
-exprList
-	: expr exprList_1
-	;
-	
-exprList_1
-	: ',' exprList
-	|
-	;
-	
-expr 
-	: expr_prime (plusminOps expr_prime)*
-	;
-
-expr_prime
-	: expr_prime_bis (muldivOps expr_prime_bis)*
-	;
-
-expr_prime_bis
-	: expr_final (compareOps expr_final)*
-	;
-	
-expr_final
-	: CSTE 
-	| '(' expr ')'
-	| opun expr
-	| IDF expr_1
-	;
-
-expr_1
-	: '(' expr_2
-	| '[' exprList ']'
-	|
-	;
-
-expr_2
-	: exprList ')'
-	| ')'
-	;
-		
-/*
-opb 
-    : '+'
-	| '-'
-	| '*'
-	| '/'
-	| '^'
-	| '<'
-	| '<='
-	| '>'
-	| '>='
-	| '=='
-	| '!='
-	| 'and'
-	| 'or'
-	;
-	*/
-    
-compareOps
-	: '<'
-	| '<='
-	| '>'
-	| '>='
-	| '=='
-	| '!='
-	;
-
-muldivOps
-	: '*'
-	| '/'
-	| '^'
-	;
-
-logicOps 
-	: 'and'
-	| 'or'
-	;
-
-plusminOps
-	: '+'
-	| '-'
-	;
-
-opun 
-	: '-'
-	| 'not'
-    ;
-		
+typename: 'int';
 /*
  * --------------------
  Lexer rules
@@ -265,11 +66,9 @@ opun
  */
 
 // Globals
-IGNORE: (NEWLINE | WS)*;
-
 NEWLINE: '\r'? '\n';
-
 WS: (' ' | '\t')+ {$channel=HIDDEN;};
+IGNORE: (NEWLINE | WS)*;
 
 // Keywords
 ARRAY: 'array';
@@ -291,27 +90,46 @@ WHILE: 'while';
 WRITE: 'write';
 
 // Lexical aspects Represent an identifier
-fragment CHARACTER: 'a' ..'z' | 'A' ..'Z';
+fragment CHARACTER
+    : 'a'..'z' 
+    | 'A'..'Z'
+    ;
 
-IDF: CHARACTER (CHARACTER | DIGIT)*;
+IDF
+    : CHARACTER (CHARACTER | DIGIT)*
+    ;
 
 // Represent a constant of any kind
-fragment CSTE_BOOL: 'true' | 'false';
+fragment CSTE_BOOL
+    : 'true' 
+    | 'false'
+    ;
 
 // Represent a numeric constant
-CSTE: CSTE_BOOL | CSTE_NUM | CSTE_STR;
+CSTE
+    : CSTE_BOOL 
+    | CSTE_NUM 
+    | CSTE_STR
+    ;
 
-fragment DIGIT: '0' ..'9';
+fragment DIGIT
+    : '0'..'9'
+    ;
 
-fragment CSTE_NUM: DIGIT+;
+fragment CSTE_NUM
+    : DIGIT+
+    ;
 
 // Represent a text constant
-fragment CSTE_STR:
-	CSTE_STR_DOUBLE_QUOTES
-	| CSTE_STR_SINGLE_QUOTES;
+fragment CSTE_STR
+    : DOUBLE_QUOTES_STR 
+    | SINGLE_QUOTE_STR
+    ;
 
-fragment CSTE_STR_DOUBLE_QUOTES:
-	'"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
+fragment DOUBLE_QUOTES_STR
+    : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"'
+    ;
 
-fragment CSTE_STR_SINGLE_QUOTES:
-	'\'' (~('\'' | '\\' | '\r' | '\n') | '\\' ('\'' | '\\'))* '\'';
+fragment SINGLE_QUOTE_STR
+    : '\'' (~('\'' | '\\' | '\r' | '\n') | '\\' ('\'' | '\\'))* '\''
+    ;
