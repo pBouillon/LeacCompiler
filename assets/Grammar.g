@@ -227,6 +227,7 @@ opb
 	| 'or'
 	;
 	*/
+    
 compareOps
 	: '<'
 	| '<='
@@ -254,7 +255,8 @@ plusminOps
 
 opun 
 	: '-'
-	| 'not';
+	| 'not'
+    ;
 		
 /*
  * --------------------
@@ -263,8 +265,11 @@ opun
  */
 
 // Globals
-NEWLINE: '\r'? '\n' {skip();};
-WS: (' ' | '\t')+ {skip();};
+IGNORE: (NEWLINE | WS)*;
+
+NEWLINE: '\r'? '\n';
+
+WS: (' ' | '\t')+ {$channel=HIDDEN;};
 
 // Keywords
 ARRAY: 'array';
@@ -296,15 +301,17 @@ fragment CSTE_BOOL: 'true' | 'false';
 // Represent a numeric constant
 CSTE: CSTE_BOOL | CSTE_NUM | CSTE_STR;
 
-fragment DIGIT: '-'? '0'..'9';
+fragment DIGIT: '0' ..'9';
 
 fragment CSTE_NUM: DIGIT+;
 
 // Represent a text constant
-fragment CSTE_STR: DOUBLE_QUOTES_STR | SINGLE_QUOTE_STR;
+fragment CSTE_STR:
+	CSTE_STR_DOUBLE_QUOTES
+	| CSTE_STR_SINGLE_QUOTES;
 
-fragment DOUBLE_QUOTES_STR:
+fragment CSTE_STR_DOUBLE_QUOTES:
 	'"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
 
-fragment SINGLE_QUOTE_STR:
+fragment CSTE_STR_SINGLE_QUOTES:
 	'\'' (~('\'' | '\\' | '\r' | '\n') | '\\' ('\'' | '\\'))* '\'';
