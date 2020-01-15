@@ -58,7 +58,23 @@ greetings
  */
 
 // Keywords
-
+ARRAY    = 'array';
+BOOL     = 'bool';
+DO		 = 'do';
+ELSE     = 'else';
+FUNCTION = 'function';
+IF       = 'if';
+INT      = 'int';
+OF       = 'of';
+PROGRAM  = 'program';
+READ     = 'read';
+REF      = 'ref';
+RETURN   = 'return';
+THEN     = 'then';
+VAR  	 = 'var';
+VOID     = 'void';
+WHILE    = 'while';
+WRITE    = 'write';
 
 // Globals
 NEWLINE: '\r'? '\n';
