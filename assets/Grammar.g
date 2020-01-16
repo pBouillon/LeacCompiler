@@ -132,8 +132,8 @@ instr_after_idf
 	;
 
 ret_1
-    : expr 
-    |
+    : expr
+    | 
     ;
 
 param
@@ -184,20 +184,32 @@ exprList_1
     ;
 
 expr
-    : expr_prime (options {greedy=true;}: (plusminOps expr_prime))*
+	: expr_compare (andOrOps expr_compare)*
+	;
+	
+expr_compare
+    : expr_plusmin (compareOps expr_plusmin)*
+    ;
+    
+expr_plusmin
+    : expr_muldiv (plusminOps expr_muldiv)*
     ;
 
-expr_prime
-    : expr_prime_bis (options {greedy=true;}: (muldivOps expr_prime_bis))*
+expr_muldiv
+    : expr_power (muldivOps expr_power)*
     ;
 
-expr_prime_bis
-    : expr_final (options {greedy=true;}: (compareOps expr_final))*
-    ;
+expr_power
+	:	expr_parent (powerOps expr_parent)*
+	;
 
+expr_parent
+	: '(' expr_compare ')' 
+	| expr_final
+	;
+	
 expr_final
     : CSTE 
-    | '(' expr ')' 
     | opun expr 
     | IDF expr_1
     ;
@@ -243,10 +255,13 @@ compareOps
 muldivOps
     : '*' 
     | '/' 
-    | '^'
     ;
 
-logicOps
+powerOps 
+	:	'^'
+    ;
+
+andOrOps
     : 'and' 
     | 'or'
     ;
