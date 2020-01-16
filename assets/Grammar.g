@@ -86,7 +86,7 @@ arraytype
     ;
 
 rangelist
-    : CSTE '..' CSTE rangelist_1
+    : atom '..' atom rangelist_1
     ;
 
 rangelist_1
@@ -258,6 +258,10 @@ opun
     : '-' 
     | 'not'
     ;
+
+atom
+	: opun? CSTE
+	;
 
 /*
 * --------------------
