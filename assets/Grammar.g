@@ -156,8 +156,7 @@ sequence
     ;
 
 sequence_1
-    : ';' sequence_2 
-    | end_sequence sequence_2 
+    : ';' sequence_2  
     |
     ;
 
