@@ -102,7 +102,6 @@ funcdecl
     : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence
     ;
 
-
 arglist
     : arg arglist_1
     |
@@ -202,10 +201,10 @@ expr_muldiv
     ;
 
 expr_power
-	: expr_parent (powerOps expr_parent)*
+	: expr_base (powerOps expr_base)*
 	;
 
-expr_parent
+expr_base
 	: '(' expr_compare ')' 
 	| expr_final
 	;
@@ -226,24 +225,6 @@ expr_2
     : exprList ')' 
     | ')'
     ;
-
-/*
-    opb 
-: '+'
-| '-'
-| '*'
-| '/'
-| '^'
-| '<'
-| '<='
-| '>'
-| '>='
-| '=='
-| '!='
-| 'and'
-    | 'or'
-;
-    */
 
 compareOps
     : '<' 
