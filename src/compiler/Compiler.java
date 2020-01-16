@@ -66,7 +66,7 @@ public class Compiler {
         GrammarParser parser = new GrammarParser(tokens);
 
         // Begin parsing at `prog` rule
-        GrammarParser.prog_return result = parser.prog();
+        GrammarParser.program_return result = parser.program();
 
         // Return the generated AST
         return (Tree)result.getTree();
