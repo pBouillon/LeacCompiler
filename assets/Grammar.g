@@ -7,15 +7,22 @@ grammar Grammar;
  */
 
 options {
-	// Grammar LL(1)
-	k = 1;
+    // Grammar LL(1)
+    k = 1;
 
-	// Configure generation AST as output
-	output = AST;
+    // Configure generation AST as output
+    output = AST;
 }
 
 tokens {
-	ROOT;
+    ARG_LIST;
+    ARG;
+    FUNC_DECL_LIST;
+    FUNC_DECL;
+    REF_ARG;
+    ROOT;
+    VAR_DECL_LIST;
+    VAR_DECL;
 }
 
 /*
@@ -52,16 +59,11 @@ program
     ;
 
 vardeclist
-    : vardeclist_1 vardeclist
-    |
-    ;
-
-vardeclist_1
-    : varsuitdecl 
+    : varsuitdecl* -> ^(VAR_DECL_LIST varsuitdecl*)
     ;
 
 varsuitdecl
-    : VAR identlist ':' typename ';' -> identlist typename
+    : VAR identlist ':' typename ';' -> ^(VAR_DECL typename identlist)
     ;
 
 identlist
@@ -103,22 +105,17 @@ funcdeclist
     ;
 
 funcdecl
-    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> IDF arglist atomtype vardeclist end_sequence
+    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL_LIST IDF arglist atomtype vardeclist end_sequence)
     ;
 
 arglist
-    : arg arglist_1
-    |
-    ;
-
-arglist_1
-    : ',' arglist -> arglist
-    |
-    ;
+	: arg (',' arg)* -> ^(ARG_LIST arg*)
+	| -> 
+	;
 
 arg
-    : IDF ':' typename -> IDF typename
-    | REF IDF ':' typename -> IDF typename
+    : IDF ':' typename -> ^(ARG IDF typename)
+    | REF IDF ':' typename -> ^(REF_ARG IDF typename)
     ;
 
 instr
@@ -133,7 +130,7 @@ instr
     
 instr_after_idf
 	: lvalue_1 '=' expr -> lvalue_1 expr
-	| '(' param -> param
+	| '(' param -> param*
 	;
 
 ret_1
