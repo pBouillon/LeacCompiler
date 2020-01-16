@@ -105,6 +105,7 @@ funcdecl
 
 arglist
     : arg arglist_1
+    |
     ;
 
 arglist_1
