@@ -48,7 +48,7 @@ program
     ;
 
 vardeclist
-    : vardeclist_1 vardeclist 
+    : vardeclist_1 vardeclist
     |
     ;
 
@@ -211,7 +211,7 @@ expr_base
 	
 expr_final
     : CSTE 
-    | opun expr 
+    | opun expr_final
     | IDF expr_1
     ;
 
