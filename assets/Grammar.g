@@ -185,15 +185,15 @@ exprList_1
     ;
 
 expr
-    : expr_prime (plusminOps expr_prime)*
+    : expr_prime (options {greedy=true;}: (plusminOps expr_prime))*
     ;
 
 expr_prime
-    : expr_prime_bis (muldivOps expr_prime_bis)*
+    : expr_prime_bis (options {greedy=true;}: (muldivOps expr_prime_bis))*
     ;
 
 expr_prime_bis
-    : expr_final (compareOps expr_final)*
+    : expr_final (options {greedy=true;}: (compareOps expr_final))*
     ;
 
 expr_final
