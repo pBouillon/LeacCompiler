@@ -270,6 +270,7 @@ Lexer rules
 */
 
 // Globals
+COMMENT_BLOC: '/*' (options {greedy=false;}: .)* '*/' {skip();};
 NEWLINE: '\r'? '\n' {skip();};
 WS: (' ' | '\t')+ {skip();};
 
