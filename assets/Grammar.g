@@ -8,7 +8,7 @@ grammar Grammar;
 
 options {
 	// Grammar LL(1)
-	k =;
+	k = 1;
 
 	// Configure generation AST as output
 	output = AST;
@@ -43,156 +43,292 @@ options {
     HashMap<String,Integer>  memory = new HashMap<String,Integer>();
 }
 
-program: PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE*;
+program
+    : PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE*
+    ;
 
-vardeclist: vardeclist_1 vardeclist_1 |;
+vardeclist
+    : vardeclist_1 vardeclist_1 
+    |
+    ;
 
-vardeclist_1: varsuitdecl |;
+vardeclist_1
+    : varsuitdecl 
+    |
+    ;
 
-varsuitdecl: VAR identlist ':' typename ';';
+varsuitdecl
+    : VAR identlist ':' typename ';'
+    ;
 
-identlist: IDF identlist_1;
+identlist
+    : IDF identlist_1
+    ;
 
-identlist_1: ',' identlist |;
+identlist_1
+    : ',' identlist 
+    |
+    ;
 
-typename: atomtype | arraytype;
+typename
+    : atomtype
+    | arraytype
+    ;
 
-atomtype: VOID | BOOL | INT;
+atomtype
+    : VOID
+    | BOOL
+    | INT
+    ;
 
-arraytype: ARRAY '[' rangelist ']' OF atomtype;
+arraytype
+    : ARRAY '[' rangelist ']' OF atomtype
+    ;
 
-rangelist: CSTE '..' CSTE rangelist_1;
+rangelist
+    : CSTE '..' CSTE rangelist_1
+    ;
 
-rangelist_1: ',' rangelist |;
+rangelist_1
+    : ',' rangelist 
+    |
+    ;
 
-funcdeclist: funcdecl funcdeclist |;
+funcdeclist
+    : funcdecl funcdeclist 
+    |
+    ;
 
-funcdecl:
-	FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist instr;
+funcdecl
+    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist instr
+    ;
 
-arglist: arg arglist_1;
+arglist
+    : arg arglist_1
+    ;
 
-arglist_1: ',' arglist |;
+arglist_1
+    : ',' arglist 
+    |
+    ;
 
-arg: IDF ':' typename | REF IDF ':' typename;
+arg
+    : IDF ':' typename
+    | REF IDF ':' typename
+    ;
 
-instr: IF expr THEN instr (options {greedy = true;
-		}: ELSE instr
-		)* | WHILE expr DO instr | lvalue '=' expr | RETURN ret_1 | IDF '(' param | '{' end_sequence
-			| READ lvalue | WRITE write_param;
+instr
+    : IF expr THEN instr (options {greedy = true; }: ELSE instr)* 
+    | WHILE expr DO instr 
+    | lvalue '=' expr 
+    | RETURN ret_1 
+    | IDF '(' param 
+    | '{' end_sequence
+    | READ lvalue 
+    | WRITE write_param
+    ;
 
-	ret_1: expr |;
+ret_1
+    : expr 
+    |
+    ;
 
-	param: ')' | exprList ')';
+param
+    : ')' 
+    | exprList ')'
+    ;
 
-	write_param: lvalue | CSTE;
+write_param
+    : lvalue 
+    | CSTE
+    ;
 
-	end_sequence: sequence '}' | '}';
+end_sequence
+    : sequence '}' 
+    | '}'
+    ;
 
-	sequence: instr sequence_1;
+sequence
+    : instr sequence_1
+    ;
 
-	sequence_1: ';' sequence_2 | end_sequence sequence_2 |;
+sequence_1
+    : ';' sequence_2 
+    | end_sequence sequence_2 
+    |
+    ;
 
-	sequence_2: sequence |;
+sequence_2: 
+    sequence 
+    |
+    ;
 
-	lvalue: IDF lvalue_1;
+lvalue
+    : IDF lvalue_1
+    ;
 
-	lvalue_1: '[' exprList ']' |;
+lvalue_1
+    : '[' exprList ']' 
+    |
+    ;
 
-	exprList: expr exprList_1;
+exprList
+    : expr exprList_1
+    ;
 
-	exprList_1: ',' exprList |;
+exprList_1
+    : ',' exprList 
+    |
+    ;
 
-	expr: expr_prime (plusminOps expr_prime)*;
+expr
+    : expr_prime (plusminOps expr_prime)*
+    ;
 
-	expr_prime: expr_prime_bis (muldivOps expr_prime_bis)*;
+expr_prime
+    : expr_prime_bis (muldivOps expr_prime_bis)*
+    ;
 
-	expr_prime_bis: expr_final (compareOps expr_final)*;
+expr_prime_bis
+    : expr_final (compareOps expr_final)*
+    ;
 
-	expr_final: CSTE | '(' expr ')' | opun expr | IDF expr_1;
+expr_final
+    : CSTE 
+    | '(' expr ')' 
+    | opun expr 
+    | IDF expr_1
+    ;
 
-	expr_1: '(' expr_2 | '[' exprList ']' |;
+expr_1
+    : '(' expr_2 
+    | '[' exprList ']' 
+    |
+    ;
 
-	expr_2: exprList ')' | ')';
+expr_2
+    : exprList ')' 
+    | ')'
+    ;
 
-	/*
-	 opb 
- : '+'
- | '-'
- | '*'
- | '/'
- | '^'
- | '<'
- | '<='
- | '>'
- | '>='
- | '=='
- | '!='
- | 'and'
-	 | 'or'
- ;
-	 */
+/*
+    opb 
+: '+'
+| '-'
+| '*'
+| '/'
+| '^'
+| '<'
+| '<='
+| '>'
+| '>='
+| '=='
+| '!='
+| 'and'
+    | 'or'
+;
+    */
 
-	compareOps: '<' | '<=' | '>' | '>=' | '==' | '!=';
+compareOps
+    : '<' 
+    | '<=' 
+    | '>' 
+    | '>=' 
+    | '==' 
+    | '!='
+    ;
 
-	muldivOps: '*' | '/' | '^';
+muldivOps
+    : '*' 
+    | '/' 
+    | '^'
+    ;
 
-	logicOps: 'and' | 'or';
+logicOps
+    : 'and' 
+    | 'or'
+    ;
 
-	plusminOps: '+' | '-';
+plusminOps
+    : '+' 
+    | '-'
+    ;
 
-	opun: '-' | 'not';
+opun
+    : '-' 
+    | 'not'
+    ;
 
-	/*
-	 * --------------------
- Lexer rules
- --------------------
-	 */
+/*
+* --------------------
+Lexer rules
+--------------------
+*/
 
-	// Globals
-	NEWLINE: '\r'? '\n' {skip();};
-	WS: (' ' | '\t')+ {skip();};
+// Globals
+NEWLINE: '\r'? '\n' {skip();};
+WS: (' ' | '\t')+ {skip();};
 
-	// Keywords
-	ARRAY: 'array';
-	BOOL: 'bool';
-	DO: 'do';
-	ELSE: 'else';
-	FUNCTION: 'function';
-	IF: 'if';
-	INT: 'int';
-	OF: 'of';
-	PROGRAM: 'program';
-	READ: 'read';
-	REF: 'ref';
-	RETURN: 'return';
-	THEN: 'then';
-	VAR: 'var';
-	VOID: 'void';
-	WHILE: 'while';
-	WRITE: 'write';
+// Keywords
+ARRAY: 'array';
+BOOL: 'bool';
+DO: 'do';
+ELSE: 'else';
+FUNCTION: 'function';
+IF: 'if';
+INT: 'int';
+OF: 'of';
+PROGRAM: 'program';
+READ: 'read';
+REF: 'ref';
+RETURN: 'return';
+THEN: 'then';
+VAR: 'var';
+VOID: 'void';
+WHILE: 'while';
+WRITE: 'write';
 
-	// Lexical aspects Represent an identifier
-	fragment CHARACTER: 'a' ..'z' | 'A' ..'Z';
+// Lexical aspects Represent an identifier
+fragment CHARACTER
+    : 'a'..'z'
+    | 'A'..'Z'
+    ;
 
-	IDF: CHARACTER (CHARACTER | DIGIT)*;
+IDF
+    : CHARACTER (CHARACTER | DIGIT)*
+    ;
 
-	// Represent a constant of any kind
-	fragment CSTE_BOOL: 'true' | 'false';
+// Represent a constant of any kind
+fragment CSTE_BOOL
+    : 'true'
+    | 'false'
+    ;
 
-	// Represent a numeric constant
-	CSTE: CSTE_BOOL | CSTE_NUM | CSTE_STR;
+// Represent a numeric constant
+CSTE
+    : CSTE_BOOL
+    | CSTE_NUM 
+    | CSTE_STR
+    ;
 
-	fragment DIGIT: '0' ..'9';
+fragment DIGIT
+    : '0'..'9'
+    ;
 
-	fragment CSTE_NUM: DIGIT+;
+fragment CSTE_NUM
+    : DIGIT+
+    ;
 
-	// Represent a text constant
-	fragment CSTE_STR: DOUBLE_QUOTES_STR | SINGLE_QUOTE_STR;
+// Represent a text constant
+fragment CSTE_STR
+    : DOUBLE_QUOTES_STR
+    | SINGLE_QUOTE_STR
+    ;
 
-	fragment DOUBLE_QUOTES_STR:
-		'"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
+fragment DOUBLE_QUOTES_STR
+    : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"'
+    ;
 
-	fragment SINGLE_QUOTE_STR:
-		'\'' (~('\'' | '\\' | '\r' | '\n') | '\\' ('\'' | '\\'))* '\'';
-	
+fragment SINGLE_QUOTE_STR
+    : '\'' (~('\'' | '\\' | '\r' | '\n') | '\\' ('\'' | '\\'))* '\''
+    ;
