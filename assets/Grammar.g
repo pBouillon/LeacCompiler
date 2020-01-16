@@ -99,8 +99,9 @@ funcdeclist
     ;
 
 funcdecl
-    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist instr
+    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence
     ;
+
 
 arglist
     : arg arglist_1
@@ -200,7 +201,7 @@ expr_muldiv
     ;
 
 expr_power
-	:	expr_parent (powerOps expr_parent)*
+	: expr_parent (powerOps expr_parent)*
 	;
 
 expr_parent
