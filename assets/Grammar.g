@@ -48,13 +48,12 @@ program
     ;
 
 vardeclist
-    : vardeclist_1 vardeclist_1 
+    : vardeclist_1 vardeclist 
     |
     ;
 
 vardeclist_1
     : varsuitdecl 
-    |
     ;
 
 varsuitdecl
@@ -120,13 +119,17 @@ arg
 instr
     : IF expr THEN instr (options {greedy = true; }: ELSE instr)* 
     | WHILE expr DO instr 
-    | lvalue '=' expr 
-    | RETURN ret_1 
-    | IDF '(' param 
+    | IDF instr_after_idf
+    | RETURN ret_1
     | '{' end_sequence
     | READ lvalue 
     | WRITE write_param
     ;
+    
+instr_after_idf
+	: lvalue_1 '=' expr
+	| '(' param
+	;
 
 ret_1
     : expr 
