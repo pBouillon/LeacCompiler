@@ -14,6 +14,10 @@ options {
 	output = AST;
 }
 
+tokens {
+	ROOT;
+}
+
 /*
  * --------------------
  Headers
@@ -44,7 +48,7 @@ options {
 }
 
 program
-    : PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE*
+    : PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE* -> ^(ROOT IDF vardeclist funcdeclist instr)
     ;
 
 vardeclist
@@ -57,7 +61,7 @@ vardeclist_1
     ;
 
 varsuitdecl
-    : VAR identlist ':' typename ';'
+    : VAR identlist ':' typename ';' -> identlist typename
     ;
 
 identlist
@@ -65,7 +69,7 @@ identlist
     ;
 
 identlist_1
-    : ',' identlist 
+    : ',' identlist -> identlist
     |
     ;
 
@@ -81,15 +85,15 @@ atomtype
     ;
 
 arraytype
-    : ARRAY '[' rangelist ']' OF atomtype
+    : ARRAY '[' rangelist ']' OF atomtype -> rangelist atomtype
     ;
 
 rangelist
-    : atom '..' atom rangelist_1
+    : atom '..' atom rangelist_1 -> atom atom rangelist_1
     ;
 
 rangelist_1
-    : ',' rangelist 
+    : ',' rangelist -> rangelist
     |
     ;
 
@@ -99,7 +103,7 @@ funcdeclist
     ;
 
 funcdecl
-    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence
+    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> IDF arglist atomtype vardeclist end_sequence
     ;
 
 arglist
@@ -108,28 +112,28 @@ arglist
     ;
 
 arglist_1
-    : ',' arglist 
+    : ',' arglist -> arglist
     |
     ;
 
 arg
-    : IDF ':' typename
-    | REF IDF ':' typename
+    : IDF ':' typename -> IDF typename
+    | REF IDF ':' typename -> IDF typename
     ;
 
 instr
     : IF expr THEN instr (options {greedy = true; }: ELSE instr)* 
-    | WHILE expr DO instr 
+    | WHILE expr DO instr -> expr instr
     | IDF instr_after_idf
     | RETURN ret_1
-    | '{' end_sequence
+    | '{' end_sequence -> end_sequence
     | READ lvalue 
     | WRITE write_param
     ;
     
 instr_after_idf
-	: lvalue_1 '=' expr
-	| '(' param
+	: lvalue_1 '=' expr -> lvalue_1 expr
+	| '(' param -> param
 	;
 
 ret_1
@@ -138,8 +142,8 @@ ret_1
     ;
 
 param
-    : ')' 
-    | exprList ')'
+    : ')' -> 
+    | exprList ')' -> exprList
     ;
 
 write_param
@@ -148,8 +152,8 @@ write_param
     ;
 
 end_sequence
-    : sequence '}' 
-    | '}'
+    : sequence '}' -> sequence
+    | '}' ->
     ;
 
 sequence
@@ -157,12 +161,12 @@ sequence
     ;
 
 sequence_1
-    : ';' sequence_2  
+    : ';' sequence_2 -> sequence_2
     |
     ;
 
-sequence_2: 
-    sequence 
+sequence_2
+	: sequence 
     |
     ;
 
@@ -171,7 +175,7 @@ lvalue
     ;
 
 lvalue_1
-    : '[' exprList ']' 
+    : '[' exprList ']' -> exprList
     |
     ;
 
@@ -180,7 +184,7 @@ exprList
     ;
 
 exprList_1
-    : ',' exprList 
+    : ',' exprList -> exprList
     |
     ;
 
@@ -205,7 +209,7 @@ expr_power
 	;
 
 expr_base
-	: '(' expr_compare ')' 
+	: '(' expr_compare ')' -> expr_compare
 	| expr_final
 	;
 	
@@ -216,47 +220,47 @@ expr_final
     ;
 
 expr_1
-    : '(' expr_2 
-    | '[' exprList ']' 
+    : '(' expr_2 -> expr_2
+    | '[' exprList ']' -> exprList
     |
     ;
 
 expr_2
-    : exprList ')' 
-    | ')'
+    : exprList ')' -> exprList
+    | ')' ->
     ;
 
 compareOps
-    : '<' 
-    | '<=' 
-    | '>' 
-    | '>=' 
-    | '==' 
-    | '!='
+    : '<' ->
+    | '<=' ->
+    | '>' ->
+    | '>=' ->
+    | '==' ->
+    | '!='->
     ;
 
 muldivOps
-    : '*' 
-    | '/' 
+    : '*' ->
+    | '/' ->
     ;
 
 powerOps 
-	:	'^'
+	: '^' ->
     ;
 
 andOrOps
-    : 'and' 
-    | 'or'
+    : 'and' ->
+    | 'or' ->
     ;
 
 plusminOps
-    : '+' 
-    | '-'
+    : '+' ->
+    | '-' ->
     ;
 
 opun
-    : '-' 
-    | 'not'
+    : '-' ->
+    | 'not' ->
     ;
 
 atom
