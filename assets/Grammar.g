@@ -19,6 +19,7 @@ tokens {
     ARG;
     FUNC_DECL_LIST;
     FUNC_DECL;
+    INSTR_BLOC;
     REF_ARG;
     ROOT;
     VAR_DECL_LIST;
@@ -55,7 +56,7 @@ tokens {
 }
 
 program
-    : PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE* -> ^(ROOT IDF vardeclist funcdeclist instr)
+    : PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE* -> ^(ROOT IDF vardeclist ^(FUNC_DECL_LIST funcdeclist) ^(INSTR_BLOC instr))
     ;
 
 vardeclist
@@ -105,7 +106,7 @@ funcdeclist
     ;
 
 funcdecl
-    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL_LIST IDF arglist atomtype vardeclist end_sequence)
+    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' instr_sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist ^(INSTR_BLOC instr_sequence))
     ;
 
 arglist
@@ -123,7 +124,7 @@ instr
     | WHILE expr DO instr -> expr instr
     | IDF instr_after_idf
     | RETURN ret_1
-    | '{' end_sequence -> end_sequence
+    | '{' instr_sequence -> instr_sequence
     | READ lvalue 
     | WRITE write_param
     ;
@@ -148,7 +149,7 @@ write_param
     | CSTE
     ;
 
-end_sequence
+instr_sequence
     : sequence '}' -> sequence
     | '}' ->
     ;
@@ -173,7 +174,7 @@ lvalue
 
 lvalue_1
     : '[' exprList ']' -> exprList
-    |
+    | ->
     ;
 
 exprList
@@ -182,7 +183,7 @@ exprList
 
 exprList_1
     : ',' exprList -> exprList
-    |
+    | ->
     ;
 
 expr
