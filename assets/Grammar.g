@@ -79,12 +79,7 @@ varsuitdecl
     ;
 
 identlist
-    : IDF identlist_1
-    ;
-
-identlist_1
-    : ',' identlist -> identlist
-    |
+    : IDF (',' IDF)*
     ;
 
 typename
@@ -112,13 +107,13 @@ rangelist_1
     ;
 
 funcdeclist
-    : funcdecl funcdeclist 
-    |
+    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' func_bloc -> ^(FUNC_DECL IDF arglist atomtype vardeclist ^(INSTR_BLOC func_bloc?)))*
     ;
 
-funcdecl
-    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist ^(INSTR_BLOC sequence))
-    ;
+func_bloc
+	: sequence '}' -> sequence
+	| '}' ->
+	;
 
 arglist
 	: arg (',' arg)* -> ^(PARAM_LIST arg*)
@@ -140,6 +135,7 @@ instr
     | WRITE write_param -> ^(WRITE_INSTR ^(VALUE write_param))
     ;
     
+
 instr_after_idf
 	: lvalue '=' expr -> lvalue expr
 	| '(' param -> param*
@@ -156,8 +152,13 @@ write_param
     ;
 
 sequence
-    : instr (';' sequence*)* -> instr sequence*
+    : instr sequence_1 -> instr sequence_1?
     ;
+
+sequence_1
+	: ';' sequence -> sequence
+	| ->
+	;
 
 lvalue
     : IDF ('[' exprList ']')? -> IDF ^(INDEX exprList)
@@ -206,7 +207,7 @@ expr_final
 expr_1
     : '(' expr_2 -> expr_2
     | '[' exprList ']' -> exprList
-    |
+    | ->
     ;
 
 expr_2
