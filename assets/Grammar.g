@@ -35,6 +35,22 @@ tokens {
     VAR_DECL_LIST;
     VAR_DECL;
     WRITE_INSTR;
+    
+    LT;
+    GT;
+    GEQ;
+    LEQ;
+    EQ;
+    NEQ;
+    MULT;
+    DIV;
+    PLUS;
+    MINUS;
+    POW;
+    NOT;
+    UMINUS;
+    AND;
+    OR;
 }
 
 /*
@@ -184,23 +200,23 @@ exprList_1
     ;
 
 expr
-	: expr_compare (andOrOps expr_compare)*
+	: expr_compare (andOrOps^ expr_compare)*
 	;
 	
 expr_compare
-    : expr_plusmin (compareOps expr_plusmin)*
+    : expr_plusmin (compareOps^ expr_plusmin)*
     ;
     
 expr_plusmin
-    : expr_muldiv (plusminOps expr_muldiv)*
+    : expr_muldiv (plusminOps^ expr_muldiv)*
     ;
 
 expr_muldiv
-    : expr_power (muldivOps expr_power)*
+    : expr_power (muldivOps^ expr_power)*
     ;
 
 expr_power
-	: expr_base (powerOps expr_base)*
+	: expr_base (powerOps^ expr_base)*
 	;
 
 expr_base
@@ -226,36 +242,36 @@ expr_2
     ;
 
 compareOps
-    : '<' ->
-    | '<=' ->
-    | '>' ->
-    | '>=' ->
-    | '==' ->
-    | '!='->
+    : '<' -> LT
+    | '<=' -> LEQ
+    | '>' -> GT
+    | '>=' -> GEQ
+    | '==' -> EQ
+    | '!='-> NEQ
     ;
 
 muldivOps
-    : '*' ->
-    | '/' ->
+    : '*' -> MULT
+    | '/' -> DIV
     ;
 
 powerOps 
-	: '^' ->
+	: '^' -> POW
     ;
 
 andOrOps
-    : 'and' ->
-    | 'or' ->
+    : 'and' -> AND
+    | 'or' -> OR
     ;
 
 plusminOps
-    : '+' ->
-    | '-' ->
+    : '+' -> PLUS
+    | '-' -> MINUS
     ;
 
 opun
-    : '-' ->
-    | 'not' ->
+    : '-' -> UMINUS
+    | 'not' -> NOT
     ;
 
 atom
