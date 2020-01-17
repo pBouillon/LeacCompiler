@@ -7,11 +7,11 @@ grammar Grammar;
  */
 
 options {
-    // Grammar LL(1)
-    k = 1;
+	// Grammar LL(1)
+	k = 1;
 
-    // Configure generation AST as output
-    output = AST;
+	// Configure generation AST as output
+	output = AST;
 }
 
 tokens {
@@ -98,7 +98,7 @@ arraytype
     ;
 
 rangelist
-    : atom '..' atom rangelist_1 -> atom atom rangelist_1
+    : atom '..' atom rangelist_1 -> atom atom rangelist_1?
     ;
 
 rangelist_1
@@ -107,13 +107,9 @@ rangelist_1
     ;
 
 funcdeclist
-    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' func_bloc -> ^(FUNC_DECL IDF arglist atomtype vardeclist ^(INSTR_BLOC func_bloc?)))*
+    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist ^(INSTR_BLOC end_sequence?)))*
     ;
 
-func_bloc
-	: sequence '}' -> sequence
-	| '}' ->
-	;
 
 arglist
 	: arg (',' arg)* -> ^(PARAM_LIST arg*)
@@ -130,19 +126,18 @@ instr
     | WHILE expr DO instr -> ^(LOOP ^(CONDITION expr) ^(INSTR_BLOC instr))
     | IDF instr_after_idf
     | RETURN expr? -> ^(RETURN_INSTR expr?)
-    | '{' sequence? '}' -> sequence?
+    | '{' end_sequence -> end_sequence?
     | READ lvalue -> ^(READ_INSTR ^(VALUE lvalue))
     | WRITE write_param -> ^(WRITE_INSTR ^(VALUE write_param))
     ;
     
-
 instr_after_idf
-	: lvalue '=' expr -> lvalue expr
+	: lvalue_1 '=' expr -> lvalue_1? expr
 	| '(' param -> param*
 	;
 
 param
-    : ')' -> 
+    : ')' ->
     | exprList ')' -> exprList
     ;
 
@@ -151,17 +146,32 @@ write_param
     | CSTE
     ;
 
+end_sequence
+    : sequence '}' 
+    | '}'
+    ;
+
 sequence
     : instr sequence_1 -> instr sequence_1?
     ;
 
 sequence_1
-	: ';' sequence -> sequence
-	| ->
-	;
+    : ';' sequence_2 -> sequence_2
+    | ->
+    ;
+
+sequence_2: 
+    sequence 
+    |
+    ;
 
 lvalue
-    : IDF ('[' exprList ']')? -> IDF ^(INDEX exprList)
+    : IDF lvalue_1
+    ;
+
+lvalue_1
+    : '[' exprList ']' 
+    |
     ;
 
 exprList
