@@ -67,11 +67,11 @@ tokens {
 }
 
 program
-    : PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE* -> ^(ROOT IDF vardeclist ^(FUNC_DECL_LIST funcdeclist) ^(INSTR_BLOC instr))
+    : PROGRAM IDF vardeclist funcdeclist instr WS* NEWLINE* -> ^(ROOT IDF ^(VAR_DECL_LIST vardeclist?) ^(FUNC_DECL_LIST funcdeclist?) ^(INSTR_BLOC instr?))
     ;
 
 vardeclist
-    : varsuitdecl* -> ^(VAR_DECL_LIST varsuitdecl*)
+    : varsuitdecl*
     ;
 
 varsuitdecl
@@ -117,7 +117,7 @@ funcdeclist
     ;
 
 funcdecl
-    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' instr_sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist ^(INSTR_BLOC instr_sequence))
+    : FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist ^(INSTR_BLOC sequence))
     ;
 
 arglist
@@ -135,7 +135,7 @@ instr
     | WHILE expr DO instr -> ^(LOOP ^(CONDITION expr) ^(INSTR_BLOC instr))
     | IDF instr_after_idf
     | RETURN expr? -> ^(RETURN_INSTR expr?)
-    | '{' instr_sequence -> instr_sequence
+    | '{' sequence? '}' -> sequence?
     | READ lvalue -> ^(READ_INSTR ^(VALUE lvalue))
     | WRITE write_param -> ^(WRITE_INSTR ^(VALUE write_param))
     ;
@@ -153,11 +153,6 @@ param
 write_param
     : lvalue 
     | CSTE
-    ;
-
-instr_sequence
-    : sequence '}' -> sequence
-    | '}' ->
     ;
 
 sequence
