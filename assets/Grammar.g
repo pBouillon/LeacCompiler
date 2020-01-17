@@ -164,7 +164,7 @@ write_param
     ;
 
 end_sequence
-    : sequence '}' 
+    : sequence '}' -> sequence
     | '}'
     ;
 
