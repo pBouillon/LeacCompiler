@@ -1,3 +1,4 @@
+import ast.RootNode;
 import compiler.Compiler;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
@@ -32,7 +33,8 @@ import java.io.File;
          Tree ast = compiler.compileTarget(source);
 
          // Display result
-         System.out.println(ast.toStringTree());
+         RootNode customAstRoot = compiler.generateAst(ast);
+         System.out.println(customAstRoot);
      }
 
  }

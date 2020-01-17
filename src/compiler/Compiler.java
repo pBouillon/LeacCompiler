@@ -2,6 +2,7 @@ package compiler;
 
 import antlr.assets.GrammarLexer;
 import antlr.assets.GrammarParser;
+import ast.RootNode;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
@@ -70,6 +71,16 @@ public class Compiler {
 
         // Return the generated AST
         return (Tree)result.getTree();
+    }
+
+    /**
+     * Generate custom AST based on the ANTLR generated tree
+     *
+     * @param rawTree Raw generated ANTLR tree
+     * @return the root node of the custom AST
+     */
+    public RootNode generateAst(Tree rawTree) {
+        return new RootNode(rawTree);
     }
 
 }
