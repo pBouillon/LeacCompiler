@@ -51,14 +51,17 @@ public class RootNode extends BaseNode {
     }
 
     @Override
-    protected void extractChildren() throws AstBaseException {
+    protected void checkChildrenAmount() throws AstBaseException {
         // Assert allowed children
         int childrenNumber = 4;
 
         if (children.size() != childrenNumber) {
             throw new BadChildrenCountException(childrenNumber,children.size());
         }
+    }
 
+    @Override
+    protected void extractChildren() throws AstBaseException {
         // Assign each child
         for (Tree child: children) {
             switch (child.toString()) {

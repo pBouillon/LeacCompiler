@@ -24,6 +24,11 @@ public class VarAffectNode extends BaseNode {
         }
     }
 
+    @Override
+    protected void checkChildrenAmount() throws AstBaseException {
+
+    }
+
     /**
      *
      */
