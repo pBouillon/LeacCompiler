@@ -24,6 +24,7 @@ tokens {
     FUNC_DECL;
     INDEX;
     INSTR_BLOC;
+    LOOP;
     PARAM;
     PARAM_LIST;
     READ_INSTR;
@@ -131,7 +132,7 @@ arg
 
 instr
     : IF expr THEN onTrue=instr (options {greedy = true; }: ELSE onFalse=instr)*  -> ^(CONDITIONNAL_BLOC ^(CONDITION expr) ^(CONDITION_TRUE_INSTR_BLOC $onTrue) ^(CONDITION_FALSE_INSTR_BLOC $onFalse?)?)
-    | WHILE expr DO instr -> expr instr
+    | WHILE expr DO instr -> ^(LOOP ^(CONDITION expr) ^(INSTR_BLOC instr))
     | IDF instr_after_idf
     | RETURN expr? -> ^(RETURN_INSTR expr?)
     | '{' instr_sequence -> instr_sequence
@@ -160,17 +161,7 @@ instr_sequence
     ;
 
 sequence
-    : instr sequence_1
-    ;
-
-sequence_1
-    : ';' sequence_2 -> sequence_2
-    |
-    ;
-
-sequence_2
-	: sequence 
-    |
+    : instr (';' sequence*)* -> instr sequence*
     ;
 
 lvalue
