@@ -31,4 +31,8 @@ public class AstNodes {
      */
     public static final String VAR_DECL_LIST = "VAR_DECL_LIST";
 
+    public static final String RMEMBER = "RMEMBER";
+    public static final String VAR_AFFECT = "VAR_AFFECT";
+    public static final String LMEMBER = "LMEMBER";
+
 }

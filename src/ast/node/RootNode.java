@@ -46,7 +46,7 @@ public class RootNode extends BaseNode {
         super(_currentNode);
 
         if (!nodeName.equals(AstNodes.ROOT)) {
-            throw new BadNodeNameException("Node name should be " + AstNodes.ROOT + " but is " + nodeName);
+            throw new BadNodeNameException(AstNodes.ROOT, nodeName);
         }
     }
 
@@ -56,8 +56,7 @@ public class RootNode extends BaseNode {
         int childrenNumber = 4;
 
         if (children.size() != childrenNumber) {
-            throw new BadChildrenCountException(
-                    "Bad children amount, expected " + childrenNumber + " but found " + children.size());
+            throw new BadChildrenCountException(childrenNumber,children.size());
         }
 
         // Assign each child

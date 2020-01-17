@@ -1,6 +1,7 @@
 package ast.exception.root;
 
 import ast.exception.AstBaseException;
+import utils.AstNodes;
 
 /**
  * ast.root.exception.BadNodeNameException is the default template for exceptions ROOT node exception,
@@ -15,12 +16,11 @@ import ast.exception.AstBaseException;
 public class BadNodeNameException extends AstBaseException {
 
     /**
-     * Default constructor
-     *
-     * @param message exception message
+     * @param awaited_name
+     * @param bad_name
      */
-    public BadNodeNameException(String message) {
-        super(message);
+    public BadNodeNameException(String awaited_name, String bad_name) {
+        super("Node name should be " + awaited_name + " but is " + bad_name);
     }
 
 }

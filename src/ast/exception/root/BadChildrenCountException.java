@@ -19,8 +19,8 @@ public class BadChildrenCountException extends AstBaseException {
      *
      * @param message exception message
      */
-    public BadChildrenCountException(String message) {
-        super(message);
+    public BadChildrenCountException(int expectedSize, int badSize) {
+        super("Bad children amount, expected " + expectedSize + " but found " + badSize);
     }
 
 }
