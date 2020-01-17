@@ -25,6 +25,11 @@ public class FuncDeclListNode extends BaseNode {
     }
 
     @Override
+    protected void checkChildrenAmount() throws AstBaseException {
+
+    }
+
+    @Override
     protected void extractChildren() {
 
     }

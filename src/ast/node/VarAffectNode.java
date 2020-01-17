@@ -15,6 +15,11 @@ public class VarAffectNode extends BaseNode {
         super(_currentNode);
     }
 
+    @Override
+    protected void checkChildrenAmount() throws AstBaseException {
+
+    }
+
     /**
      *
      */

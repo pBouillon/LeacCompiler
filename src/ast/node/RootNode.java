@@ -51,7 +51,7 @@ public class RootNode extends BaseNode {
     }
 
     @Override
-    protected void extractChildren() throws AstBaseException {
+    protected void checkChildrenAmount() throws AstBaseException {
         // Assert allowed children
         int childrenNumber = 4;
 
@@ -59,7 +59,10 @@ public class RootNode extends BaseNode {
             throw new BadChildrenCountException(
                     "Bad children amount, expected " + childrenNumber + " but found " + children.size());
         }
+    }
 
+    @Override
+    protected void extractChildren() throws AstBaseException {
         // Assign each child
         for (Tree child: children) {
             switch (child.toString()) {

@@ -50,9 +50,17 @@ abstract class BaseNode {
             children.add(currentNode.getChild(i));
         }
 
-        // Extract all its childs
+        // Ensure children amount
+        checkChildrenAmount();
+
+        // Extract all its children
         extractChildren();
     }
+
+    /**
+     *
+     */
+    abstract protected void checkChildrenAmount() throws AstBaseException;
 
     /**
      *
