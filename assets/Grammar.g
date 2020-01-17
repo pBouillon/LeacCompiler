@@ -15,6 +15,8 @@ options {
 }
 
 tokens {
+	TARRAY;
+	RANGE;
 	ARRAY_INDEX;
     VAR_AFFECT;
     FUNC_CALL;
@@ -97,7 +99,7 @@ varsuitdecl
     ;
 
 identlist
-    : IDF (',' IDF)*
+    : IDF (','! IDF)*
     ;
 
 typename
@@ -112,16 +114,16 @@ atomtype
     ;
 
 arraytype
-    : ARRAY '[' rangelist ']' OF atomtype -> rangelist atomtype
+    : ARRAY '[' rangelist ']' OF atomtype -> ^(TARRAY atomtype rangelist)
     ;
 
 rangelist
-    : atom '..' atom rangelist_1 -> atom atom rangelist_1?
+    : atom '..' atom rangelist_1 -> ^(RANGE atom atom) rangelist_1?
     ;
 
 rangelist_1
     : ',' rangelist -> rangelist
-    |
+    | ->
     ;
 
 funcdeclist
@@ -163,7 +165,7 @@ write_param
 
 end_sequence
     : sequence '}' -> sequence
-    | '}'
+    | '}' -> 
     ;
 
 sequence
