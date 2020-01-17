@@ -1,6 +1,7 @@
-import ast.RootNode;
+import ast.exception.root.BadChildrenCountException;
+import ast.exception.root.BadNodeNameException;
+import ast.node.RootNode;
 import compiler.Compiler;
-import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
 import utils.GrammarConstants;
 
@@ -32,8 +33,15 @@ import java.io.File;
          // Compile the source file and fetch the generated AST
          Tree ast = compiler.compileTarget(source);
 
+         // Extract custom ast
+         RootNode customAstRoot = null;
+         try {
+             customAstRoot = compiler.generateAst(ast);
+         } catch (BadChildrenCountException | BadNodeNameException e) {
+             e.printStackTrace();
+         }
+
          // Display result
-         RootNode customAstRoot = compiler.generateAst(ast);
          System.out.println(customAstRoot);
      }
 
