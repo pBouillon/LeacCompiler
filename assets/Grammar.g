@@ -22,6 +22,9 @@ tokens {
     CONDITIONNAL_BLOC;
     CONDITION_FALSE_INSTR_BLOC;
     CONDITION_TRUE_INSTR_BLOC;
+    CSTE_B;
+    CSTE_N;
+    CSTE_S;
     DIV;
     ELSE_BLOC;
     EQ;
@@ -130,7 +133,7 @@ rangelist_1
     ;
 
 funcdeclist
-    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence)* -> ^(FUNC_DECL IDF arglist atomtype vardeclist? ^(INSTR_BLOC end_sequence?))*
+    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist? ^(INSTR_BLOC end_sequence?)))*
     ;
 
 
@@ -163,7 +166,7 @@ param
 
 write_param
     : lvalue 
-    | CSTE
+    | cste
     ;
 
 end_sequence
@@ -191,7 +194,7 @@ lvalue
 
 lvalue_1
     : '[' exprList ']' -> ^(ARRAY_INDEX exprList)
-    |
+    | ->
     ;
 
 exprList
@@ -229,7 +232,7 @@ expr_base
     ;
     
 expr_final
-    : CSTE 
+    : cste 
     | opun expr_final -> ^(opun expr_final)
     | IDF expr_1
     ;
@@ -279,8 +282,14 @@ opun
     ;
 
 atom
-    : opun? CSTE
+    : opun? cste
     ;
+
+cste
+	: CSTE_NUM -> ^(CSTE_N CSTE_NUM)
+	| CSTE_BOOL -> ^(CSTE_B CSTE_BOOL)
+	| CSTE_STR -> ^(CSTE_S CSTE_STR)
+	;
 
 /*
 * --------------------
@@ -318,33 +327,27 @@ fragment CHARACTER
     | 'A'..'Z'
     ;
 
+CSTE_BOOL
+    : 'true'
+    | 'false'
+    ;
+    
 IDF
     : CHARACTER (CHARACTER | DIGIT)*
     ;
 
-// Represent a constant of any kind
-fragment CSTE_BOOL
-    : 'true'
-    | 'false'
-    ;
-
 // Represent a numeric constant
-CSTE
-    : CSTE_BOOL
-    | CSTE_NUM 
-    | CSTE_STR
-    ;
 
 fragment DIGIT
     : '0'..'9'
     ;
 
-fragment CSTE_NUM
+CSTE_NUM
     : DIGIT+
     ;
 
 // Represent a text constant
-fragment CSTE_STR
+CSTE_STR
     : DOUBLE_QUOTES_STR
     | SINGLE_QUOTE_STR
     ;
