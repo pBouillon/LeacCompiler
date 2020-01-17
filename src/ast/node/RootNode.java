@@ -46,7 +46,7 @@ public class RootNode extends BaseNode {
         super(_currentNode);
 
         if (!nodeName.equals(AstNodes.ROOT)) {
-            throw new BadNodeNameException("ROOT node should be " + AstNodes.ROOT + " but is " + nodeName);
+            throw new BadNodeNameException("Node name should be " + AstNodes.ROOT + " but is " + nodeName);
         }
     }
 
