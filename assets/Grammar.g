@@ -15,6 +15,7 @@ options {
 }
 
 tokens {
+	ARRAY_INDEX;
     VAR_AFFECT;
     FUNC_CALL;
     CONDITION;
@@ -141,16 +142,13 @@ arg
 instr
     : IF expr THEN onTrue=instr (options {greedy = true; }: ELSE onFalse=instr)*  -> ^(CONDITIONNAL_BLOC ^(CONDITION expr) ^(CONDITION_TRUE_INSTR_BLOC $onTrue) ^(CONDITION_FALSE_INSTR_BLOC $onFalse?)?)
     | WHILE expr DO instr -> ^(LOOP ^(CONDITION expr) ^(INSTR_BLOC instr))
-    | IDF instr_after_idf -> ^(instr_after_idf IDF)
+    | IDF ( lvalue_1 '=' expr -> ^(VAR_AFFECT IDF lvalue_1? expr)
+    	| '(' param -> ^(FUNC_CALL IDF param*)
+    )
     | RETURN expr? -> ^(RETURN_INSTR expr?)
     | '{' end_sequence -> end_sequence?
     | READ lvalue -> ^(READ_INSTR ^(VALUE lvalue))
     | WRITE write_param -> ^(WRITE_INSTR ^(VALUE write_param))
-    ;
-    
-instr_after_idf
-    : lvalue_1 '=' expr -> ^(VAR_AFFECT lvalue_1? expr)
-    | '(' param -> ^(FUNC_CALL param*)
     ;
 
 param
@@ -187,7 +185,7 @@ lvalue
     ;
 
 lvalue_1
-    : '[' exprList ']' 
+    : '[' exprList ']' -> ^(ARRAY_INDEX exprList)
     |
     ;
 
