@@ -15,12 +15,12 @@ options {
 }
 
 tokens {
-    ARG_LIST;
-    ARG;
+    PARAM_LIST;
+    PARAM;
     FUNC_DECL_LIST;
     FUNC_DECL;
     INSTR_BLOC;
-    REF_ARG;
+    REF_PARAM;
     ROOT;
     VAR_DECL_LIST;
     VAR_DECL;
@@ -110,13 +110,13 @@ funcdecl
     ;
 
 arglist
-	: arg (',' arg)* -> ^(ARG_LIST arg*)
+	: arg (',' arg)* -> ^(PARAM_LIST arg*)
 	| -> 
 	;
 
 arg
-    : IDF ':' typename -> ^(ARG IDF typename)
-    | REF IDF ':' typename -> ^(REF_ARG IDF typename)
+    : IDF ':' typename -> ^(PARAM IDF typename)
+    | REF IDF ':' typename -> ^(REF_PARAM IDF typename)
     ;
 
 instr
