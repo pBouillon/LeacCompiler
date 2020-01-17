@@ -1,5 +1,6 @@
 package ast.node;
 
+import ast.exception.AstBaseException;
 import ast.exception.root.BadChildrenCountException;
 import org.antlr.runtime.tree.Tree;
 
@@ -19,7 +20,7 @@ public class VarDeclListNode extends BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    public VarDeclListNode(Tree _currentNode) throws BadChildrenCountException {
+    public VarDeclListNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 

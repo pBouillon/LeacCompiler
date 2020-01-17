@@ -1,9 +1,9 @@
 package ast.exception.root;
 
-import ast.exception.BaseException;
+import ast.exception.AstBaseException;
 
 /**
- * ast.root.exception.BaseException is the default template for exceptions ROOT node exception,
+ * ast.root.exception.AstBaseException is the default template for exceptions ROOT node exception,
  * relative to its childrens count
  *
  * @author Florian Vogt
@@ -12,7 +12,7 @@ import ast.exception.BaseException;
  * @version 0.1
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
-public class BadChildrenCountException extends BaseException {
+public class BadChildrenCountException extends AstBaseException {
 
     /**
      * Default constructor

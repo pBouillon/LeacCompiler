@@ -1,5 +1,6 @@
 package ast.node;
 
+import ast.exception.AstBaseException;
 import ast.exception.root.BadChildrenCountException;
 import org.antlr.runtime.tree.Tree;
 
@@ -36,7 +37,7 @@ abstract class BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    BaseNode(Tree _currentNode) throws BadChildrenCountException {
+    BaseNode(Tree _currentNode) throws AstBaseException {
         currentNode = _currentNode;
 
         // Fetch node's name
@@ -56,7 +57,7 @@ abstract class BaseNode {
     /**
      *
      */
-    abstract protected void extractChildren() throws BadChildrenCountException;
+    abstract protected void extractChildren() throws AstBaseException;
 
     /**
      * Default toString method

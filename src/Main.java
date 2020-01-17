@@ -1,3 +1,4 @@
+import ast.exception.AstBaseException;
 import ast.exception.root.BadChildrenCountException;
 import ast.exception.root.BadNodeNameException;
 import ast.node.RootNode;
@@ -37,7 +38,7 @@ import java.io.File;
          RootNode customAstRoot = null;
          try {
              customAstRoot = compiler.generateAst(ast);
-         } catch (BadChildrenCountException | BadNodeNameException e) {
+         } catch (AstBaseException e) {
              e.printStackTrace();
          }
 

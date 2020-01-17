@@ -2,6 +2,7 @@ package compiler;
 
 import antlr.assets.GrammarLexer;
 import antlr.assets.GrammarParser;
+import ast.exception.AstBaseException;
 import ast.exception.root.BadChildrenCountException;
 import ast.exception.root.BadNodeNameException;
 import ast.node.RootNode;
@@ -81,7 +82,7 @@ public class Compiler {
      * @param rawTree Raw generated ANTLR tree
      * @return the root node of the custom AST
      */
-    public RootNode generateAst(Tree rawTree) throws BadChildrenCountException, BadNodeNameException {
+    public RootNode generateAst(Tree rawTree) throws AstBaseException {
         return new RootNode(rawTree);
     }
 

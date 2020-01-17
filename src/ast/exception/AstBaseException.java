@@ -1,7 +1,7 @@
 package ast.exception;
 
 /**
- * ast.exception.BaseException is the default template for exceptions
+ * ast.exception.AstBaseException is the default template for exceptions
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
@@ -9,14 +9,14 @@ package ast.exception;
  * @version 0.1
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
-public abstract class BaseException extends Exception {
+public abstract class AstBaseException extends Exception {
 
     /**
      * Default constructor
      *
      * @param message exception message
      */
-    protected BaseException(String message) {
+    protected AstBaseException(String message) {
         super(message);
     }
 

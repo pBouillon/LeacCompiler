@@ -1,5 +1,6 @@
 package ast.node;
 
+import ast.exception.AstBaseException;
 import ast.exception.root.BadChildrenCountException;
 import ast.exception.root.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
@@ -41,7 +42,7 @@ public class RootNode extends BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    public RootNode(Tree _currentNode) throws BadNodeNameException, BadChildrenCountException {
+    public RootNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
 
         if (!nodeName.equals(AstNodes.ROOT)) {
@@ -50,7 +51,7 @@ public class RootNode extends BaseNode {
     }
 
     @Override
-    protected void extractChildren() throws BadChildrenCountException {
+    protected void extractChildren() throws AstBaseException {
         // Assert allowed children
         int childrenNumber = 4;
 

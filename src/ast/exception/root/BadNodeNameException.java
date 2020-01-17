@@ -1,6 +1,6 @@
 package ast.exception.root;
 
-import ast.exception.BaseException;
+import ast.exception.AstBaseException;
 
 /**
  * ast.root.exception.BadNodeNameException is the default template for exceptions ROOT node exception,
@@ -12,7 +12,7 @@ import ast.exception.BaseException;
  * @version 0.1
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
-public class BadNodeNameException extends BaseException {
+public class BadNodeNameException extends AstBaseException {
 
     /**
      * Default constructor
