@@ -15,15 +15,17 @@ options {
 }
 
 tokens {
-    PARAM_LIST;
-    PARAM;
     FUNC_DECL_LIST;
     FUNC_DECL;
     INSTR_BLOC;
+    PARAM;
+    PARAM_LIST;
     REF_PARAM;
+    RETURN_INSTR;
     ROOT;
     VAR_DECL_LIST;
     VAR_DECL;
+    WRITE_INSTR;
 }
 
 /*
@@ -123,21 +125,16 @@ instr
     : IF expr THEN instr (options {greedy = true; }: ELSE instr)* 
     | WHILE expr DO instr -> expr instr
     | IDF instr_after_idf
-    | RETURN ret_1
+    | RETURN expr? -> ^(RETURN_INSTR expr?)
     | '{' instr_sequence -> instr_sequence
     | READ lvalue 
-    | WRITE write_param
+    | WRITE write_param -> ^(WRITE_INSTR write_param)
     ;
     
 instr_after_idf
 	: lvalue_1 '=' expr -> lvalue_1 expr
 	| '(' param -> param*
 	;
-
-ret_1
-    : expr
-    | 
-    ;
 
 param
     : ')' -> 
