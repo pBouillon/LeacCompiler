@@ -15,6 +15,11 @@ options {
 }
 
 tokens {
+	CONDITION;
+	CONDITIONNAL_BLOC;
+	CONDITION_TRUE_INSTR_BLOC;
+	CONDITION_FALSE_INSTR_BLOC;
+	ELSE_BLOC;
     FUNC_DECL_LIST;
     FUNC_DECL;
     INDEX;
@@ -125,7 +130,7 @@ arg
     ;
 
 instr
-    : IF expr THEN instr (options {greedy = true; }: ELSE instr)* 
+    : IF expr THEN onTrue=instr (options {greedy = true; }: ELSE onFalse=instr)*  -> ^(CONDITIONNAL_BLOC ^(CONDITION expr) ^(CONDITION_TRUE_INSTR_BLOC $onTrue) ^(CONDITION_FALSE_INSTR_BLOC $onFalse?)?)
     | WHILE expr DO instr -> expr instr
     | IDF instr_after_idf
     | RETURN expr? -> ^(RETURN_INSTR expr?)
