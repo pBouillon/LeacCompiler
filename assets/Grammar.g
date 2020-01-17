@@ -16,6 +16,7 @@ options {
 
 tokens {
     AND;
+    ARRAY_ACCESS;
 	ARRAY_INDEX;
     CONDITION;
     CONDITIONNAL_BLOC;
@@ -31,8 +32,9 @@ tokens {
     GT;
     INDEX;
     INSTR_BLOC;
-    LOOP;
     LEQ;
+    LMEMBER;
+    LOOP;
     LT;
     MINUS;
     MULT;
@@ -43,11 +45,12 @@ tokens {
     PARAM_LIST;
     PLUS;
     POW;
+    RANGE;
     READ_INSTR;
     REF_PARAM;
     RETURN_INSTR;
+    RMEMBER;
     ROOT;
-	RANGE;
 	TARRAY;
     UMINUS;
     VALUE;
@@ -144,7 +147,7 @@ arg
 instr
     : IF expr THEN onTrue=instr (options {greedy = true; }: ELSE onFalse=instr)*  -> ^(CONDITIONNAL_BLOC ^(CONDITION expr) ^(CONDITION_TRUE_INSTR_BLOC $onTrue) ^(CONDITION_FALSE_INSTR_BLOC $onFalse?)?)
     | WHILE expr DO instr -> ^(LOOP ^(CONDITION expr) ^(INSTR_BLOC instr))
-    | IDF ( lvalue_1 '=' expr -> ^(VAR_AFFECT IDF lvalue_1? expr)
+    | IDF ( lvalue_1 '=' expr -> ^(VAR_AFFECT ^(LMEMBER IDF lvalue_1?) ^(RMEMBER expr))
     	| '(' param -> ^(FUNC_CALL IDF param*)
     )
     | RETURN expr? -> ^(RETURN_INSTR expr?)
@@ -227,13 +230,13 @@ expr_base
     
 expr_final
     : CSTE 
-    | opun expr_final
+    | opun expr_final -> ^(opun expr_final)
     | IDF expr_1
     ;
 
 expr_1
     : '(' expr_2 -> expr_2
-    | '[' exprList ']' -> exprList
+    | '[' exprList ']' -> ^(INDEX exprList)
     | ->
     ;
 
