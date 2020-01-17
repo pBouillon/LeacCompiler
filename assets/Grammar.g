@@ -7,19 +7,21 @@ grammar Grammar;
  */
 
 options {
-	// Grammar LL(1)
-	k = 1;
+    // Grammar LL(1)
+    k = 1;
 
-	// Configure generation AST as output
-	output = AST;
+    // Configure generation AST as output
+    output = AST;
 }
 
 tokens {
-	CONDITION;
-	CONDITIONNAL_BLOC;
-	CONDITION_TRUE_INSTR_BLOC;
-	CONDITION_FALSE_INSTR_BLOC;
-	ELSE_BLOC;
+    VAR_AFFECT;
+    FUNC_CALL;
+    CONDITION;
+    CONDITIONNAL_BLOC;
+    CONDITION_TRUE_INSTR_BLOC;
+    CONDITION_FALSE_INSTR_BLOC;
+    ELSE_BLOC;
     FUNC_DECL_LIST;
     FUNC_DECL;
     INDEX;
@@ -35,7 +37,6 @@ tokens {
     VAR_DECL_LIST;
     VAR_DECL;
     WRITE_INSTR;
-    
     LT;
     GT;
     GEQ;
@@ -123,14 +124,14 @@ rangelist_1
     ;
 
 funcdeclist
-    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist ^(INSTR_BLOC end_sequence?)))*
+    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist? ^(INSTR_BLOC end_sequence?)))*
     ;
 
 
 arglist
-	: arg (',' arg)* -> ^(PARAM_LIST arg*)
-	| -> 
-	;
+    : arg (',' arg)* -> ^(PARAM_LIST arg*)
+    | -> 
+    ;
 
 arg
     : IDF ':' typename -> ^(PARAM IDF typename)
@@ -140,7 +141,7 @@ arg
 instr
     : IF expr THEN onTrue=instr (options {greedy = true; }: ELSE onFalse=instr)*  -> ^(CONDITIONNAL_BLOC ^(CONDITION expr) ^(CONDITION_TRUE_INSTR_BLOC $onTrue) ^(CONDITION_FALSE_INSTR_BLOC $onFalse?)?)
     | WHILE expr DO instr -> ^(LOOP ^(CONDITION expr) ^(INSTR_BLOC instr))
-    | IDF instr_after_idf
+    | IDF instr_after_idf -> ^(instr_after_idf IDF)
     | RETURN expr? -> ^(RETURN_INSTR expr?)
     | '{' end_sequence -> end_sequence?
     | READ lvalue -> ^(READ_INSTR ^(VALUE lvalue))
@@ -148,9 +149,9 @@ instr
     ;
     
 instr_after_idf
-	: lvalue_1 '=' expr -> lvalue_1? expr
-	| '(' param -> param*
-	;
+    : lvalue_1 '=' expr -> ^(VAR_AFFECT lvalue_1? expr)
+    | '(' param -> ^(FUNC_CALL param*)
+    ;
 
 param
     : ')' ->
@@ -176,8 +177,8 @@ sequence_1
     | ->
     ;
 
-sequence_2: 
-    sequence 
+sequence_2
+	: sequence 
     |
     ;
 
@@ -200,9 +201,9 @@ exprList_1
     ;
 
 expr
-	: expr_compare (andOrOps^ expr_compare)*
-	;
-	
+    : expr_compare (andOrOps^ expr_compare)*
+    ;
+    
 expr_compare
     : expr_plusmin (compareOps^ expr_plusmin)*
     ;
@@ -216,14 +217,14 @@ expr_muldiv
     ;
 
 expr_power
-	: expr_base (powerOps^ expr_base)*
-	;
+    : expr_base (powerOps^ expr_base)*
+    ;
 
 expr_base
-	: '(' expr_compare ')' -> expr_compare
-	| expr_final
-	;
-	
+    : '(' expr_compare ')' -> expr_compare
+    | expr_final
+    ;
+    
 expr_final
     : CSTE 
     | opun expr_final
@@ -256,7 +257,7 @@ muldivOps
     ;
 
 powerOps 
-	: '^' -> POW
+    : '^' -> POW
     ;
 
 andOrOps
@@ -275,8 +276,8 @@ opun
     ;
 
 atom
-	: opun? CSTE
-	;
+    : opun? CSTE
+    ;
 
 /*
 * --------------------
