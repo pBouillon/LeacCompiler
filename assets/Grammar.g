@@ -15,46 +15,46 @@ options {
 }
 
 tokens {
-	TARRAY;
-	RANGE;
+    AND;
 	ARRAY_INDEX;
-    VAR_AFFECT;
-    FUNC_CALL;
     CONDITION;
     CONDITIONNAL_BLOC;
-    CONDITION_TRUE_INSTR_BLOC;
     CONDITION_FALSE_INSTR_BLOC;
+    CONDITION_TRUE_INSTR_BLOC;
+    DIV;
     ELSE_BLOC;
-    FUNC_DECL_LIST;
+    EQ;
+    FUNC_CALL;
     FUNC_DECL;
+    FUNC_DECL_LIST;
+    GEQ;
+    GT;
     INDEX;
     INSTR_BLOC;
     LOOP;
+    LEQ;
+    LT;
+    MINUS;
+    MULT;
+    NEQ;
+    NOT;
+    OR;
     PARAM;
     PARAM_LIST;
+    PLUS;
+    POW;
     READ_INSTR;
     REF_PARAM;
     RETURN_INSTR;
     ROOT;
-    VALUE;
-    VAR_DECL_LIST;
-    VAR_DECL;
-    WRITE_INSTR;
-    LT;
-    GT;
-    GEQ;
-    LEQ;
-    EQ;
-    NEQ;
-    MULT;
-    DIV;
-    PLUS;
-    MINUS;
-    POW;
-    NOT;
+	RANGE;
+	TARRAY;
     UMINUS;
-    AND;
-    OR;
+    VALUE;
+    VAR_AFFECT;
+    VAR_DECL;
+    VAR_DECL_LIST;
+    WRITE_INSTR;
 }
 
 /*
