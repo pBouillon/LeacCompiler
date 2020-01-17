@@ -17,12 +17,15 @@ options {
 tokens {
     FUNC_DECL_LIST;
     FUNC_DECL;
+    INDEX;
     INSTR_BLOC;
     PARAM;
     PARAM_LIST;
+    READ_INSTR;
     REF_PARAM;
     RETURN_INSTR;
     ROOT;
+    VALUE;
     VAR_DECL_LIST;
     VAR_DECL;
     WRITE_INSTR;
@@ -127,12 +130,12 @@ instr
     | IDF instr_after_idf
     | RETURN expr? -> ^(RETURN_INSTR expr?)
     | '{' instr_sequence -> instr_sequence
-    | READ lvalue 
-    | WRITE write_param -> ^(WRITE_INSTR write_param)
+    | READ lvalue -> ^(READ_INSTR ^(VALUE lvalue))
+    | WRITE write_param -> ^(WRITE_INSTR ^(VALUE write_param))
     ;
     
 instr_after_idf
-	: lvalue_1 '=' expr -> lvalue_1 expr
+	: lvalue '=' expr -> lvalue expr
 	| '(' param -> param*
 	;
 
@@ -166,12 +169,7 @@ sequence_2
     ;
 
 lvalue
-    : IDF lvalue_1
-    ;
-
-lvalue_1
-    : '[' exprList ']' -> exprList
-    | ->
+    : IDF ('[' exprList ']')? -> IDF ^(INDEX exprList)
     ;
 
 exprList
