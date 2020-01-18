@@ -9,6 +9,11 @@ public class RMemberNode extends BaseNode {
     }
 
     @Override
+    protected void exitNode() throws AstBaseException {
+
+    }
+
+    @Override
     protected void checkChildrenAmount() throws AstBaseException {
         // TODO
     }
@@ -16,5 +21,10 @@ public class RMemberNode extends BaseNode {
     @Override
     protected void extractChildren() throws AstBaseException {
         // TODO
+    }
+
+    @Override
+    protected void fillSymbolTable() throws AstBaseException {
+
     }
 }

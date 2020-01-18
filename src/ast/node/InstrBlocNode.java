@@ -3,6 +3,7 @@ package ast.node;
 import ast.exception.AstBaseException;
 import ast.exception.root.BadChildrenCountException;
 import org.antlr.runtime.tree.Tree;
+import symbolTable.SymbolTableProvider;
 
 /**
  * ast.node.InstrBlocNode is the node in which instructions are defined
@@ -25,6 +26,11 @@ public class InstrBlocNode extends BaseNode {
     }
 
     @Override
+    protected void exitNode() throws AstBaseException {
+
+    }
+
+    @Override
     protected void checkChildrenAmount() throws AstBaseException {
 
     }
@@ -32,6 +38,11 @@ public class InstrBlocNode extends BaseNode {
     @Override
     protected void extractChildren() {
 
+    }
+
+    @Override
+    protected void fillSymbolTable() throws AstBaseException {
+        SymbolTableProvider.addNested();
     }
 
 }

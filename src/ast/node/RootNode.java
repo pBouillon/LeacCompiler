@@ -4,6 +4,10 @@ import ast.exception.AstBaseException;
 import ast.exception.root.BadChildrenCountException;
 import ast.exception.root.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
+import symbolTable.SymbolTable;
+import symbolTable.SymbolTableProvider;
+import symbolTable.symbol.Symbol;
+import symbolTable.symbol.SymbolTypes;
 import utils.AstNodes;
 
 /**
@@ -51,6 +55,11 @@ public class RootNode extends BaseNode {
     }
 
     @Override
+    protected void exitNode() throws AstBaseException {
+        SymbolTableProvider.unwrap();
+    }
+
+    @Override
     protected void checkChildrenAmount() throws AstBaseException {
         // Assert allowed children
         int childrenNumber = 4;
@@ -81,6 +90,12 @@ public class RootNode extends BaseNode {
                     programName = child.toString();
             }
         }
+    }
+
+    @Override
+    protected void fillSymbolTable() throws AstBaseException {
+        Symbol programEntry = new Symbol(programName, SymbolTypes.PROGRAM, currentNode);
+        SymbolTableProvider.getCurrent().registerSymbol(programEntry);
     }
 
 }
