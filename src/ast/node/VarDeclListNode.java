@@ -5,7 +5,7 @@ import ast.exception.root.BadChildrenCountException;
 import org.antlr.runtime.tree.Tree;
 
 /**
- * ast.node.FuncDeclListNode is the variables in which all functions are declared
+ * ast.node.VarDeclListNode is the variables in which all functions are declared
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
