@@ -36,6 +36,7 @@ import java.io.File;
 
          // Extract custom ast
          RootNode customAstRoot = null;
+         
          try {
              customAstRoot = compiler.generateAst(ast);
          } catch (AstBaseException e) {

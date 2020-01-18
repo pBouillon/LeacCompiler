@@ -53,15 +53,23 @@ abstract class BaseNode {
         // Ensure children amount
         checkChildrenAmount();
 
-        // Extract all its children
-        extractChildren();
+        // Extract relevant idfs
+        extractIdfs();
 
         // Fill the symbol table
         fillSymbolTable();
 
+        // Extract all its children
+        extractChildren();
+
         // Exit this node
         exitNode();
     }
+
+    /**
+     *
+     */
+    abstract protected void extractIdfs() throws AstBaseException;
 
     /**
      *

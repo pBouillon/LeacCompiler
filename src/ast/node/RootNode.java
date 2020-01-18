@@ -55,6 +55,12 @@ public class RootNode extends BaseNode {
     }
 
     @Override
+    protected void extractIdfs() throws AstBaseException {
+        programName = children.get(0).toString();
+        children.remove(0);
+    }
+
+    @Override
     protected void exitNode() throws AstBaseException {
         SymbolTableProvider.unwrap();
     }
@@ -87,7 +93,7 @@ public class RootNode extends BaseNode {
                     break;
 
                 default:
-                    programName = child.toString();
+                    // TODO: throw exp
             }
         }
     }
@@ -95,6 +101,7 @@ public class RootNode extends BaseNode {
     @Override
     protected void fillSymbolTable() throws AstBaseException {
         Symbol programEntry = new Symbol(programName, SymbolTypes.PROGRAM, currentNode);
+
         SymbolTableProvider.getCurrent().registerSymbol(programEntry);
     }
 

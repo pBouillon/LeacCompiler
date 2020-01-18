@@ -33,6 +33,11 @@ public class PlusNode extends OperationNode {
     }
 
     @Override
+    protected void extractIdfs() throws AstBaseException {
+
+    }
+
+    @Override
     protected void exitNode() throws AstBaseException {
 
     }
