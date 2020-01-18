@@ -36,7 +36,12 @@ public class VarAffectNode extends BaseNode {
 
     @Override
     protected void checkChildrenAmount() throws AstBaseException {
+        // Assert allowed children
+        int childrenNumber = 2;
 
+        if (children.size() != childrenNumber) {
+            throw new BadChildrenCountException(childrenNumber, children.size());
+        }
     }
 
     /**
@@ -44,13 +49,6 @@ public class VarAffectNode extends BaseNode {
      */
     @Override
     protected void extractChildren() throws AstBaseException {
-        // Assert allowed children
-        int childrenNumber = 2;
-
-        if (children.size() != childrenNumber) {
-            throw new BadChildrenCountException(childrenNumber, children.size());
-        }
-
         // Assign each child
         for (Tree child: children) {
             switch (child.toString()) {
