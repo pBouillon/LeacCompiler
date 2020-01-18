@@ -133,7 +133,7 @@ rangelist_1
     ;
 
 funcdeclist
-    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist? ^(INSTR_BLOC end_sequence?)))*
+    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence)* -> ^(FUNC_DECL IDF arglist atomtype vardeclist? ^(INSTR_BLOC end_sequence?))*
     ;
 
 
