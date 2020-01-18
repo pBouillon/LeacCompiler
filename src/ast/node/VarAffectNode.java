@@ -25,6 +25,11 @@ public class VarAffectNode extends BaseNode {
     }
 
     @Override
+    protected void exitNode() throws AstBaseException {
+
+    }
+
+    @Override
     protected void checkChildrenAmount() throws AstBaseException {
 
     }
@@ -53,6 +58,11 @@ public class VarAffectNode extends BaseNode {
                     break;
             }
         }
+    }
+
+    @Override
+    protected void fillSymbolTable() throws AstBaseException {
+
     }
 }
 

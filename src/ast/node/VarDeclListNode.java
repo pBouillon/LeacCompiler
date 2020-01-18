@@ -25,12 +25,22 @@ public class VarDeclListNode extends BaseNode {
     }
 
     @Override
+    protected void exitNode() throws AstBaseException {
+
+    }
+
+    @Override
     protected void checkChildrenAmount() throws AstBaseException {
 
     }
 
     @Override
     protected void extractChildren() {
+
+    }
+
+    @Override
+    protected void fillSymbolTable() throws AstBaseException {
 
     }
 

@@ -55,7 +55,18 @@ abstract class BaseNode {
 
         // Extract all its children
         extractChildren();
+
+        // Fill the symbol table
+        fillSymbolTable();
+
+        // Exit this node
+        exitNode();
     }
+
+    /**
+     *
+     */
+    abstract protected void exitNode() throws AstBaseException;
 
     /**
      *
@@ -68,6 +79,11 @@ abstract class BaseNode {
     abstract protected void extractChildren() throws AstBaseException;
 
     /**
+     *
+     */
+    abstract protected void fillSymbolTable() throws AstBaseException;
+
+    /**
      * Default toString method
      *
      * @return the current node's name
@@ -75,15 +91,6 @@ abstract class BaseNode {
     @Override
     public String toString() {
         return nodeName ;
-    }
-
-    /**
-     * Access to all this node's children
-     *
-     * @return an ArrayList of those children
-     */
-    public ArrayList<Tree> getChildren() {
-        return children;
     }
 
 }
