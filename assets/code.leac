@@ -32,7 +32,7 @@
         };
         i = i + 1
     };
-    maximum = maxTAB(Tval);
+    maximum = maxTAB(Tval[i]);
     write maximum;
-    theEnd()
+    theEnd(1+1)
 }

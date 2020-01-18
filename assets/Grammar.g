@@ -234,13 +234,10 @@ expr_base
 expr_final
     : cste 
     | opun expr_final -> ^(opun expr_final)
-    | IDF expr_1
-    ;
-
-expr_1
-    : '(' expr_2 -> expr_2
-    | '[' exprList ']' -> ^(INDEX exprList)
-    | ->
+    | i=IDF ( '(' expr_2 -> ^(FUNC_CALL $i expr_2)
+          | '[' exprList ']' -> $i ^(INDEX exprList)
+          | -> $i
+          )
     ;
 
 expr_2
