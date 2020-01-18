@@ -33,9 +33,19 @@ public class LtNode extends OperationNode {
     }
 
     @Override
+    protected void exitNode() throws AstBaseException {
+
+    }
+
+    @Override
     protected void extractChildren() throws AstBaseException {
         for (Tree child: children) {
             subOperations.add(OperationNodeFactory.createOperationNode(child));
         }
+    }
+
+    @Override
+    protected void fillSymbolTable() throws AstBaseException {
+
     }
 }
