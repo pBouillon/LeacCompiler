@@ -4,6 +4,8 @@ import ast.exception.root.BadNodeNameException;
 import ast.node.RootNode;
 import compiler.Compiler;
 import org.antlr.runtime.tree.Tree;
+import symbolTable.SymbolTable;
+import symbolTable.SymbolTableProvider;
 import utils.GrammarConstants;
 
 import java.io.File;
@@ -34,9 +36,12 @@ import java.io.File;
          // Compile the source file and fetch the generated AST
          Tree ast = compiler.compileTarget(source);
 
+         // Initialise the symbol table
+         SymbolTableProvider.initialise();
+
          // Extract custom ast
          RootNode customAstRoot = null;
-         
+
          try {
              customAstRoot = compiler.generateAst(ast);
          } catch (AstBaseException e) {

@@ -6,7 +6,7 @@ public class SymbolTableProvider {
 
     private static SymbolTable rootSymbolTable;
 
-    private SymbolTableProvider() {
+    public static void initialise() {
         rootSymbolTable = new SymbolTable(null);
         currentSymbolTable = rootSymbolTable;
     }

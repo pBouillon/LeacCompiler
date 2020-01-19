@@ -4,7 +4,7 @@ import ast.exception.AstBaseException;
 import org.antlr.runtime.tree.Tree;
 
 public class FuncCallNode extends BaseNode {
-    public FuncCallNode(Tree _currentNode) {
+    public FuncCallNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 

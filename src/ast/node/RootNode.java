@@ -102,7 +102,9 @@ public class RootNode extends BaseNode {
     protected void fillSymbolTable() throws AstBaseException {
         Symbol programEntry = new Symbol(programName, SymbolTypes.PROGRAM, currentNode);
 
-        SymbolTableProvider.getCurrent().registerSymbol(programEntry);
+        SymbolTableProvider
+                .getCurrent()
+                .registerSymbol(programEntry);
     }
 
 }
