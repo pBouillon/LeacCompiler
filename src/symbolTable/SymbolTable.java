@@ -21,7 +21,9 @@ public class SymbolTable implements ISymbolTable {
     }
 
     public boolean isSymbolRegistered(String idf) {
-        return symbols.containsKey(idf);
+        return (symbols.containsKey(idf)
+                    || origin != null)
+                && origin.isSymbolRegistered(idf);
     }
 
     public Symbol getSymbol(String idf) {
