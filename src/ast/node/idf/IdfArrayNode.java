@@ -3,6 +3,7 @@ package ast.node.idf;
 import ast.exception.AstBaseException;
 import ast.factory.OperationNodeFactory;
 import ast.node.BaseNode;
+import ast.node.constant.ConstantNumericNode;
 import ast.node.function.FuncCallNode;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;
@@ -52,7 +53,8 @@ public class IdfArrayNode extends IdfNode {
         for (Tree child : children) {
             switch (child.toString()) {
                 case AstNodes.CSTE_N:
-                    indexes.add(new IdfNode(child)); // Todo : Constantes
+                    indexes.add(new ConstantNumericNode(child));
+
                 case AstNodes.FUNC_CALL:
                     indexes.add(new FuncCallNode(child));
 
@@ -67,6 +69,10 @@ public class IdfArrayNode extends IdfNode {
                     ArrayNode.setName(indexes.get(indexes.size()).toString());
                     indexes.set(indexes.size(), ArrayNode);
                     break;
+
+                case AstNodes.CSTE_B:
+                case AstNodes.CSTE_S:
+                    // TODO: raise ex
 
                 default:
                     indexes.add(new IdfNode(child));

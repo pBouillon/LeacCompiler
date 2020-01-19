@@ -57,4 +57,5 @@ public class AstNodes {
     public static final String FUNC_DECL = "FUNC_DECL";
     public static final String CSTE_S = "CSTE_S";
     public static final String CSTE_B = "CSTE_B";
+    public static final String PARAM = "PARAM";
 }

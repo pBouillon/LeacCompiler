@@ -4,6 +4,7 @@ import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
 import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
+import symbolTable.SymbolTableProvider;
 import utils.AstNodes;
 
 import java.util.ArrayList;
@@ -57,6 +58,10 @@ public class FuncDeclListNode extends BaseNode {
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
+    }
+
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
     }
 
 }

@@ -50,4 +50,9 @@ public class PlusNode extends OperationNode {
     protected void fillSymbolTable() throws AstBaseException {
 
     }
+
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
+
+    }
 }

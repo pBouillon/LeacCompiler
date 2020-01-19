@@ -35,4 +35,8 @@ public abstract class ConstantNode extends BaseNode {
     @Override
     protected void fillSymbolTable() throws AstBaseException {
     }
+
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
+    }
 }

@@ -93,4 +93,11 @@ public class FuncDeclNode extends BaseNode {
 
         SymbolTableProvider.nest();
     }
+
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
+        if (SymbolTableProvider.getCurrent().isSymbolRegistered(functionName)) {
+            // TODO: throw ex
+        }
+    }
 }

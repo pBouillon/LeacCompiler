@@ -14,7 +14,7 @@ public class ConstantNumericNode extends ConstantNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    protected ConstantNumericNode(Tree _currentNode) throws AstBaseException {
+    public ConstantNumericNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
 
         if (!nodeName.equals(AstNodes.CSTE_N)) {

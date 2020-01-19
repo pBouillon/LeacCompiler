@@ -20,7 +20,6 @@ public class IdfNode extends BaseNode {
      */
     @Override
     protected void extractIdfs() throws AstBaseException {
-
     }
 
     /**
@@ -28,7 +27,6 @@ public class IdfNode extends BaseNode {
      */
     @Override
     protected void exitNode() throws AstBaseException {
-
     }
 
     /**
@@ -36,7 +34,6 @@ public class IdfNode extends BaseNode {
      */
     @Override
     protected void checkChildrenAmount() throws AstBaseException {
-
     }
 
     /**
@@ -44,7 +41,6 @@ public class IdfNode extends BaseNode {
      */
     @Override
     protected void extractChildren() throws AstBaseException {
-
     }
 
     /**
@@ -52,7 +48,10 @@ public class IdfNode extends BaseNode {
      */
     @Override
     protected void fillSymbolTable() throws AstBaseException {
+    }
 
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
     }
 
 

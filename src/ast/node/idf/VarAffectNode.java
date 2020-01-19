@@ -13,6 +13,7 @@ public class VarAffectNode extends BaseNode {
 
 
     private LMemberNode lMemberNode;
+
     private RMemberNode rMemberNode;
 
     /**
@@ -69,6 +70,11 @@ public class VarAffectNode extends BaseNode {
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
+
+    }
+
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
 
     }
 }

@@ -51,4 +51,9 @@ public class GtNode extends OperationNode {
     protected void fillSymbolTable() throws AstBaseException {
 
     }
+
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
+
+    }
 }

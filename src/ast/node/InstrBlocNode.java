@@ -55,4 +55,9 @@ public class InstrBlocNode extends BaseNode {
         SymbolTableProvider.nest();
     }
 
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
+
+    }
+
 }

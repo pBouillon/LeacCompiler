@@ -26,4 +26,5 @@ public class ConstantBooleanNode extends ConstantNode {
     protected void extractChildren() throws AstBaseException {
         value = Boolean.parseBoolean(children.get(0).toString());
     }
+
 }

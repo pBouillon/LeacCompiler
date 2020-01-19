@@ -61,6 +61,9 @@ public abstract class BaseNode {
         // Extract all its children
         extractChildren();
 
+        // Perform controls
+        performSemanticControls();
+
         // Exit this node
         exitNode();
     }
@@ -89,6 +92,11 @@ public abstract class BaseNode {
      *
      */
     abstract protected void fillSymbolTable() throws AstBaseException;
+
+    /**
+     *
+     */
+    abstract protected void performSemanticControls() throws AstBaseException;
 
     /**
      * Default toString method

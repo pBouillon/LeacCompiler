@@ -32,4 +32,9 @@ public class RMemberNode extends BaseNode {
     protected void fillSymbolTable() throws AstBaseException {
 
     }
+
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
+
+    }
 }

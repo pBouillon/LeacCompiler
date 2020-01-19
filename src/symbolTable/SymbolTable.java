@@ -25,7 +25,15 @@ public class SymbolTable implements ISymbolTable {
     }
 
     public Symbol getSymbol(String idf) {
-        return symbols.get(idf);
+        Symbol symbol = symbols.get(idf);
+
+        if (symbol == null) {
+            return origin != null
+                    ? origin.getSymbol(idf)
+                    : null;
+        }
+
+        return symbol;
     }
 
     public void registerSymbol(Symbol symbol) {

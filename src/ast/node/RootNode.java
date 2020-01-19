@@ -108,4 +108,8 @@ public class RootNode extends BaseNode {
                 .registerSymbol(programEntry);
     }
 
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
+    }
+
 }
