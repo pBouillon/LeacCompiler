@@ -1,7 +1,9 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
+import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
+import utils.AstNodes;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,10 @@ public class FuncDeclListNode extends BaseNode {
      */
     public FuncDeclListNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
+
+        if (!nodeName.equals(AstNodes.FUNC_DECL_LIST)) {
+            throw new BadNodeNameException(AstNodes.FUNC_DECL_LIST, nodeName);
+        }
     }
 
     @Override

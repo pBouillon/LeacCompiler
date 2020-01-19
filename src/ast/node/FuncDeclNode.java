@@ -2,10 +2,12 @@ package ast.node;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
+import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
 import symbolTable.symbol.Symbol;
 import symbolTable.symbol.SymbolType;
+import utils.AstNodes;
 
 public class FuncDeclNode extends BaseNode {
 
@@ -26,6 +28,10 @@ public class FuncDeclNode extends BaseNode {
      */
     FuncDeclNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
+
+        if (!nodeName.equals(AstNodes.FUNC_DECL)) {
+            throw new BadNodeNameException(AstNodes.FUNC_DECL, nodeName);
+        }
     }
 
     @Override

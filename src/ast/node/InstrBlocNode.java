@@ -1,8 +1,10 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
+import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
+import utils.AstNodes;
 
 /**
  * ast.node.InstrBlocNode is the node in which instructions are defined
@@ -22,6 +24,10 @@ public class InstrBlocNode extends BaseNode {
      */
     public InstrBlocNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
+
+        if (!nodeName.equals(AstNodes.INSTR_BLOC)) {
+            throw new BadNodeNameException(AstNodes.INSTR_BLOC, nodeName);
+        }
     }
 
     @Override

@@ -1,11 +1,17 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
+import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
+import utils.AstNodes;
 
 public class FuncCallNode extends BaseNode {
     public FuncCallNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
+
+        if (!nodeName.equals(AstNodes.FUNC_CALL)) {
+            throw new BadNodeNameException(AstNodes.FUNC_CALL, nodeName);
+        }
     }
 
     /**
