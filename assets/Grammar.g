@@ -97,7 +97,7 @@ program
     ;
 
 vardeclist
-    : varsuitdecl*
+    : varsuitdecl* -> ^(VAR_DECL_LIST varsuitdecl*)
     ;
 
 varsuitdecl
