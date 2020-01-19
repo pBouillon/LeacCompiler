@@ -1,4 +1,4 @@
-package ast.node;
+package ast.node.operation;
 
 import ast.exception.AstBaseException;
 import ast.factory.OperationNodeFactory;
@@ -7,7 +7,7 @@ import org.antlr.runtime.tree.Tree;
 import java.util.ArrayList;
 
 /**
- * ast.node.PowNode is the power operator node
+ * ast.node.operation.GtNode is the greater operator node
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
 
-public class PowNode extends OperationNode {
+public class GtNode extends OperationNode {
 
     private ArrayList<OperationNode> subOperations;
 
@@ -25,7 +25,7 @@ public class PowNode extends OperationNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    public PowNode(Tree _currentNode) throws AstBaseException {
+    public GtNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 
@@ -38,6 +38,7 @@ public class PowNode extends OperationNode {
     protected void exitNode() throws AstBaseException {
 
     }
+
 
     @Override
     protected void extractChildren() throws AstBaseException {

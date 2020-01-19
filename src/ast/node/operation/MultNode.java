@@ -1,4 +1,4 @@
-package ast.node;
+package ast.node.operation;
 
 import ast.exception.AstBaseException;
 import ast.factory.OperationNodeFactory;
@@ -7,7 +7,7 @@ import org.antlr.runtime.tree.Tree;
 import java.util.ArrayList;
 
 /**
- * ast.node.MultNode is the multiplication operator node
+ * ast.node.operation.MultNode is the multiplication operator node
  *
  * @author Florian Vogt
  * @author Pierre Bouillon

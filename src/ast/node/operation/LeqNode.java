@@ -1,4 +1,4 @@
-package ast.node;
+package ast.node.operation;
 
 import ast.exception.AstBaseException;
 import ast.factory.OperationNodeFactory;
@@ -7,7 +7,7 @@ import org.antlr.runtime.tree.Tree;
 import java.util.ArrayList;
 
 /**
- * ast.node.AndNode is the AND operator node
+ * ast.node.operation.LeqNode is the "less or equal" operator node
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
@@ -15,8 +15,7 @@ import java.util.ArrayList;
  * @version 0.1
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
-
-public class AndNode extends OperationNode {
+public class LeqNode extends OperationNode {
 
     private ArrayList<OperationNode> subOperations;
 
@@ -25,7 +24,7 @@ public class AndNode extends OperationNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    public AndNode(Tree _currentNode) throws AstBaseException {
+    public LeqNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 

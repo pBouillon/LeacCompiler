@@ -1,19 +1,18 @@
-package ast.node;
+package ast.node.function;
 
 import ast.exception.AstBaseException;
+import ast.exception.common.BadNodeNameException;
+import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
+import utils.AstNodes;
 
-import java.util.ArrayList;
-
-public class IdfNode extends BaseNode {
-
-    /**
-     * Default constructor to ensure the usage of the ANTLR raw AST
-     *
-     * @param _currentNode ANTLR raw AST
-     */
-    IdfNode(Tree _currentNode) throws AstBaseException {
+public class FuncCallNode extends BaseNode {
+    public FuncCallNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
+
+        if (!nodeName.equals(AstNodes.FUNC_CALL)) {
+            throw new BadNodeNameException(AstNodes.FUNC_CALL, nodeName);
+        }
     }
 
     /**
@@ -45,7 +44,7 @@ public class IdfNode extends BaseNode {
      */
     @Override
     protected void extractChildren() throws AstBaseException {
-
+    // TODO
     }
 
     /**
@@ -55,6 +54,4 @@ public class IdfNode extends BaseNode {
     protected void fillSymbolTable() throws AstBaseException {
 
     }
-
-
 }

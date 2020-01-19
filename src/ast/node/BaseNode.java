@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @version 0.1
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
-abstract class BaseNode {
+public abstract class BaseNode {
 
     /**
      * Node's children
@@ -36,7 +36,7 @@ abstract class BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    BaseNode(Tree _currentNode) throws AstBaseException {
+    protected BaseNode(Tree _currentNode) throws AstBaseException {
         currentNode = _currentNode;
 
         // Fetch node's name

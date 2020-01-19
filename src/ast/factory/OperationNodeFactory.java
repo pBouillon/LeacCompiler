@@ -2,7 +2,7 @@ package ast.factory;
 
 import ast.exception.AstBaseException;
 import ast.exception.operation.BadOperationNameException;
-import ast.node.*;
+import ast.node.operation.*;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;
 

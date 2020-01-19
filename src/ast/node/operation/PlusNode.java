@@ -1,4 +1,4 @@
-package ast.node;
+package ast.node.operation;
 
 import ast.exception.AstBaseException;
 import ast.factory.OperationNodeFactory;
@@ -7,7 +7,7 @@ import org.antlr.runtime.tree.Tree;
 import java.util.ArrayList;
 
 /**
- * ast.node.DivNode is the division operator node
+ * ast.node.operation.PlusNode is the addition operator node
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
 
-public class DivNode extends OperationNode {
+public class PlusNode extends OperationNode {
 
     private ArrayList<OperationNode> subOperations;
 
@@ -25,7 +25,7 @@ public class DivNode extends OperationNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    public DivNode(Tree _currentNode) throws AstBaseException {
+    public PlusNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 

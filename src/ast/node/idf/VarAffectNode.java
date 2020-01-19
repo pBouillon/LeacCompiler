@@ -1,8 +1,11 @@
-package ast.node;
+package ast.node.idf;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
 import ast.exception.common.BadNodeNameException;
+import ast.node.BaseNode;
+import ast.node.LMemberNode;
+import ast.node.RMemberNode;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;
 

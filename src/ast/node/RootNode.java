@@ -3,6 +3,8 @@ package ast.node;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
 import ast.exception.common.BadNodeNameException;
+import ast.node.function.FuncDeclListNode;
+import ast.node.idf.VarDeclListNode;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
 import symbolTable.symbol.Symbol;

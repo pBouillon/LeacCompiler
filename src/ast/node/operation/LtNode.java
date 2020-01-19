@@ -1,4 +1,4 @@
-package ast.node;
+package ast.node.operation;
 
 import ast.exception.AstBaseException;
 import ast.factory.OperationNodeFactory;
@@ -7,7 +7,7 @@ import org.antlr.runtime.tree.Tree;
 import java.util.ArrayList;
 
 /**
- * ast.node.MinusNode is the minus operator node
+ * ast.node.operation.LtNode is the lesser operator node
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
 
-public class MinusNode extends OperationNode {
+public class LtNode extends OperationNode {
 
     private ArrayList<OperationNode> subOperations;
 
@@ -25,7 +25,7 @@ public class MinusNode extends OperationNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    public MinusNode(Tree _currentNode) throws AstBaseException {
+    public LtNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 

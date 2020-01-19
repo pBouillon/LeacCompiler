@@ -1,11 +1,12 @@
-package ast.node;
+package ast.node.operation;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
+import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
 
 /**
- * ast.node.OperationNode is a node for operations
+ * ast.node.operation.OperationNode is a node for operations
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
@@ -25,7 +26,7 @@ public abstract class OperationNode extends BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    OperationNode(Tree _currentNode) throws AstBaseException {
+    protected OperationNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 

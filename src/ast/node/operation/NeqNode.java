@@ -1,12 +1,13 @@
-package ast.node;
+package ast.node.operation;
 
 import ast.exception.AstBaseException;
-import ast.exception.common.BadNodeNameException;
+import ast.factory.OperationNodeFactory;
 import org.antlr.runtime.tree.Tree;
-import utils.AstNodes;
+
+import java.util.ArrayList;
 
 /**
- * ast.node.VarDeclListNode is the variables in which all functions are declared
+ * ast.node.operation.NeqNode is the "not equal" operator node
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
@@ -14,39 +15,39 @@ import utils.AstNodes;
  * @version 0.1
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
-public class VarDeclListNode extends BaseNode {
+
+public class NeqNode extends OperationNode {
+
+    private ArrayList<OperationNode> subOperations;
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
      * @param _currentNode ANTLR raw AST
      */
-    public VarDeclListNode(Tree _currentNode) throws AstBaseException {
+    public NeqNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
-
-        if (!nodeName.equals(AstNodes.VAR_DECL_LIST)) {
-            throw new BadNodeNameException(AstNodes.VAR_DECL_LIST, nodeName);
-        }
     }
 
     @Override
     protected void extractIdfs() throws AstBaseException {
+
     }
 
     @Override
     protected void exitNode() throws AstBaseException {
+
     }
 
     @Override
-    protected void checkChildrenAmount() throws AstBaseException {
-    }
-
-    @Override
-    protected void extractChildren() {
+    protected void extractChildren() throws AstBaseException {
+        for (Tree child: children) {
+            subOperations.add(OperationNodeFactory.createOperationNode(child));
+        }
     }
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
-    }
 
+    }
 }

@@ -1,7 +1,9 @@
-package ast.node;
+package ast.node.idf;
 
 import ast.exception.AstBaseException;
 import ast.factory.OperationNodeFactory;
+import ast.node.BaseNode;
+import ast.node.function.FuncCallNode;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;
 

@@ -1,13 +1,13 @@
-package ast.node;
+package ast.node.idf;
 
 import ast.exception.AstBaseException;
-import ast.factory.OperationNodeFactory;
+import ast.exception.common.BadNodeNameException;
+import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
-
-import java.util.ArrayList;
+import utils.AstNodes;
 
 /**
- * ast.node.EqNode is the equal operator node
+ * ast.node.idf.VarDeclListNode is the variables in which all functions are declared
  *
  * @author Florian Vogt
  * @author Pierre Bouillon
@@ -15,38 +15,39 @@ import java.util.ArrayList;
  * @version 0.1
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
-public class EqNode extends OperationNode {
-
-    private ArrayList<OperationNode> subOperations;
+public class VarDeclListNode extends BaseNode {
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
      * @param _currentNode ANTLR raw AST
      */
-    public EqNode(Tree _currentNode) throws AstBaseException {
+    public VarDeclListNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
-    }
 
-    @Override
-    protected void extractIdfs() throws AstBaseException {
-
-    }
-
-    @Override
-    protected void exitNode() throws AstBaseException {
-
-    }
-
-    @Override
-    protected void extractChildren() throws AstBaseException {
-        for (Tree child: children) {
-            subOperations.add(OperationNodeFactory.createOperationNode(child));
+        if (!nodeName.equals(AstNodes.VAR_DECL_LIST)) {
+            throw new BadNodeNameException(AstNodes.VAR_DECL_LIST, nodeName);
         }
     }
 
     @Override
-    protected void fillSymbolTable() throws AstBaseException {
-
+    protected void extractIdfs() throws AstBaseException {
     }
+
+    @Override
+    protected void exitNode() throws AstBaseException {
+    }
+
+    @Override
+    protected void checkChildrenAmount() throws AstBaseException {
+    }
+
+    @Override
+    protected void extractChildren() {
+    }
+
+    @Override
+    protected void fillSymbolTable() throws AstBaseException {
+    }
+
 }

@@ -1,6 +1,8 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
+import ast.node.idf.IdfArrayNode;
+import ast.node.idf.IdfNode;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;
 
@@ -16,7 +18,7 @@ public class LMemberNode extends BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    LMemberNode(Tree _currentNode) throws AstBaseException {
+    public LMemberNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
 
     }
