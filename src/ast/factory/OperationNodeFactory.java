@@ -1,8 +1,7 @@
 package ast.factory;
 
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
-import ast.exception.root.BadOperationNameException;
+import ast.exception.operation.BadOperationNameException;
 import ast.node.*;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;

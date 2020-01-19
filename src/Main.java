@@ -1,10 +1,7 @@
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
-import ast.exception.root.BadNodeNameException;
 import ast.node.RootNode;
 import compiler.Compiler;
 import org.antlr.runtime.tree.Tree;
-import symbolTable.SymbolTable;
 import symbolTable.SymbolTableProvider;
 import utils.GrammarConstants;
 

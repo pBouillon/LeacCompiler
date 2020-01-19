@@ -1,7 +1,6 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
 

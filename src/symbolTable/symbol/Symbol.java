@@ -16,7 +16,6 @@ public class Symbol {
 
     private Object value;
 
-
     public Symbol(String _idf, SymbolTypes _type, Object _value, boolean _isInitialized, Tree node) {
         idf = _idf;
         type = _type;

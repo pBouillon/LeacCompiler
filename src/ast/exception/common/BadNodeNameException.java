@@ -1,4 +1,4 @@
-package ast.exception.root;
+package ast.exception.common;
 
 import ast.exception.AstBaseException;
 import utils.AstNodes;
