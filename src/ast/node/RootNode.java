@@ -6,7 +6,7 @@ import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
 import symbolTable.symbol.Symbol;
-import symbolTable.symbol.SymbolTypes;
+import symbolTable.symbol.SymbolType;
 import utils.AstNodes;
 
 /**
@@ -99,7 +99,7 @@ public class RootNode extends BaseNode {
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
-        Symbol programEntry = new Symbol(programName, SymbolTypes.PROGRAM, currentNode);
+        Symbol programEntry = new Symbol(programName, SymbolType.PROGRAM, currentNode);
 
         SymbolTableProvider
                 .getCurrent()

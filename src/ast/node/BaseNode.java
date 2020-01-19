@@ -68,7 +68,7 @@ abstract class BaseNode {
     /**
      *
      */
-    abstract protected void extractIdfs() throws AstBaseException;
+    abstract protected void checkChildrenAmount() throws AstBaseException;
 
     /**
      *
@@ -78,12 +78,12 @@ abstract class BaseNode {
     /**
      *
      */
-    abstract protected void checkChildrenAmount() throws AstBaseException;
+    abstract protected void extractChildren() throws AstBaseException;
 
     /**
      *
      */
-    abstract protected void extractChildren() throws AstBaseException;
+    abstract protected void extractIdfs() throws AstBaseException;
 
     /**
      *

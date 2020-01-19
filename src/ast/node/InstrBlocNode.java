@@ -46,7 +46,7 @@ public class InstrBlocNode extends BaseNode {
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
-        SymbolTableProvider.addNested();
+        SymbolTableProvider.nest();
     }
 
 }

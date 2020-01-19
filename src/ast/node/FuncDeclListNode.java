@@ -25,8 +25,6 @@ public class FuncDeclListNode extends BaseNode {
      */
     public FuncDeclListNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
-
-        declaredFunctions = new ArrayList<>();
     }
 
     @Override
@@ -43,6 +41,8 @@ public class FuncDeclListNode extends BaseNode {
 
     @Override
     protected void extractChildren() throws AstBaseException {
+        declaredFunctions = new ArrayList<>();
+
         for(Tree child : children) {
             declaredFunctions.add(new FuncDeclNode(child));
         }

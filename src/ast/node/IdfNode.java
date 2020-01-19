@@ -5,14 +5,14 @@ import org.antlr.runtime.tree.Tree;
 
 import java.util.ArrayList;
 
-public class IDFNode extends BaseNode {
+public class IdfNode extends BaseNode {
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
      * @param _currentNode ANTLR raw AST
      */
-    IDFNode(Tree _currentNode) throws AstBaseException {
+    IdfNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 

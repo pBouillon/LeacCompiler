@@ -11,7 +11,7 @@ public class SymbolTableProvider {
         currentSymbolTable = rootSymbolTable;
     }
 
-    public static void addNested() {
+    public static void nest() {
         currentSymbolTable = new SymbolTable(currentSymbolTable);
     }
 
