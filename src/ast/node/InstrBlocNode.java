@@ -3,6 +3,7 @@ package ast.node;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
+import symbolTable.SymbolTable;
 import symbolTable.SymbolTableProvider;
 import utils.AstNodes;
 
@@ -37,7 +38,7 @@ public class InstrBlocNode extends BaseNode {
 
     @Override
     protected void exitNode() throws AstBaseException {
-
+        SymbolTableProvider.unwrap();
     }
 
     @Override
