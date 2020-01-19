@@ -1,4 +1,4 @@
-package ast.exception.root;
+package ast.exception.operation;
 
 import ast.exception.AstBaseException;
 

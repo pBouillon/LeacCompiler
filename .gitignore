@@ -2,6 +2,9 @@
 GrammarLexer.java
 GrammarParser.java
 Grammar.tokens
+*.png
+*.jpg
+*.jpeg
 
 assets/output/
 

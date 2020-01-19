@@ -1,8 +1,11 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
+import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
+import utils.AstNodes;
+
+import java.util.ArrayList;
 
 /**
  * ast.node.FuncDeclListNode is the node in which all functions are declared
@@ -15,6 +18,8 @@ import org.antlr.runtime.tree.Tree;
  */
 public class FuncDeclListNode extends BaseNode {
 
+    private ArrayList<FuncDeclNode> declaredFunctions;
+
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
@@ -22,31 +27,35 @@ public class FuncDeclListNode extends BaseNode {
      */
     public FuncDeclListNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
+
+        if (!nodeName.equals(AstNodes.FUNC_DECL_LIST)) {
+            throw new BadNodeNameException(AstNodes.FUNC_DECL_LIST, nodeName);
+        }
     }
 
     @Override
     protected void extractIdfs() throws AstBaseException {
-
     }
 
     @Override
     protected void exitNode() throws AstBaseException {
-
     }
 
     @Override
     protected void checkChildrenAmount() throws AstBaseException {
-
     }
 
     @Override
-    protected void extractChildren() {
+    protected void extractChildren() throws AstBaseException {
+        declaredFunctions = new ArrayList<>();
 
+        for(Tree child : children) {
+            declaredFunctions.add(new FuncDeclNode(child));
+        }
     }
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
-
     }
 
 }

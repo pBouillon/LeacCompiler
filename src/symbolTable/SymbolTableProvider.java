@@ -6,12 +6,12 @@ public class SymbolTableProvider {
 
     private static SymbolTable rootSymbolTable;
 
-    private SymbolTableProvider() {
+    public static void initialise() {
         rootSymbolTable = new SymbolTable(null);
         currentSymbolTable = rootSymbolTable;
     }
 
-    public static void addNested() {
+    public static void nest() {
         currentSymbolTable = new SymbolTable(currentSymbolTable);
     }
 

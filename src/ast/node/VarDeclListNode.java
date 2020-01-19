@@ -1,8 +1,9 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
+import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
+import utils.AstNodes;
 
 /**
  * ast.node.VarDeclListNode is the variables in which all functions are declared
@@ -22,31 +23,30 @@ public class VarDeclListNode extends BaseNode {
      */
     public VarDeclListNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
+
+        if (!nodeName.equals(AstNodes.VAR_DECL_LIST)) {
+            throw new BadNodeNameException(AstNodes.VAR_DECL_LIST, nodeName);
+        }
     }
 
     @Override
     protected void extractIdfs() throws AstBaseException {
-
     }
 
     @Override
     protected void exitNode() throws AstBaseException {
-
     }
 
     @Override
     protected void checkChildrenAmount() throws AstBaseException {
-
     }
 
     @Override
     protected void extractChildren() {
-
     }
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
-
     }
 
 }

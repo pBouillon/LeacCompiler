@@ -1,4 +1,4 @@
-package ast.exception.root;
+package ast.exception.common;
 
 import ast.exception.AstBaseException;
 
@@ -16,11 +16,9 @@ public class BadChildrenCountException extends AstBaseException {
 
     /**
      * Default constructor
-     *
-     * @param message exception message
      */
-    public BadChildrenCountException(int expectedSize, int badSize) {
-        super("Bad children amount, expected " + expectedSize + " but found " + badSize);
+    public BadChildrenCountException(int expectedSize, int actualSize) {
+        super("Bad children amount, expected " + expectedSize + " but found " + actualSize);
     }
 
 }

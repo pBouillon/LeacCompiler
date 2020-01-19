@@ -12,12 +12,11 @@ public class Symbol {
 
     private int lineNumber;
 
-    private SymbolTypes type;
+    private SymbolType type;
 
     private Object value;
 
-
-    public Symbol(String _idf, SymbolTypes _type, Object _value, boolean _isInitialized, Tree node) {
+    public Symbol(String _idf, SymbolType _type, Object _value, boolean _isInitialized, Tree node) {
         idf = _idf;
         type = _type;
         value = _value;
@@ -26,7 +25,7 @@ public class Symbol {
         extractSymbolMetaData(node);
     }
 
-    public Symbol(String _idf, SymbolTypes _type, Tree node) {
+    public Symbol(String _idf, SymbolType _type, Tree node) {
         idf = _idf;
         type = _type;
         value = null;
@@ -56,7 +55,7 @@ public class Symbol {
         return lineNumber;
     }
 
-    public SymbolTypes getType() {
+    public SymbolType getType() {
         return type;
     }
 

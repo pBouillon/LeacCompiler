@@ -53,4 +53,6 @@ public class AstNodes {
     public static final String OR_NODE = "OR";
     public static final String FUNC_CALL = "FUNC_CALL";
     public static final String CSTE_N = "CSTE_N";
+    public static final String PARAM_LIST = "PARAM_LIST";
+    public static final String FUNC_DECL = "FUNC_DECL";
 }

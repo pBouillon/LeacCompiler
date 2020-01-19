@@ -1,7 +1,6 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
 import org.antlr.runtime.tree.Tree;
 
 import java.util.ArrayList;
@@ -69,7 +68,7 @@ abstract class BaseNode {
     /**
      *
      */
-    abstract protected void extractIdfs() throws AstBaseException;
+    abstract protected void checkChildrenAmount() throws AstBaseException;
 
     /**
      *
@@ -79,12 +78,12 @@ abstract class BaseNode {
     /**
      *
      */
-    abstract protected void checkChildrenAmount() throws AstBaseException;
+    abstract protected void extractChildren() throws AstBaseException;
 
     /**
      *
      */
-    abstract protected void extractChildren() throws AstBaseException;
+    abstract protected void extractIdfs() throws AstBaseException;
 
     /**
      *

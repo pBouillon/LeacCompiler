@@ -3,8 +3,6 @@ package compiler;
 import antlr.assets.GrammarLexer;
 import antlr.assets.GrammarParser;
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
-import ast.exception.root.BadNodeNameException;
 import ast.node.RootNode;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;

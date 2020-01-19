@@ -7,7 +7,7 @@ import utils.AstNodes;
 
 import java.util.ArrayList;
 
-public class IDFArrayNode extends IDFNode {
+public class IdfArrayNode extends IdfNode {
 
     private ArrayList<BaseNode> indexes;
 
@@ -17,7 +17,7 @@ public class IDFArrayNode extends IDFNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    IDFArrayNode(Tree _currentNode) throws AstBaseException {
+    IdfArrayNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 
@@ -48,7 +48,7 @@ public class IDFArrayNode extends IDFNode {
         for (Tree child: children) {
             switch (child.toString()) {
                 case AstNodes.CSTE_N:
-                    indexes.add(new IDFNode(child)); // Todo : Constantes
+                    indexes.add(new IdfNode(child)); // Todo : Constantes
                 case AstNodes.FUNC_CALL:
                     indexes.add(new FuncCallNode(child));
 
@@ -59,13 +59,13 @@ public class IDFArrayNode extends IDFNode {
                     indexes.add(OperationNodeFactory.createOperationNode(child));
 
                 case AstNodes.INDEX:
-                    IDFArrayNode ArrayNode = new IDFArrayNode(child);
+                    IdfArrayNode ArrayNode = new IdfArrayNode(child);
                     ArrayNode.setName(indexes.get(indexes.size()).toString());
                     indexes.set(indexes.size(), ArrayNode);
                     break;
 
                 default:
-                    indexes.add(new IDFNode(child));
+                    indexes.add(new IdfNode(child));
             }
         }
     }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class LMemberNode extends BaseNode {
 
-    private ArrayList<IDFNode> idfs;
+    private ArrayList<IdfNode> idfs;
 
 
     /**
@@ -46,13 +46,13 @@ public class LMemberNode extends BaseNode {
         for (Tree child: children) {
             switch (child.toString()) {
                 case AstNodes.INDEX:
-                    IDFArrayNode ArrayNode = new IDFArrayNode(child);
+                    IdfArrayNode ArrayNode = new IdfArrayNode(child);
                     ArrayNode.setName(idfs.get(idfs.size()).toString());
                     idfs.set(idfs.size(), ArrayNode);
                     break;
 
                 default:
-                    idfs.add(new IDFNode(child));
+                    idfs.add(new IdfNode(child));
             }
         }
     }

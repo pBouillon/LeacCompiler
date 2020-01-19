@@ -1,10 +1,8 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
+import ast.exception.common.BadChildrenCountException;
 import org.antlr.runtime.tree.Tree;
-
-import java.util.ArrayList;
 
 /**
  * ast.node.OperationNode is a node for operations

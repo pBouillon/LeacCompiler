@@ -97,7 +97,7 @@ program
     ;
 
 vardeclist
-    : varsuitdecl*
+    : varsuitdecl* -> ^(VAR_DECL_LIST varsuitdecl*)
     ;
 
 varsuitdecl
@@ -133,7 +133,7 @@ rangelist_1
     ;
 
 funcdeclist
-    : (funcdec)* 
+    : (funcdec)*
     ;
 
 funcdec

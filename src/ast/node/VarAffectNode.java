@@ -1,8 +1,8 @@
 package ast.node;
 
 import ast.exception.AstBaseException;
-import ast.exception.root.BadChildrenCountException;
-import ast.exception.root.BadNodeNameException;
+import ast.exception.common.BadChildrenCountException;
+import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;
 
