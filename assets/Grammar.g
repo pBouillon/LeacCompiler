@@ -137,11 +137,11 @@ funcdeclist
     ;
 
 funcdec
-	:	FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF arglist? atomtype vardeclist? ^(INSTR_BLOC end_sequence?))
+	:	FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF ^(PARAM_LIST arglist?) atomtype vardeclist? ^(INSTR_BLOC end_sequence?))
 	;
 
 arglist
-    : arg (',' arg)* -> ^(PARAM_LIST arg*)
+    : arg (',' arg)* -> arg*
     | -> 
     ;
 

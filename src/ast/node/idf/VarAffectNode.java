@@ -14,6 +14,7 @@ public class VarAffectNode extends BaseNode {
 
     private LMemberNode lMemberNode;
     private RMemberNode rMemberNode;
+
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
@@ -53,7 +54,7 @@ public class VarAffectNode extends BaseNode {
     @Override
     protected void extractChildren() throws AstBaseException {
         // Assign each child
-        for (Tree child: children) {
+        for (Tree child : children) {
             switch (child.toString()) {
                 case AstNodes.LMEMBER:
                     rMemberNode = new RMemberNode(child);

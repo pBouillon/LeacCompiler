@@ -72,14 +72,14 @@ public class RootNode extends BaseNode {
         int childrenNumber = 4;
 
         if (children.size() != childrenNumber) {
-            throw new BadChildrenCountException(childrenNumber,children.size());
+            throw new BadChildrenCountException(childrenNumber, children.size());
         }
     }
 
     @Override
     protected void extractChildren() throws AstBaseException {
         // Assign each child
-        for (Tree child: children) {
+        for (Tree child : children) {
             switch (child.toString()) {
                 case AstNodes.VAR_DECL_LIST:
                     varDeclListNode = new VarDeclListNode(child);

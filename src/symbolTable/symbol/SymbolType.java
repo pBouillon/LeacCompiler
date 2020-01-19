@@ -14,7 +14,7 @@ public enum SymbolType {
     PROGRAM;
 
     public static SymbolType fromString(String toConvert) {
-        for (SymbolType symbolType: SymbolType.values()) {
+        for (SymbolType symbolType : SymbolType.values()) {
             if (symbolType.toString().equalsIgnoreCase(toConvert)) {
                 return symbolType;
             }

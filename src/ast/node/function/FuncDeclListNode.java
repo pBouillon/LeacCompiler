@@ -50,7 +50,7 @@ public class FuncDeclListNode extends BaseNode {
     protected void extractChildren() throws AstBaseException {
         declaredFunctions = new ArrayList<>();
 
-        for(Tree child : children) {
+        for (Tree child : children) {
             declaredFunctions.add(new FuncDeclNode(child));
         }
     }

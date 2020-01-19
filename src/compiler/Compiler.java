@@ -30,7 +30,7 @@ public class Compiler {
      *
      * @param source the file to be compiled
      * @return the generated AST if successful
-     *         null otherwise
+     * null otherwise
      */
     public Tree compileTarget(File source) {
         Tree generatedAst = null;
@@ -50,9 +50,9 @@ public class Compiler {
      * Perform the compilation operation on the given stream
      *
      * @param sourceStream the streamed sources
-     * @throws IOException on an unknown or invalid file
-     * @throws RecognitionException on a mismatch between the grammar's definition and the source's content
      * @return the generated AST
+     * @throws IOException          on an unknown or invalid file
+     * @throws RecognitionException on a mismatch between the grammar's definition and the source's content
      */
     private Tree performCompilation(FileInputStream sourceStream) throws IOException, RecognitionException {
         // Perform input from the streamed sources
@@ -71,7 +71,7 @@ public class Compiler {
         GrammarParser.program_return result = parser.program();
 
         // Return the generated AST
-        return (Tree)result.getTree();
+        return (Tree) result.getTree();
     }
 
     /**

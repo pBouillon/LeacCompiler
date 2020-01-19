@@ -4,8 +4,6 @@ import ast.exception.AstBaseException;
 import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
 
-import java.util.ArrayList;
-
 public class IdfNode extends BaseNode {
 
     /**
@@ -13,7 +11,7 @@ public class IdfNode extends BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    IdfNode(Tree _currentNode) throws AstBaseException {
+    public IdfNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 

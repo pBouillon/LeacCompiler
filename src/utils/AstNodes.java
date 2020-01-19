@@ -38,14 +38,14 @@ public class AstNodes {
     public static final String INDEX = "INDEX";
 
     public static final String DIV_NODE = "DIV";
-    public static final String EQ_NODE = "EQ" ;
+    public static final String EQ_NODE = "EQ";
 
-    public static final String GEQ_NODE = "GEQ" ;
-    public static final String GT_NODE = "GT" ;
+    public static final String GEQ_NODE = "GEQ";
+    public static final String GT_NODE = "GT";
     public static final String LEQ_NODE = "LEQ";
     public static final String LT_NODE = "LT";
-    public static final String MINUS_NODE = "MINUS" ;
-    public static final String MULT_NODE = "MULT" ;
+    public static final String MINUS_NODE = "MINUS";
+    public static final String MULT_NODE = "MULT";
     public static final String NEQ_NODE = "NEQ";
     public static final String PLUS_NODE = "PLUS";
     public static final String POW_NODE = "POW";

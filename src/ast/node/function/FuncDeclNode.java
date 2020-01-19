@@ -78,17 +78,13 @@ public class FuncDeclNode extends BaseNode {
 
         if (symbolType == SymbolType.BOOLEAN) {
             symbolType = SymbolType.FUNCTION_BOOLEAN;
-        }
-        else if (symbolType == SymbolType.INT) {
+        } else if (symbolType == SymbolType.INT) {
             symbolType = SymbolType.FUNCTION_INT;
-        }
-        else if (symbolType == SymbolType.STRING) {
+        } else if (symbolType == SymbolType.STRING) {
             symbolType = SymbolType.FUNCTION_STRING;
-        }
-        else if (symbolType == SymbolType.VOID) {
+        } else if (symbolType == SymbolType.VOID) {
             symbolType = SymbolType.FUNCTION_VOID;
-        }
-        else {
+        } else {
             // TODO: throw ex
         }
 

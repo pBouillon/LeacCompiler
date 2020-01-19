@@ -1,7 +1,6 @@
 package ast.exception.common;
 
 import ast.exception.AstBaseException;
-import utils.AstNodes;
 
 /**
  * ast.root.exception.BadNodeNameException is the default template for exceptions ROOT node exception,

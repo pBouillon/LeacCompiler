@@ -19,7 +19,7 @@ public class IdfArrayNode extends IdfNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    IdfArrayNode(Tree _currentNode) throws AstBaseException {
+    public IdfArrayNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
     }
 
@@ -30,9 +30,11 @@ public class IdfArrayNode extends IdfNode {
     protected void exitNode() throws AstBaseException {
 
     }
-    void setName(String name) {
+
+    public void setName(String name) {
         this.nodeName = name;
     }
+
     /**
      *
      */
@@ -47,7 +49,7 @@ public class IdfArrayNode extends IdfNode {
     @Override
     protected void extractChildren() throws AstBaseException {
         // Assign each child
-        for (Tree child: children) {
+        for (Tree child : children) {
             switch (child.toString()) {
                 case AstNodes.CSTE_N:
                     indexes.add(new IdfNode(child)); // Todo : Constantes

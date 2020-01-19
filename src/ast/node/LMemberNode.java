@@ -37,7 +37,8 @@ public class LMemberNode extends BaseNode {
     }
 
     @Override
-    protected void checkChildrenAmount() throws AstBaseException {}
+    protected void checkChildrenAmount() throws AstBaseException {
+    }
 
     /**
      *
@@ -45,7 +46,7 @@ public class LMemberNode extends BaseNode {
     @Override
     protected void extractChildren() throws AstBaseException {
         // Assign each child
-        for (Tree child: children) {
+        for (Tree child : children) {
             switch (child.toString()) {
                 case AstNodes.INDEX:
                     IdfArrayNode ArrayNode = new IdfArrayNode(child);

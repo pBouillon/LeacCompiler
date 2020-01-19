@@ -3,7 +3,6 @@ package ast.node;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
 import org.antlr.runtime.tree.Tree;
-import symbolTable.SymbolTable;
 import symbolTable.SymbolTableProvider;
 import utils.AstNodes;
 

@@ -97,7 +97,7 @@ public abstract class BaseNode {
      */
     @Override
     public String toString() {
-        return nodeName ;
+        return nodeName;
     }
 
 }

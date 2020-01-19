@@ -42,7 +42,7 @@ public class GtNode extends OperationNode {
 
     @Override
     protected void extractChildren() throws AstBaseException {
-        for (Tree child: children) {
+        for (Tree child : children) {
             subOperations.add(OperationNodeFactory.createOperationNode(child));
         }
     }
