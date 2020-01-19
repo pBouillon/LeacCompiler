@@ -3,6 +3,7 @@ package ast.node.function;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
 import ast.exception.common.BadNodeNameException;
+import ast.exception.semantic.SymbolAlreadyDefinedException;
 import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
@@ -57,7 +58,8 @@ public class ParamNode extends BaseNode {
     @Override
     protected void performSemanticControls() throws AstBaseException {
         if (SymbolTableProvider.getCurrent().isSymbolRegistered(paramName)) {
-            // TODO: throw ex
+            throw new SymbolAlreadyDefinedException(
+                    SymbolTableProvider.getCurrent().getSymbol(paramName));
         }
     }
 }

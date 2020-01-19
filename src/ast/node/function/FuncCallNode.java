@@ -2,6 +2,7 @@ package ast.node.function;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
+import ast.exception.semantic.UnknownSymbolException;
 import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTable;
@@ -65,7 +66,7 @@ public class FuncCallNode extends BaseNode {
     @Override
     protected void performSemanticControls() throws AstBaseException {
         if (!SymbolTableProvider.getCurrent().isSymbolRegistered(functionName)) {
-            // TODO: throw ex
+            throw new UnknownSymbolException(functionName, currentNode.getLine());
         }
 
         Symbol registeredSymbol = SymbolTableProvider.getCurrent().getSymbol(functionName);

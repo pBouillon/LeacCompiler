@@ -3,6 +3,7 @@ package ast.node.function;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
 import ast.exception.common.BadNodeNameException;
+import ast.exception.semantic.SymbolAlreadyDefinedException;
 import ast.node.BaseNode;
 import ast.node.InstrBlocNode;
 import ast.node.idf.VarDeclListNode;
@@ -41,6 +42,11 @@ public class FuncDeclNode extends BaseNode {
     protected void extractIdfs() throws AstBaseException {
         functionName = children.get(0).toString();
         functionType = children.get(2).toString();
+
+        if (SymbolTableProvider.getCurrent().isSymbolRegistered(functionName)) {
+            throw new SymbolAlreadyDefinedException(
+                    SymbolTableProvider.getCurrent().getSymbol(functionName));
+        }
     }
 
     @Override
@@ -96,8 +102,5 @@ public class FuncDeclNode extends BaseNode {
 
     @Override
     protected void performSemanticControls() throws AstBaseException {
-        if (SymbolTableProvider.getCurrent().isSymbolRegistered(functionName)) {
-            // TODO: throw ex
-        }
     }
 }
