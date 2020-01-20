@@ -24,12 +24,17 @@ public class ConstantNumericNode extends ConstantNode {
 
     @Override
     protected void extractChildren() throws AstBaseException {
+        
         value = Integer.parseInt(children.get(0).toString());
     }
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return String.valueOf(value);
+        return value +"";
+    }
+
+    public void toggleNegative() {
+        this.value *= -1 ;
     }
 
 }

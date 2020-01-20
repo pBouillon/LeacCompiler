@@ -2,18 +2,17 @@ package ast.factory;
 
 import ast.exception.AstBaseException;
 import ast.exception.operation.BadOperationNameException;
-import ast.node.constant.ConstantBooleanNode;
+import ast.node.BaseNode;
 import ast.node.constant.ConstantNumericNode;
-import ast.node.constant.ConstantStringNode;
 import ast.node.operation.*;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;
 
 public class OperationNodeFactory {
-    public static OperationNode createOperationNode(Tree currentNode) throws AstBaseException {
+    public static BaseNode createOperationNode(Tree currentNode) throws AstBaseException {
         String nodeName = currentNode.toString();
 
-        OperationNode operationNode = null;
+        BaseNode operationNode = null;
 
         switch (nodeName) {
             case AstNodes.DIV_NODE:
@@ -51,6 +50,10 @@ public class OperationNodeFactory {
                 break;
             case AstNodes.AND_NODE:
                 operationNode = new AndNode(currentNode);
+                break;
+            case AstNodes.UMINUS_NODE:
+                operationNode = new ConstantNumericNode(currentNode.getChild(0));
+                ((ConstantNumericNode) operationNode).toggleNegative();
                 break;
             default:
                 throw new BadOperationNameException(nodeName);
