@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 public class WriteInstrNode extends BaseNode {
 
-    private ArrayList<BaseNode> items;
-    private ArrayList<String> idfs;
+    private ArrayList<BaseNode> items = new ArrayList<>();
+    private ArrayList<String> idfs = new ArrayList<>();
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST

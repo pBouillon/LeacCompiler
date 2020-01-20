@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class InstrBlocNode extends BaseNode {
 
-    private ArrayList<BaseNode> instructions;
+    private ArrayList<BaseNode> instructions = new ArrayList<>();
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
@@ -66,7 +66,6 @@ public class InstrBlocNode extends BaseNode {
 
     @Override
     protected void extractChildren() throws AstBaseException {
-        instructions = new ArrayList<>();
 
         for(Tree child : children) {
             switch(child.toString()) {
@@ -81,10 +80,13 @@ public class InstrBlocNode extends BaseNode {
                     break;
                 case AstNodes.VAR_AFFECT:
                     instructions.add(new VarAffectNode(child));
+                    break;
                 case AstNodes.LOOP:
                     instructions.add(new LoopNode(child));
+                    break;
                 case AstNodes.CONDITIONNAL_BLOC:
                     instructions.add(new ConditionalBlocNode(child));
+                    break;
                 default:
                     break;
             }
