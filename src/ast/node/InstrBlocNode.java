@@ -80,7 +80,7 @@ public class InstrBlocNode extends BaseNode {
                 case AstNodes.VAR_AFFECT:
                     instructions.add(new VarAffectNode(child));
                 case AstNodes.LOOP:
-                    instructions.add(new LOOPNode(child));
+                    instructions.add(new LoopNode(child));
                 case AstNodes.CONDITIONNAL_BLOC:
                     instructions.add(new ConditionnalBLocNode(child));
                 default:

@@ -3,8 +3,8 @@ package ast.node;
 import ast.exception.AstBaseException;
 import org.antlr.runtime.tree.Tree;
 
-public class LOOPNode extends BaseNode {
-    public LOOPNode(Tree child) throws AstBaseException {
+public class LoopNode extends BaseNode {
+    public LoopNode(Tree child) throws AstBaseException {
         super(child);
     }
 
