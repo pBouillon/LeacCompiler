@@ -78,6 +78,8 @@ public class InstrBlocNode extends BaseNode {
         switch(node.toString()) {
             case AstNodes.WRITE_INSTR:
                 return new WriteInstrNode(node);
+            case AstNodes.READ_INSTR:
+                return new ReadInstrNode(node);
             case AstNodes.RETURN_INSTR:
                 return new ReturnInstrNode(node);
             case AstNodes.FUNC_CALL:

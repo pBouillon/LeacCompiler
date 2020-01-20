@@ -3,10 +3,16 @@ package ast.node.operation;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
 import ast.exception.operation.BadOperationNameException;
+import ast.exception.semantic.TypeMismatchException;
+import ast.exception.semantic.UnknownSymbolException;
 import ast.factory.OperationNodeFactory;
 import ast.node.BaseNode;
 import ast.node.constant.ConstantNumericNode;
+import ast.node.idf.IdfNode;
 import org.antlr.runtime.tree.Tree;
+import symbolTable.SymbolTableProvider;
+import symbolTable.symbol.Symbol;
+import symbolTable.symbol.SymbolType;
 import utils.AstNodes;
 
 /**
@@ -62,7 +68,14 @@ public abstract class OperationNode extends BaseNode {
             return new ConstantNumericNode(node);
         }
         else {
-            throw new BadOperationNameException(node.toString());
+            // provided node may be an IDF
+            Symbol idf = SymbolTableProvider.getCurrent().getSymbol(node.toString());
+
+            if (idf == null) {
+                throw new UnknownSymbolException(node.toString(), node);
+            }
+
+            return new IdfNode(node);
         }
     }
 

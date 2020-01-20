@@ -42,6 +42,8 @@ public class ReadInstrNode extends BaseNode {
 
     @Override
     protected void extractChildren() throws AstBaseException {
+        items = new ArrayList<>();
+
         // Assign each child
         for (Tree child : children) {
             switch (child.toString()) {
@@ -59,14 +61,16 @@ public class ReadInstrNode extends BaseNode {
 
     @Override
     protected void extractIdfs() throws AstBaseException {
-            for (Tree child : children) {
-                switch (child.toString()) {
-                    case AstNodes.ARRAY_INDEX:
-                        break;
-                    default:
-                        idfs.add(child.toString());
-                }
+        idfs = new ArrayList<>();
+
+        for (Tree child : children) {
+            switch (child.toString()) {
+                case AstNodes.ARRAY_INDEX:
+                    break;
+                default:
+                    idfs.add(child.toString());
             }
+        }
     }
 
     @Override

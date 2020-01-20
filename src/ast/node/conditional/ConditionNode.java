@@ -85,7 +85,6 @@ public class ConditionNode extends BaseNode {
             if (idf.getType() != SymbolType.BOOL) {
                 throw new TypeMismatchException(SymbolType.BOOL.toString(), idf.getType().toString(), condition);
             }
-
         }
     }
 
