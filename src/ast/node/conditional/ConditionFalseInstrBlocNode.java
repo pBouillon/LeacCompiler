@@ -2,6 +2,7 @@ package ast.node.conditional;
 
 import ast.exception.AstBaseException;
 import ast.node.BaseNode;
+import ast.node.InstrBlocNode;
 import org.antlr.runtime.tree.Tree;
 
 import java.util.ArrayList;
@@ -32,6 +33,10 @@ public class ConditionFalseInstrBlocNode extends BaseNode {
     @Override
     protected void extractChildren() throws AstBaseException {
         instructions = new ArrayList<>();
+
+        for(Tree child : children) {
+            instructions.add(InstrBlocNode.getInstructionNode(child));
+        }
     }
 
     @Override
@@ -41,7 +46,15 @@ public class ConditionFalseInstrBlocNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        for (BaseNode instruction : instructions) {
+            sb.append(prefix)
+                    .append(instruction.generateCode(prefix))
+                    .append(";\n");
+        }
+
+        return sb.toString();
     }
 
     @Override
