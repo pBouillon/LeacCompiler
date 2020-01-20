@@ -2,6 +2,8 @@ package compiler;
 
 import antlr.assets.GrammarLexer;
 import antlr.assets.GrammarParser;
+import ast.exception.AstBaseException;
+import ast.node.RootNode;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
@@ -28,7 +30,7 @@ public class Compiler {
      *
      * @param source the file to be compiled
      * @return the generated AST if successful
-     *         null otherwise
+     * null otherwise
      */
     public Tree compileTarget(File source) {
         Tree generatedAst = null;
@@ -48,9 +50,9 @@ public class Compiler {
      * Perform the compilation operation on the given stream
      *
      * @param sourceStream the streamed sources
-     * @throws IOException on an unknown or invalid file
-     * @throws RecognitionException on a mismatch between the grammar's definition and the source's content
      * @return the generated AST
+     * @throws IOException          on an unknown or invalid file
+     * @throws RecognitionException on a mismatch between the grammar's definition and the source's content
      */
     private Tree performCompilation(FileInputStream sourceStream) throws IOException, RecognitionException {
         // Perform input from the streamed sources
@@ -69,7 +71,28 @@ public class Compiler {
         GrammarParser.program_return result = parser.program();
 
         // Return the generated AST
-        return (Tree)result.getTree();
+        return (Tree) result.getTree();
+    }
+
+    /**
+     * Generate custom AST based on the ANTLR generated tree
+     *
+     * @param rawTree Raw generated ANTLR tree
+     * @return the root node of the custom AST
+     */
+    public RootNode generateAst(Tree rawTree) throws AstBaseException {
+        return new RootNode(rawTree);
+    }
+
+    /**
+     * Generate the output, in language C
+     *
+     * @param root AST root
+     * @return the source in C
+     * @throws AstBaseException
+     */
+    public String generateCode(RootNode root) throws AstBaseException {
+        return root.generateCode("");
     }
 
 }

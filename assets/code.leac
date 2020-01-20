@@ -12,7 +12,7 @@
         while i <= 3 do
             {while j <= 5 do
                 { if t[i, j] > max then max = t[i, j];
-                    j = j + 1
+                    t[j] = j + 1
                     };
                 i = i + 1
                 };
@@ -32,7 +32,7 @@
         };
         i = i + 1
     };
-    maximum = maxTAB(Tval);
+    maximum = maxTAB(Tval[i]);
     write maximum;
-    theEnd()
+    theEnd(1+1)
 }

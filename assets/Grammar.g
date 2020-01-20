@@ -97,7 +97,7 @@ program
     ;
 
 vardeclist
-    : varsuitdecl*
+    : varsuitdecl* -> varsuitdecl*
     ;
 
 varsuitdecl
@@ -133,12 +133,15 @@ rangelist_1
     ;
 
 funcdeclist
-    : (FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF arglist atomtype vardeclist? ^(INSTR_BLOC end_sequence?)))*
+    : (funcdec)*
     ;
 
+funcdec
+	:	FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF ^(PARAM_LIST arglist?) atomtype ^(VAR_DECL_LIST vardeclist?) ^(INSTR_BLOC end_sequence?))
+	;
 
 arglist
-    : arg (',' arg)* -> ^(PARAM_LIST arg*)
+    : arg (',' arg)* -> arg*
     | -> 
     ;
 
@@ -155,8 +158,8 @@ instr
     )
     | RETURN expr? -> ^(RETURN_INSTR expr?)
     | '{' end_sequence -> end_sequence?
-    | READ lvalue -> ^(READ_INSTR ^(VALUE lvalue))
-    | WRITE write_param -> ^(WRITE_INSTR ^(VALUE write_param))
+    | READ lvalue -> ^(READ_INSTR lvalue)
+    | WRITE write_param -> ^(WRITE_INSTR write_param)
     ;
 
 param
@@ -234,13 +237,10 @@ expr_base
 expr_final
     : cste 
     | opun expr_final -> ^(opun expr_final)
-    | IDF expr_1
-    ;
-
-expr_1
-    : '(' expr_2 -> expr_2
-    | '[' exprList ']' -> ^(INDEX exprList)
-    | ->
+    | i=IDF ( '(' expr_2 -> ^(FUNC_CALL $i expr_2)
+          | '[' exprList ']' -> $i ^(ARRAY_INDEX exprList)
+          | -> $i
+          )
     ;
 
 expr_2

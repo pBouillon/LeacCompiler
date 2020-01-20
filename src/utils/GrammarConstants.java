@@ -16,4 +16,6 @@ public class GrammarConstants {
      */
     public static final String LANG_SOURCE = "./assets/code.leac";
 
+    public static final String INDENTATION = "    ";
+
 }
