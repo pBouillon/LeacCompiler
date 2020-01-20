@@ -61,4 +61,5 @@ public class AstNodes {
     public static final String UMINUS_NODE = "UMINUS";
     public static final String NOT_NODE = "NOT";
     public static final String WRITE_INSTR = "WRITE_INSTR";
+    public static final String READ_INSTR = "READ_INSTR" ;
 }
