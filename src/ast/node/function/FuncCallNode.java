@@ -145,7 +145,7 @@ public class FuncCallNode extends BaseNode {
             if (!param.equals(items.get(items.size()-1)))
                     sb.append(", ");
         }
-        System.out.println(sb.toString());
+        
         return sb.append(")").toString();
     }
 

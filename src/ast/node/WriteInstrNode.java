@@ -94,7 +94,7 @@ public class WriteInstrNode extends BaseNode {
     @Override
     public String generateCode(String prefix) throws AstBaseException {
         // TODO: idf code gen
-        return prefix + "printf(\"\", " + "TODO" + ");";
+        return prefix + "printf(\"\", " + "TODO" + ")";
     }
 
     @Override
