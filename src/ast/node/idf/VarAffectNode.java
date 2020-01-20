@@ -21,7 +21,7 @@ public class VarAffectNode extends BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    VarAffectNode(Tree _currentNode) throws AstBaseException {
+    public VarAffectNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
 
         if (!nodeName.equals(AstNodes.VAR_AFFECT)) {

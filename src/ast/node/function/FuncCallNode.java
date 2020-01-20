@@ -156,11 +156,7 @@ public class FuncCallNode extends BaseNode {
         if (!SymbolTableProvider.getCurrent().isSymbolRegistered(functionName)) {
             throw new UnknownSymbolException(functionName, currentNode);
         }
-        for (String idf : idfs) {
-            if (!SymbolTableProvider.getCurrent().isSymbolRegistered((idf))) {
-                throw new UnknownSymbolException(idf, currentNode);
-            }
-        }
+
         Symbol registeredSymbol = SymbolTableProvider.getCurrent().getSymbol(functionName);
 
         if (registeredSymbol.getType() != SymbolType.FUNCTION_BOOLEAN
@@ -169,5 +165,13 @@ public class FuncCallNode extends BaseNode {
             || registeredSymbol.getType() != SymbolType.FUNCTION_INT) {
             throw new TypeMismatchException("FUNCTION", registeredSymbol.getType().toString(), currentNode);
         }
+
+        for (String idf : idfs) {
+            if (!SymbolTableProvider.getCurrent().isSymbolRegistered((idf))) {
+                throw new UnknownSymbolException(idf, currentNode);
+            }
+            // Todo : check if idfs are the same type as function decl
+        }
+
     }
 }

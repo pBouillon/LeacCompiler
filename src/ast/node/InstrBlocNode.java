@@ -2,6 +2,8 @@ package ast.node;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
+import ast.node.function.FuncCallNode;
+import ast.node.idf.VarAffectNode;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
 import utils.AstNodes;
@@ -63,8 +65,28 @@ public class InstrBlocNode extends BaseNode {
     }
 
     @Override
-    protected void extractChildren() {
-
+    protected void extractChildren() throws AstBaseException {
+        for(Tree child : children) {
+            switch(child.toString()) {
+                case AstNodes.WRITE_INSTR:
+                    instructions.add(new WriteInstrNode(child));
+                    break;
+                case AstNodes.RETURN_INSTR:
+                    instructions.add(new ReturnInstrNode(child));
+                    break;
+                case AstNodes.FUNC_CALL:
+                    instructions.add(new FuncCallNode(child));
+                    break;
+                case AstNodes.VAR_AFFECT:
+                    instructions.add(new VarAffectNode(child));
+                case AstNodes.LOOP:
+                    instructions.add(new LOOPNode(child));
+                case AstNodes.CONDITIONNAL_BLOC:
+                    instructions.add(new ConditionnalBLocNode(child));
+                default:
+                    break;
+            }
+        }
     }
 
     @Override
