@@ -146,7 +146,7 @@ public class FuncCallNode extends BaseNode {
                     sb.append(", ");
         }
         
-        return sb.append(")").toString();
+        return sb.append(");").toString();
     }
 
     /**

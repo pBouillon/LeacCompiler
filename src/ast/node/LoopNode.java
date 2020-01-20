@@ -45,7 +45,7 @@ public class LoopNode extends BaseNode {
      */
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        return prefix+"//<WHILE>\n";
     }
 
     /**

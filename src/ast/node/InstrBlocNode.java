@@ -48,8 +48,8 @@ public class InstrBlocNode extends BaseNode {
 
         for (BaseNode instruction : instructions) {
             sb.append(prefix)
-                    .append(instruction.generateCode(prefix))
-                    .append(";\n");
+                    .append(instruction.generateCode(prefix));
+
         }
 
         return sb.toString();

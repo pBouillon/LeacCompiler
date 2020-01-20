@@ -69,7 +69,17 @@ public class VarDecNode extends BaseNode {
      */
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        for (String idf : idfs) {
+            sb.append(prefix)
+                    .append(idf);
+            if (!idf.equals(idfs.get(idfs.size()-1)))
+                sb.append(',');
+            else
+                sb.append(";\n");
+        }
+        return children.get(0).toString() + ' ' + sb.toString();
     }
 
     /**
