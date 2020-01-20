@@ -35,11 +35,7 @@ public class LMemberNode extends BaseNode {
     public String generateCode(String prefix) throws AstBaseException {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(prefix);
-
-        for (BaseNode node : idfs) {
-            sb.append(node.generateCode(prefix));
-        }
+        sb.append(prefix + idfs.get(0).generateCode(prefix));
 
         return sb.toString();
     }

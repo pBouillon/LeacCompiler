@@ -70,6 +70,11 @@ public class IdfArrayNode extends IdfNode {
                 case AstNodes.PLUS_NODE:
                     indexes.add(OperationNodeFactory.createOperationNode(child));
                     break;
+                case AstNodes.UMINUS_NODE:
+                    ConstantNumericNode poneytail = new ConstantNumericNode(child.getChild(0));
+                    poneytail.toggleNegative();
+                    indexes.add(poneytail);
+                    break;
 
                 case AstNodes.ARRAY_INDEX:
                     IdfArrayNode ArrayNode = new IdfArrayNode(child);

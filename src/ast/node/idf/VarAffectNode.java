@@ -57,11 +57,11 @@ public class VarAffectNode extends BaseNode {
         // Assign each child
         for (Tree child : children) {
             switch (child.toString()) {
-                case AstNodes.LMEMBER:
+                case AstNodes.RMEMBER:
                     rMemberNode = new RMemberNode(child);
                     break;
 
-                case AstNodes.RMEMBER:
+                case AstNodes.LMEMBER:
                     lMemberNode = new LMemberNode(child);
                     break;
             }
@@ -70,7 +70,7 @@ public class VarAffectNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return prefix + lMemberNode.generateCode(prefix) + " = " + rMemberNode.generateCode(prefix) + ";\n";
+        return prefix + lMemberNode.generateCode(prefix) + " = " + rMemberNode.generateCode("") + ";\n";
     }
 
     @Override
