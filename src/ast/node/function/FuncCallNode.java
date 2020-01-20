@@ -43,8 +43,8 @@ public class FuncCallNode extends BaseNode {
 
         functionName = children.get(0).toString();
 
-        for (Tree child : children) {
-            switch(child.toString()) {
+        for(int i = 1; i < children.size() ; i++) {
+            switch(children.get(i).toString()) {
                 case AstNodes.AND_NODE:
                 case AstNodes.OR_NODE:
                 case AstNodes.EQ_NODE:
@@ -66,7 +66,7 @@ public class FuncCallNode extends BaseNode {
                 case AstNodes.CSTE_S:
                     break;
                 default:
-                    idfs.add(child.toString());
+                    idfs.add(children.get(i).toString());
             }
         }
     }
@@ -93,8 +93,8 @@ public class FuncCallNode extends BaseNode {
     @Override
     protected void extractChildren() throws AstBaseException {
         // Assign each child
-        for (Tree child : children) {
-            switch(child.toString()) {
+        for(int i = 1 ; i < children.size() ; i++) {
+            switch(children.get(i).toString()) {
                 case AstNodes.AND_NODE:
                 case AstNodes.OR_NODE:
                 case AstNodes.EQ_NODE:
@@ -110,24 +110,24 @@ public class FuncCallNode extends BaseNode {
                 case AstNodes.POW_NODE:
                 case AstNodes.UMINUS_NODE:
                 case AstNodes.NOT_NODE:
-                    items.add(OperationNodeFactory.createOperationNode(child));
+                    items.add(OperationNodeFactory.createOperationNode(children.get(i)));
                     break;
                 case AstNodes.ARRAY_INDEX:
-                    IdfArrayNode ArrayNode = new IdfArrayNode(child);
+                    IdfArrayNode ArrayNode = new IdfArrayNode(children.get(i));
                     ArrayNode.setName(items.get(items.size()-1).toString());
                     items.set(items.size()-1, ArrayNode);
                     break;
                 case AstNodes.CSTE_N:
-                    items.add(new ConstantNumericNode(child));
+                    items.add(new ConstantNumericNode(children.get(i)));
                     break;
                 case AstNodes.CSTE_B:
-                    items.add(new ConstantBooleanNode(child));
+                    items.add(new ConstantBooleanNode(children.get(i)));
                     break;
                 case AstNodes.CSTE_S:
-                    items.add(new ConstantStringNode(child));
+                    items.add(new ConstantStringNode(children.get(i)));
                     break;
                 default:
-                    items.add(new IdfNode(child));
+                    items.add(new IdfNode(children.get(i)));
             }
         }
     }
@@ -141,9 +141,11 @@ public class FuncCallNode extends BaseNode {
             .append("(");
 
         for (BaseNode param : items) {
-            sb.append(param.generateCode(prefix)).append(", ");
+            sb.append(param.generateCode(prefix));
+            if (!param.equals(items.get(items.size()-1)))
+                    sb.append(", ");
         }
-
+        System.out.println(sb.toString());
         return sb.append(")").toString();
     }
 
@@ -164,9 +166,9 @@ public class FuncCallNode extends BaseNode {
         Symbol registeredSymbol = SymbolTableProvider.getCurrent().getSymbol(functionName);
 
         if (registeredSymbol.getType() != SymbolType.FUNCTION_BOOLEAN
-            || registeredSymbol.getType() != SymbolType.FUNCTION_VOID
-            || registeredSymbol.getType() != SymbolType.FUNCTION_STRING
-            || registeredSymbol.getType() != SymbolType.FUNCTION_INT) {
+            && registeredSymbol.getType() != SymbolType.FUNCTION_VOID
+            && registeredSymbol.getType() != SymbolType.FUNCTION_STRING
+            && registeredSymbol.getType() != SymbolType.FUNCTION_INT) {
             throw new TypeMismatchException("FUNCTION", registeredSymbol.getType().toString(), currentNode);
         }
 

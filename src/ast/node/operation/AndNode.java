@@ -17,9 +17,6 @@ import java.util.ArrayList;
  */
 
 public class AndNode extends OperationNode {
-
-    private ArrayList<OperationNode> subOperations;
-
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
@@ -30,30 +27,8 @@ public class AndNode extends OperationNode {
     }
 
     @Override
-    protected void extractIdfs() throws AstBaseException {
-
-    }
-
-    @Override
     public String generateCode(String prefix) throws AstBaseException {
         return leftNode.generateCode(prefix) + " && " + rightNode.generateCode(generateCode(prefix));
-    }
-
-    @Override
-    protected void exitNode() throws AstBaseException {
-
-    }
-
-    @Override
-    protected void extractChildren() throws AstBaseException {
-        for (Tree child : children) {
-            subOperations.add(OperationNodeFactory.createOperationNode(child));
-        }
-    }
-
-    @Override
-    protected void fillSymbolTable() throws AstBaseException {
-
     }
 
     @Override

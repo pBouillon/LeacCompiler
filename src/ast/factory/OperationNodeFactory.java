@@ -2,6 +2,9 @@ package ast.factory;
 
 import ast.exception.AstBaseException;
 import ast.exception.operation.BadOperationNameException;
+import ast.node.constant.ConstantBooleanNode;
+import ast.node.constant.ConstantNumericNode;
+import ast.node.constant.ConstantStringNode;
 import ast.node.operation.*;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;

@@ -1,8 +1,12 @@
 package ast.node.operation;
 
 import ast.exception.AstBaseException;
+import ast.exception.operation.BadOperationNameException;
 import ast.factory.OperationNodeFactory;
+import ast.node.BaseNode;
+import ast.node.constant.ConstantNumericNode;
 import org.antlr.runtime.tree.Tree;
+import utils.AstNodes;
 
 import java.util.ArrayList;
 
@@ -18,7 +22,6 @@ import java.util.ArrayList;
 
 public class PlusNode extends OperationNode {
 
-    private ArrayList<OperationNode> subOperations;
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
@@ -30,34 +33,11 @@ public class PlusNode extends OperationNode {
     }
 
     @Override
-    protected void extractIdfs() throws AstBaseException {
-
-    }
-
-    @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return leftNode.generateCode(prefix) + " + " + rightNode.generateCode(generateCode(prefix));
-    }
-
-    @Override
-    protected void exitNode() throws AstBaseException {
-
-    }
-
-    @Override
-    protected void extractChildren() throws AstBaseException {
-        for (Tree child : children) {
-            subOperations.add(OperationNodeFactory.createOperationNode(child));
-        }
-    }
-
-    @Override
-    protected void fillSymbolTable() throws AstBaseException {
-
+        return leftNode.generateCode(prefix) + " + " + rightNode.generateCode(prefix);
     }
 
     @Override
     protected void performSemanticControls() throws AstBaseException {
-
     }
 }
