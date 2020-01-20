@@ -29,7 +29,7 @@ public class ConditionalBlocNode extends BaseNode {
     protected void checkChildrenAmount() throws AstBaseException {
         int allowedChildrenAmount = 3;
 
-        if (children.size() != allowedChildrenAmount) {
+        if (children.size() > allowedChildrenAmount) {
             throw new BadChildrenCountException(allowedChildrenAmount, children.size());
         }
     }
