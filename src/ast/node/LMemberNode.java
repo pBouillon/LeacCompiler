@@ -33,7 +33,15 @@ public class LMemberNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(prefix);
+
+        for (BaseNode node : idfs) {
+            sb.append(node.generateCode(prefix));
+        }
+
+        return sb.toString();
     }
 
     @Override

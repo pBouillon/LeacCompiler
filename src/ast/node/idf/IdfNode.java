@@ -24,7 +24,7 @@ public class IdfNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        return nodeName;
     }
 
     /**

@@ -34,7 +34,15 @@ public class RMemberNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(prefix);
+
+        for (BaseNode node : items) {
+            sb.append(node.generateCode(prefix));
+        }
+
+        return sb.toString();
     }
 
     @Override
