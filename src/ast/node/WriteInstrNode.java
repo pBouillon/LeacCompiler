@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 public class WriteInstrNode extends BaseNode {
 
-    private ArrayList<BaseNode> items = new ArrayList<>();
-    private ArrayList<String> idfs = new ArrayList<>();
+    private ArrayList<BaseNode> items;
+    private ArrayList<String> idfs;
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
@@ -49,6 +49,8 @@ public class WriteInstrNode extends BaseNode {
 
     @Override
     protected void extractChildren() throws AstBaseException {
+        items = new ArrayList<>();
+
         // Assign each child
         for (Tree child : children) {
             switch (child.toString()) {
@@ -75,6 +77,7 @@ public class WriteInstrNode extends BaseNode {
 
     @Override
     protected void extractIdfs() throws AstBaseException {
+        idfs =  new ArrayList<>();
         for (Tree child : children) {
             switch (child.toString()) {
                 case AstNodes.ARRAY_INDEX:

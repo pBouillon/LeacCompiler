@@ -2,9 +2,17 @@ package ast.node.idf;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
+import ast.exception.semantic.TypeMismatchException;
+import ast.exception.semantic.UnknownSymbolException;
 import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
+import symbolTable.SymbolTableProvider;
+import symbolTable.symbol.Symbol;
+import symbolTable.symbol.SymbolType;
 import utils.AstNodes;
+
+import javax.sound.midi.SysexMessage;
+import java.util.ArrayList;
 
 /**
  * ast.node.idf.VarDeclListNode is the variables in which all functions are declared
@@ -17,6 +25,7 @@ import utils.AstNodes;
  */
 public class VarDeclListNode extends BaseNode {
 
+    private ArrayList<VarDecNode> vars;
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
@@ -32,6 +41,7 @@ public class VarDeclListNode extends BaseNode {
 
     @Override
     protected void extractIdfs() throws AstBaseException {
+
     }
 
     @Override
@@ -43,7 +53,11 @@ public class VarDeclListNode extends BaseNode {
     }
 
     @Override
-    protected void extractChildren() {
+    protected void extractChildren() throws AstBaseException {
+        vars = new ArrayList<>();
+        for(Tree child : children) {
+            vars.add(new VarDecNode(child));
+        }
     }
 
     @Override
@@ -53,6 +67,7 @@ public class VarDeclListNode extends BaseNode {
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
+
     }
 
     @Override

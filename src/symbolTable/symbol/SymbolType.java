@@ -5,6 +5,7 @@ public enum SymbolType {
     INT,
     STRING,
     VOID,
+    TARRAY,
 
     PARAMETER,
     FUNCTION_BOOLEAN,
