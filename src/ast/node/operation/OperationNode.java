@@ -2,6 +2,7 @@ package ast.node.operation;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
+import ast.factory.OperationNodeFactory;
 import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
 
@@ -37,6 +38,15 @@ public abstract class OperationNode extends BaseNode {
         if (children.size() != allowedChildrenAmount) {
             throw new BadChildrenCountException(allowedChildrenAmount, children.size());
         }
+    }
+
+    @Override
+    protected void extractChildren() throws AstBaseException {
+        int i = 0;
+
+        leftNode = OperationNodeFactory.createOperationNode(children.get(i++));
+        rightNode = OperationNodeFactory.createOperationNode(children.get(i));
+
     }
 
 

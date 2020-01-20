@@ -60,5 +60,5 @@ public class AstNodes {
     public static final String PARAM = "PARAM";
     public static final String UMINUS_NODE = "UMINUS";
     public static final String NOT_NODE = "NOT";
-
+    public static final String WRITE_INSTR = "WRITE_INSTR";
 }
