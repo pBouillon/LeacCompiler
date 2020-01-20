@@ -72,7 +72,7 @@ public class ReadInstrNode extends BaseNode {
     @Override
     public String generateCode(String prefix) throws AstBaseException {
             // TODO: idf code gen
-            return prefix + "scanf(\"\", " + "TODO" + ");";
+            return prefix + "scanf(\"\", " + "TODO" + ")";
     }
 
     @Override
