@@ -96,8 +96,8 @@ public class VarDecNode extends BaseNode {
 
 
             switch (symbolType) {
-                case BOOLEAN:
-                    symbolType = SymbolType.BOOLEAN;
+                case BOOL:
+                    symbolType = SymbolType.BOOL;
                     break;
                 case INT:
                     symbolType = SymbolType.INT;

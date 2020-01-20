@@ -8,7 +8,7 @@ public class TypeMismatchException extends AstBaseException {
      * Default constructor
      */
     public TypeMismatchException(String expectedType, String actualType, Tree currentNode) {
-        super("Expected type " + expectedType + " but found " + actualType + "line " + currentNode.getLine());
+        super("Expected type " + expectedType + " but found " + actualType + " line " + currentNode.getLine());
     }
 
     public TypeMismatchException(Tree currentNode) {

@@ -1,7 +1,7 @@
 package symbolTable.symbol;
 
 public enum SymbolType {
-    BOOLEAN,
+    BOOL,
     INT,
     STRING,
     VOID,

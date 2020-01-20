@@ -99,7 +99,7 @@ public class FuncDeclNode extends BaseNode {
         }
 
         switch (symbolType) {
-            case BOOLEAN:
+            case BOOL:
                 symbolType = SymbolType.FUNCTION_BOOLEAN;
                 break;
             case INT:
