@@ -2,6 +2,7 @@ package ast.node;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
+import ast.exception.common.UnexpectedChildException;
 import ast.node.conditional.ConditionalBlocNode;
 import ast.node.function.FuncCallNode;
 import ast.node.idf.VarAffectNode;
@@ -68,28 +69,26 @@ public class InstrBlocNode extends BaseNode {
     protected void extractChildren() throws AstBaseException {
         instructions = new ArrayList<>();
         for(Tree child : children) {
-            switch(child.toString()) {
-                case AstNodes.WRITE_INSTR:
-                    instructions.add(new WriteInstrNode(child));
-                    break;
-                case AstNodes.RETURN_INSTR:
-                    instructions.add(new ReturnInstrNode(child));
-                    break;
-                case AstNodes.FUNC_CALL:
-                    instructions.add(new FuncCallNode(child));
-                    break;
-                case AstNodes.VAR_AFFECT:
-                    instructions.add(new VarAffectNode(child));
-                    break;
-                case AstNodes.LOOP:
-                    instructions.add(new LoopNode(child));
-                    break;
-                case AstNodes.CONDITIONNAL_BLOC:
-                    instructions.add(new ConditionalBlocNode(child));
-                    break;
-                default:
-                    break;
-            }
+            instructions.add(InstrBlocNode.getInstructionNode(child));
+        }
+    }
+
+    public static BaseNode getInstructionNode(Tree node) throws AstBaseException {
+        switch(node.toString()) {
+            case AstNodes.WRITE_INSTR:
+                return new WriteInstrNode(node);
+            case AstNodes.RETURN_INSTR:
+                return new ReturnInstrNode(node);
+            case AstNodes.FUNC_CALL:
+                return new FuncCallNode(node);
+            case AstNodes.VAR_AFFECT:
+                return new VarAffectNode(node);
+            case AstNodes.LOOP:
+                return new LoopNode(node);
+            case AstNodes.CONDITIONNAL_BLOC:
+                return new ConditionalBlocNode(node);
+            default:
+                throw new UnexpectedChildException(node.toString(), node.toString());
         }
     }
 

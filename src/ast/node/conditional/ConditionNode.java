@@ -26,7 +26,7 @@ public class ConditionNode extends BaseNode {
 
     @Override
     protected void checkChildrenAmount() throws AstBaseException {
-        int allowedChildrenAmount = 1;
+        int allowedChildrenAmount = 3;
 
         if (children.size() != allowedChildrenAmount) {
             throw new BadChildrenCountException(allowedChildrenAmount, children.size());

@@ -29,7 +29,7 @@ public class WriteInstrNode extends BaseNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    protected WriteInstrNode(Tree _currentNode) throws AstBaseException {
+    public WriteInstrNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
 
         if (!nodeName.equals(AstNodes.WRITE_INSTR)) {
