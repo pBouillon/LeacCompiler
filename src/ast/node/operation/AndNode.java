@@ -28,7 +28,7 @@ public class AndNode extends OperationNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return leftNode.generateCode(prefix) + " && " + rightNode.generateCode(generateCode(prefix));
+        return leftNode.generateCode(prefix) + " && " + rightNode.generateCode(prefix);
     }
 
     @Override
