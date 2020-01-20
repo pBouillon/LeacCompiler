@@ -29,7 +29,7 @@ public class PowNode extends OperationNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return "pow(" + leftNode.generateCode(prefix) + ", " + rightNode.generateCode(generateCode(prefix)) + ")";
+        return "pow(" + leftNode.generateCode(prefix) + ", " +rightNode.generateCode(prefix) + ")";
     }
 
     @Override

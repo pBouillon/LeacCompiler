@@ -3,6 +3,7 @@ package ast.node;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
 import ast.exception.common.UnexpectedChildException;
+import ast.node.conditional.ConditionNode;
 import ast.node.conditional.ConditionalBlocNode;
 import ast.node.function.FuncCallNode;
 import ast.node.idf.VarAffectNode;
