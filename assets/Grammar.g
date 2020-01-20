@@ -158,8 +158,8 @@ instr
     )
     | RETURN expr? -> ^(RETURN_INSTR expr?)
     | '{' end_sequence -> end_sequence?
-    | READ lvalue -> ^(READ_INSTR ^(VALUE lvalue))
-    | WRITE write_param -> ^(WRITE_INSTR ^(VALUE write_param))
+    | READ lvalue -> ^(READ_INSTR lvalue)
+    | WRITE write_param -> ^(WRITE_INSTR write_param)
     ;
 
 param
@@ -238,7 +238,7 @@ expr_final
     : cste 
     | opun expr_final -> ^(opun expr_final)
     | i=IDF ( '(' expr_2 -> ^(FUNC_CALL $i expr_2)
-          | '[' exprList ']' -> $i ^(INDEX exprList)
+          | '[' exprList ']' -> $i ^(ARRAY_INDEX exprList)
           | -> $i
           )
     ;

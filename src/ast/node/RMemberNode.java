@@ -55,8 +55,8 @@ public class RMemberNode extends BaseNode {
             switch (child.toString()) {
                 case AstNodes.INDEX:
                     IdfArrayNode ArrayNode = new IdfArrayNode(child);
-                    ArrayNode.setName(items.get(items.size()).toString());
-                    items.set(items.size(), ArrayNode);
+                    ArrayNode.setName(items.get(items.size()-1).toString());
+                    items.set(items.size()-1, ArrayNode);
                     break;
                 case AstNodes.CSTE_N:
                     items.add(new ConstantNumericNode(child));
