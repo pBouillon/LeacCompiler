@@ -58,4 +58,7 @@ public class AstNodes {
     public static final String CSTE_S = "CSTE_S";
     public static final String CSTE_B = "CSTE_B";
     public static final String PARAM = "PARAM";
+    public static final String UMINUS_NODE = "UMINUS";
+    public static final String NOT_NODE = "NOT";
+
 }

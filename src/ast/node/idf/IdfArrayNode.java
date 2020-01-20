@@ -43,7 +43,7 @@ public class IdfArrayNode extends IdfNode {
      *
      */
     @Override
-    protected void checkChildrenAmount() throws AstBaseException {
+    protected void checkChildrenAmount() {
 
     }
 
