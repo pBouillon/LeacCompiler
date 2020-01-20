@@ -1,10 +1,11 @@
-package ast.node;
+package ast.node.conditional;
 
 import ast.exception.AstBaseException;
+import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
 
-public class ConditionnalBLocNode extends BaseNode {
-    public ConditionnalBLocNode(Tree child) throws AstBaseException {
+public class ConditionalBlocNode extends BaseNode {
+    public ConditionalBlocNode(Tree child) throws AstBaseException {
         super(child);
     }
 

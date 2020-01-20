@@ -2,6 +2,7 @@ package ast.node;
 
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
+import ast.node.conditional.ConditionalBlocNode;
 import ast.node.function.FuncCallNode;
 import ast.node.idf.VarAffectNode;
 import org.antlr.runtime.tree.Tree;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  */
 public class InstrBlocNode extends BaseNode {
 
-    private ArrayList<BaseNode> instructions = new ArrayList<>();
+    private ArrayList<BaseNode> instructions;
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
@@ -38,7 +39,6 @@ public class InstrBlocNode extends BaseNode {
 
     @Override
     protected void extractIdfs() throws AstBaseException {
-
     }
 
     @Override
@@ -66,6 +66,8 @@ public class InstrBlocNode extends BaseNode {
 
     @Override
     protected void extractChildren() throws AstBaseException {
+        instructions = new ArrayList<>();
+
         for(Tree child : children) {
             switch(child.toString()) {
                 case AstNodes.WRITE_INSTR:
@@ -82,7 +84,7 @@ public class InstrBlocNode extends BaseNode {
                 case AstNodes.LOOP:
                     instructions.add(new LoopNode(child));
                 case AstNodes.CONDITIONNAL_BLOC:
-                    instructions.add(new ConditionnalBLocNode(child));
+                    instructions.add(new ConditionalBlocNode(child));
                 default:
                     break;
             }

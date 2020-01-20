@@ -38,7 +38,11 @@ public class FuncCallNode extends BaseNode {
      */
     @Override
     protected void extractIdfs() throws AstBaseException {
+        idfs = new ArrayList<>();
+        items = new ArrayList<>();
+
         functionName = children.get(0).toString();
+        
         for (Tree child : children) {
             switch(child.toString()) {
                 case AstNodes.AND_NODE:

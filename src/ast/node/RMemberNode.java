@@ -58,6 +58,8 @@ public class RMemberNode extends BaseNode {
      */
     @Override
     protected void extractChildren() throws AstBaseException {
+        items = new ArrayList<>();
+
         // Assign each child
         for (Tree child : children) {
             switch (child.toString()) {
