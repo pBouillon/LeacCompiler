@@ -84,4 +84,15 @@ public class Compiler {
         return new RootNode(rawTree);
     }
 
+    /**
+     * Generate the output, in language C
+     *
+     * @param root AST root
+     * @return the source in C
+     * @throws AstBaseException
+     */
+    public String generateCode(RootNode root) throws AstBaseException {
+        return root.generateCode("");
+    }
+
 }

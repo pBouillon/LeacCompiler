@@ -75,6 +75,11 @@ public class FuncDeclNode extends BaseNode {
     }
 
     @Override
+    public String generateCode(String prefix) throws AstBaseException {
+        return null;
+    }
+
+    @Override
     protected void fillSymbolTable() throws AstBaseException {
         SymbolType symbolType = SymbolType.fromString(functionType);
 

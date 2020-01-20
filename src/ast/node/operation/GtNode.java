@@ -35,6 +35,11 @@ public class GtNode extends OperationNode {
     }
 
     @Override
+    public String generateCode(String prefix) throws AstBaseException {
+        return null;
+    }
+
+    @Override
     protected void exitNode() throws AstBaseException {
 
     }

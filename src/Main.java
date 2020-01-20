@@ -23,7 +23,7 @@ public class Main {
      *
      * @param args program arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AstBaseException {
         // Create the compiler
         Compiler compiler = new Compiler();
 
@@ -45,8 +45,8 @@ public class Main {
             e.printStackTrace();
         }
 
-        // Display result
-        System.out.println(customAstRoot);
+        // Display generated code
+        System.out.println(customAstRoot.generateCode(""));
     }
 
 }

@@ -10,6 +10,7 @@ import symbolTable.SymbolTableProvider;
 import symbolTable.symbol.Symbol;
 import symbolTable.symbol.SymbolType;
 import utils.AstNodes;
+import utils.GrammarConstants;
 
 /**
  * ast.node.RootNode is the root node of the built AST
@@ -59,6 +60,38 @@ public class RootNode extends BaseNode {
     protected void extractIdfs() throws AstBaseException {
         programName = children.get(0).toString();
         children.remove(0);
+    }
+
+    @Override
+    public String generateCode(String prefix) throws AstBaseException {
+
+        StringBuilder codeBuilder = new StringBuilder();
+
+        codeBuilder
+                .append("/* BEGIN OF THE AUTO GENERATED CODE FROM CUSTOM AST */\n")
+                .append("\n")
+                .append("/* Begin function definitions */\n")
+                .append(prefix + funcDeclListNode.generateCode(prefix)).append("\n")
+                .append("/* End function definitions */\n")
+                .append("\n")
+                .append("/* Begin global variable definitions */\n")
+                .append(prefix + varDeclListNode.generateCode(prefix)).append("\n")
+                .append("/* End global variable definitions */\n")
+                .append("\n")
+                .append(prefix + "int main (int argc, char **argv)").append("\n")
+                .append(prefix + "{").append("\n");
+
+        prefix += GrammarConstants.INDENTATION;
+
+        codeBuilder.append(prefix + instrBlocNode.generateCode(prefix)).append("\n");
+
+        prefix = prefix.substring(0, prefix.length() - GrammarConstants.INDENTATION.length());
+
+        return codeBuilder
+                .append(prefix + "}").append("\n")
+                .append(prefix).append("\n")
+                .append("/* END OF THE CODE GENERATION */\n")
+                .toString();
     }
 
     @Override

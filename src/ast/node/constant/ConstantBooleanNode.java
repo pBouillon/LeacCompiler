@@ -27,4 +27,9 @@ public class ConstantBooleanNode extends ConstantNode {
         value = Boolean.parseBoolean(children.get(0).toString());
     }
 
+    @Override
+    public String generateCode(String prefix) throws AstBaseException {
+        return String.valueOf(value);
+    }
+
 }

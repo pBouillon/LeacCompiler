@@ -22,6 +22,11 @@ public class IdfNode extends BaseNode {
     protected void extractIdfs() throws AstBaseException {
     }
 
+    @Override
+    public String generateCode(String prefix) throws AstBaseException {
+        return null;
+    }
+
     /**
      *
      */

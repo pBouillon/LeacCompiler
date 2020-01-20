@@ -26,4 +26,9 @@ public class ConstantStringNode extends ConstantNode {
     protected void extractChildren() throws AstBaseException {
         value = children.get(0).toString();
     }
+
+    @Override
+    public String generateCode(String prefix) throws AstBaseException {
+        return value;
+    }
 }

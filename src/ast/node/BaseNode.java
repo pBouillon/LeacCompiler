@@ -91,6 +91,11 @@ public abstract class BaseNode {
     /**
      *
      */
+    abstract public String generateCode(String prefix) throws AstBaseException;
+
+    /**
+     *
+     */
     abstract protected void fillSymbolTable() throws AstBaseException;
 
     /**

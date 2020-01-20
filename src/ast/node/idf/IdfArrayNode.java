@@ -80,6 +80,11 @@ public class IdfArrayNode extends IdfNode {
         }
     }
 
+    @Override
+    public String generateCode(String prefix) throws AstBaseException {
+        return null;
+    }
+
     /**
      *
      */

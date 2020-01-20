@@ -55,6 +55,11 @@ public class FuncCallNode extends BaseNode {
         // TODO
     }
 
+    @Override
+    public String generateCode(String prefix) throws AstBaseException {
+        return null;
+    }
+
     /**
      *
      */
