@@ -41,7 +41,14 @@ public class FuncDeclListNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        for (FuncDeclNode func : declaredFunctions) {
+            sb.append(func.generateCode(prefix))
+                    .append("\n");
+        }
+
+        return sb.toString();
     }
 
     @Override

@@ -14,6 +14,7 @@ import symbolTable.SymbolTableProvider;
 import symbolTable.symbol.Symbol;
 import symbolTable.symbol.SymbolType;
 import utils.AstNodes;
+import utils.GrammarConstants;
 
 public class FuncDeclNode extends BaseNode {
 
@@ -78,7 +79,15 @@ public class FuncDeclNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        return prefix + functionType + " " +
+                functionName +
+                " (" +
+                paramListNode.generateCode(prefix) +
+                ")\n" +
+                prefix + "{\n" +
+                varDeclListNode.generateCode(prefix + GrammarConstants.INDENTATION) +
+                instrBlocNode.generateCode(prefix + GrammarConstants.INDENTATION) +
+                prefix + "}\n";
     }
 
     @Override

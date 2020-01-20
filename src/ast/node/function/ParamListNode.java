@@ -48,7 +48,13 @@ public class ParamListNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        for (ParamNode param : paramNodes) {
+            sb.append(param.generateCode(prefix));
+        }
+
+        return sb.toString();
     }
 
     @Override

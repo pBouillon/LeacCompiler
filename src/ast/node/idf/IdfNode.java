@@ -59,5 +59,4 @@ public class IdfNode extends BaseNode {
     protected void performSemanticControls() throws AstBaseException {
     }
 
-
 }

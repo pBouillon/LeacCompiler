@@ -35,7 +35,7 @@ public class LeqNode extends OperationNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        return leftNode.generateCode(prefix) + " <= " + rightNode.generateCode(generateCode(prefix));
     }
 
     @Override

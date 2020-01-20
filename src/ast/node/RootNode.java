@@ -69,22 +69,19 @@ public class RootNode extends BaseNode {
         StringBuilder codeBuilder = new StringBuilder();
 
         codeBuilder
+                .append("#include <math.h>\n\n")
                 .append("/* BEGIN OF THE AUTO GENERATED CODE FROM CUSTOM AST */\n")
                 .append("\n")
-                .append("/* Begin function definitions */\n")
-                .append(prefix + funcDeclListNode.generateCode(prefix)).append("\n")
+                .append("/* Begin function definitions */\n").append(prefix).append(funcDeclListNode.generateCode(prefix))
                 .append("/* End function definitions */\n")
                 .append("\n")
-                .append("/* Begin global variable definitions */\n")
-                .append(prefix + varDeclListNode.generateCode(prefix)).append("\n")
+                .append("/* Begin global variable definitions */\n").append(prefix).append(varDeclListNode.generateCode(prefix))
                 .append("/* End global variable definitions */\n")
-                .append("\n")
-                .append(prefix + "int main (int argc, char **argv)").append("\n")
-                .append(prefix + "{").append("\n");
+                .append("\n").append(prefix).append("int main (int argc, char **argv)").append("\n").append(prefix).append("{").append("\n");
 
         prefix += GrammarConstants.INDENTATION;
 
-        codeBuilder.append(prefix + instrBlocNode.generateCode(prefix)).append("\n");
+        codeBuilder.append(prefix).append(instrBlocNode.generateCode(prefix)).append("\n");
 
         prefix = prefix.substring(0, prefix.length() - GrammarConstants.INDENTATION.length());
 

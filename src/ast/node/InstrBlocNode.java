@@ -6,6 +6,8 @@ import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
 import utils.AstNodes;
 
+import java.util.ArrayList;
+
 /**
  * ast.node.InstrBlocNode is the node in which instructions are defined
  *
@@ -16,6 +18,8 @@ import utils.AstNodes;
  * @url https://github.com/pBouillon/TELECOM_Trad
  */
 public class InstrBlocNode extends BaseNode {
+
+    private ArrayList<BaseNode> instructions = new ArrayList<>();
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
@@ -37,7 +41,15 @@ public class InstrBlocNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        for (BaseNode instruction : instructions) {
+            sb.append(prefix)
+                    .append(instruction.generateCode(prefix))
+                    .append(";\n");
+        }
+
+        return sb.toString();
     }
 
     @Override

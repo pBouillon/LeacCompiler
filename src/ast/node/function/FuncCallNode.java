@@ -130,7 +130,17 @@ public class FuncCallNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(prefix)
+            .append(functionName)
+            .append("(");
+
+        for (BaseNode param : items) {
+            sb.append(param.generateCode(prefix)).append(", ");
+        }
+
+        return sb.append(")").toString();
     }
 
     /**
