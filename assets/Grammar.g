@@ -97,7 +97,7 @@ program
     ;
 
 vardeclist
-    : varsuitdecl* -> ^(VAR_DECL_LIST varsuitdecl*)
+    : varsuitdecl* -> varsuitdecl*
     ;
 
 varsuitdecl
@@ -137,7 +137,7 @@ funcdeclist
     ;
 
 funcdec
-	:	FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF ^(PARAM_LIST arglist?) atomtype vardeclist? ^(INSTR_BLOC end_sequence?))
+	:	FUNCTION IDF '(' arglist ')' ':' atomtype vardeclist '{' end_sequence -> ^(FUNC_DECL IDF ^(PARAM_LIST arglist?) atomtype ^(VAR_DECL_LIST vardeclist?) ^(INSTR_BLOC end_sequence?))
 	;
 
 arglist

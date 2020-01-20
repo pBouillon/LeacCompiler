@@ -7,14 +7,14 @@ import utils.AstNodes;
 
 public class ConstantBooleanNode extends ConstantNode {
 
-    private boolean value;
+    public boolean value;
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
      * @param _currentNode ANTLR raw AST
      */
-    protected ConstantBooleanNode(Tree _currentNode) throws AstBaseException {
+    public ConstantBooleanNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
 
         if (!nodeName.equals(AstNodes.CSTE_B)) {

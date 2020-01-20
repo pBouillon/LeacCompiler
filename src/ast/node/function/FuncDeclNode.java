@@ -4,6 +4,8 @@ import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
 import ast.exception.common.BadNodeNameException;
 import ast.exception.semantic.SymbolAlreadyDefinedException;
+import ast.exception.semantic.TypeMismatchException;
+import ast.exception.semantic.UnknownSymbolException;
 import ast.node.BaseNode;
 import ast.node.InstrBlocNode;
 import ast.node.idf.VarDeclListNode;
@@ -84,19 +86,24 @@ public class FuncDeclNode extends BaseNode {
         SymbolType symbolType = SymbolType.fromString(functionType);
 
         if (symbolType == null) {
-            // TODO: throw ex
+            throw new UnknownSymbolException(functionName, currentNode);
         }
 
-        if (symbolType == SymbolType.BOOLEAN) {
-            symbolType = SymbolType.FUNCTION_BOOLEAN;
-        } else if (symbolType == SymbolType.INT) {
-            symbolType = SymbolType.FUNCTION_INT;
-        } else if (symbolType == SymbolType.STRING) {
-            symbolType = SymbolType.FUNCTION_STRING;
-        } else if (symbolType == SymbolType.VOID) {
-            symbolType = SymbolType.FUNCTION_VOID;
-        } else {
-            // TODO: throw ex
+        switch (symbolType) {
+            case BOOLEAN:
+                symbolType = SymbolType.FUNCTION_BOOLEAN;
+                break;
+            case INT:
+                symbolType = SymbolType.FUNCTION_INT;
+                break;
+            case STRING:
+                symbolType = SymbolType.FUNCTION_STRING;
+                break;
+            case VOID:
+                symbolType = SymbolType.FUNCTION_VOID;
+                break;
+            default:
+                throw new TypeMismatchException(currentNode);
         }
 
         SymbolTableProvider.getCurrent().registerSymbol(

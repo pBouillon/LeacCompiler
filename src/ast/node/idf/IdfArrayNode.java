@@ -1,9 +1,12 @@
 package ast.node.idf;
 
 import ast.exception.AstBaseException;
+import ast.exception.semantic.InvalidArrayIndexException;
 import ast.factory.OperationNodeFactory;
 import ast.node.BaseNode;
+import ast.node.constant.ConstantBooleanNode;
 import ast.node.constant.ConstantNumericNode;
+import ast.node.constant.ConstantStringNode;
 import ast.node.function.FuncCallNode;
 import org.antlr.runtime.tree.Tree;
 import utils.AstNodes;
@@ -71,8 +74,14 @@ public class IdfArrayNode extends IdfNode {
                     break;
 
                 case AstNodes.CSTE_B:
+                    throw new InvalidArrayIndexException(
+                            currentNode,
+                            String.valueOf(new ConstantBooleanNode(child).value));
+
                 case AstNodes.CSTE_S:
-                    // TODO: raise ex
+                    throw new InvalidArrayIndexException(
+                            currentNode,
+                            new ConstantStringNode(child).value);
 
                 default:
                     indexes.add(new IdfNode(child));

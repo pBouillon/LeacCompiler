@@ -3,6 +3,7 @@ package ast.node;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadChildrenCountException;
 import ast.exception.common.BadNodeNameException;
+import ast.exception.common.UnexpectedChildException;
 import ast.node.function.FuncDeclListNode;
 import ast.node.idf.VarDeclListNode;
 import org.antlr.runtime.tree.Tree;
@@ -127,7 +128,7 @@ public class RootNode extends BaseNode {
                     break;
 
                 default:
-                    // TODO: throw exp
+                    throw new UnexpectedChildException(AstNodes.ROOT, child.toString());
             }
         }
     }
