@@ -61,7 +61,7 @@ public class LMemberNode extends BaseNode {
         // Assign each child
         for (Tree child : children) {
             switch (child.toString()) {
-                case AstNodes.INDEX:
+                case AstNodes.ARRAY_INDEX:
                     IdfArrayNode ArrayNode = new IdfArrayNode(child);
                     ArrayNode.setName(idfs.get(idfs.size()).toString());
                     idfs.set(idfs.size(), ArrayNode);

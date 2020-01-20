@@ -66,7 +66,7 @@ public class IdfArrayNode extends IdfNode {
                 case AstNodes.PLUS_NODE:
                     indexes.add(OperationNodeFactory.createOperationNode(child));
 
-                case AstNodes.INDEX:
+                case AstNodes.ARRAY_INDEX:
                     IdfArrayNode ArrayNode = new IdfArrayNode(child);
                     ArrayNode.setName(indexes.get(indexes.size()).toString());
                     indexes.set(indexes.size(), ArrayNode);

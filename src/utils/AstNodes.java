@@ -35,7 +35,7 @@ public class AstNodes {
     public static final String VAR_AFFECT = "VAR_AFFECT";
     public static final String LMEMBER = "LMEMBER";
     public static final String VAR_DECL = "VAR_DECL";
-    public static final String INDEX = "INDEX";
+    public static final String ARRAY_INDEX = "ARRAY_INDEX";
 
     public static final String DIV_NODE = "DIV";
     public static final String EQ_NODE = "EQ";
