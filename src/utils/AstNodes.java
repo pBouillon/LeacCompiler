@@ -65,5 +65,9 @@ public class AstNodes {
     public static final String RETURN_INSTR = "RETURN_INSTR";
     public static final String LOOP = "LOOP";
     public static final String CONDITIONNAL_BLOC = "CONDITIONNAL_BLOC";
+    public static final String CONDITION = "CONDITION";
+    public static final String CONDITION_FALSE_INSTR_BLOC = "CONDITION_FALSE_INSTR_BLOC";
+    public static final String CONDITION_TRUE_INSTR_BLOC = "CONDITION_TRUE_INSTR_BLOC";
+
 
 }

@@ -6,7 +6,10 @@ import ast.exception.common.BadNodeNameException;
 import ast.exception.semantic.SymbolAlreadyDefinedException;
 import ast.node.BaseNode;
 import org.antlr.runtime.tree.Tree;
+import symbolTable.SymbolTable;
 import symbolTable.SymbolTableProvider;
+import symbolTable.symbol.Symbol;
+import symbolTable.symbol.SymbolType;
 import utils.AstNodes;
 
 public class ParamNode extends BaseNode {
@@ -58,14 +61,16 @@ public class ParamNode extends BaseNode {
 
     @Override
     protected void fillSymbolTable() throws AstBaseException {
-
-    }
-
-    @Override
-    protected void performSemanticControls() throws AstBaseException {
         if (SymbolTableProvider.getCurrent().isSymbolRegistered(paramName)) {
             throw new SymbolAlreadyDefinedException(
                     SymbolTableProvider.getCurrent().getSymbol(paramName));
         }
+        SymbolTableProvider.getCurrent().registerSymbol(
+                new Symbol(paramName, SymbolType.PARAMETER, currentNode));
+    }
+
+    @Override
+    protected void performSemanticControls() throws AstBaseException {
+
     }
 }

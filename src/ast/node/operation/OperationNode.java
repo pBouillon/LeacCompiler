@@ -8,6 +8,7 @@ import ast.exception.semantic.UnknownSymbolException;
 import ast.factory.OperationNodeFactory;
 import ast.node.BaseNode;
 import ast.node.constant.ConstantNumericNode;
+import ast.node.idf.IdfArrayNode;
 import ast.node.idf.IdfNode;
 import org.antlr.runtime.tree.Tree;
 import symbolTable.SymbolTableProvider;
@@ -61,6 +62,14 @@ public abstract class OperationNode extends BaseNode {
         }
         else if (node.toString().equalsIgnoreCase(AstNodes.CSTE_N)) {
             return new ConstantNumericNode(node);
+        }
+        else if (node.toString().equalsIgnoreCase(AstNodes.ARRAY_INDEX)) {
+            Symbol idf = SymbolTableProvider.getCurrent().getSymbol(node.getChild(0).toString());
+
+            if (idf == null) {
+                throw new UnknownSymbolException(node.getChild(0).toString(), node);
+            }
+            return new IdfArrayNode(node);
         }
         else {
             // provided node may be an IDF

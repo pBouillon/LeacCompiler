@@ -8,6 +8,7 @@ import ast.node.BaseNode;
 import ast.node.constant.ConstantBooleanNode;
 import ast.node.operation.*;
 import org.antlr.runtime.tree.Tree;
+import utils.AstNodes;
 import utils.GrammarConstants;
 
 public class ConditionalBlocNode extends BaseNode {
@@ -41,10 +42,21 @@ public class ConditionalBlocNode extends BaseNode {
     @Override
     protected void extractChildren() throws AstBaseException {
         int i = 0;
-
-        operationNode = new ConditionNode(children.get(i++));
-        conditionFalseInstrBlocNode = new ConditionFalseInstrBlocNode(children.get(i++));
-        conditionTrueInstrBlocNode = new ConditionTrueInstrBlocNode(children.get(i));
+        for (Tree child : children) {
+            switch(child.toString()) {
+                case AstNodes.CONDITION_TRUE_INSTR_BLOC:
+                    conditionTrueInstrBlocNode = new ConditionTrueInstrBlocNode(children.get(i));
+                    break;
+                case AstNodes.CONDITION_FALSE_INSTR_BLOC:
+                    conditionFalseInstrBlocNode = new ConditionFalseInstrBlocNode(children.get(i++));
+                    break;
+                case AstNodes.CONDITION:
+                    operationNode = new ConditionNode(child);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     @Override
@@ -61,7 +73,8 @@ public class ConditionalBlocNode extends BaseNode {
                 .append(conditionTrueInstrBlocNode.generateCode(prefix + GrammarConstants.INDENTATION))
                 .append(prefix).append("}\n");
 
-        if (conditionFalseInstrBlocNode.getChildren().size() != 0) {
+        if (conditionFalseInstrBlocNode != null
+            && conditionFalseInstrBlocNode.getChildren().size() != 0) {
             sb.append(prefix).append("else\n")
                     .append(prefix).append("{\n")
                     .append(conditionFalseInstrBlocNode.generateCode(prefix + GrammarConstants.INDENTATION))
