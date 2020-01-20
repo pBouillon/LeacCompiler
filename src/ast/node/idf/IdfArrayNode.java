@@ -17,7 +17,6 @@ public class IdfArrayNode extends IdfNode {
 
     private ArrayList<BaseNode> indexes;
 
-
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
@@ -91,7 +90,18 @@ public class IdfArrayNode extends IdfNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(prefix)
+                .append(nodeName);
+
+        for (BaseNode node : indexes) {
+            sb.append("[")
+                    .append(node.generateCode(prefix))
+                    .append("]");
+        }
+
+        return sb.toString();
     }
 
     /**

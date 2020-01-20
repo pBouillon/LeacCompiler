@@ -70,7 +70,7 @@ public class VarAffectNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        return prefix + lMemberNode.generateCode(prefix) + " = " + rMemberNode.generateCode(prefix) + ";\n";
     }
 
     @Override
