@@ -3,6 +3,7 @@ package ast.node.function;
 import ast.exception.AstBaseException;
 import ast.exception.common.BadNodeNameException;
 import ast.exception.semantic.TypeMismatchException;
+import ast.exception.semantic.UninitializedSymbolException;
 import ast.exception.semantic.UnknownSymbolException;
 import ast.factory.OperationNodeFactory;
 import ast.node.BaseNode;
@@ -172,11 +173,17 @@ public class FuncCallNode extends BaseNode {
             throw new TypeMismatchException("FUNCTION", registeredSymbol.getType().toString(), currentNode);
         }
 
+        Symbol idfSym;
         for (String idf : idfs) {
-            if (!SymbolTableProvider.getCurrent().isSymbolRegistered((idf))) {
+            idfSym = SymbolTableProvider.getCurrent().getSymbol(idf);
+
+            if (idfSym == null) {
                 throw new UnknownSymbolException(idf, currentNode);
             }
-            // Todo : check if idfs are the same type as function decl
+
+            if (!idfSym.isInitialized()) {
+                throw new UninitializedSymbolException(idf, currentNode);
+            }
         }
 
     }

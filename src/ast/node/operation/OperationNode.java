@@ -42,11 +42,6 @@ public abstract class OperationNode extends BaseNode {
 
     @Override
     protected void checkChildrenAmount() throws AstBaseException {
-        int allowedChildrenAmount = 2;
-
-        if (children.size() != allowedChildrenAmount) {
-            throw new BadChildrenCountException(allowedChildrenAmount, children.size());
-        }
     }
 
     @Override
