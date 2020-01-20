@@ -66,7 +66,7 @@ public class LMemberNode extends BaseNode {
                 case AstNodes.ARRAY_INDEX:
                     IdfArrayNode ArrayNode = new IdfArrayNode(child);
                     ArrayNode.setName(idfs.get(idfs.size() - 1).toString());
-                    idfs.set(idfs.size(), ArrayNode);
+                    idfs.set(idfs.size()-1, ArrayNode);
                     break;
 
                 default:

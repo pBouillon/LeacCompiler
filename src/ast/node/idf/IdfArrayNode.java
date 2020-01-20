@@ -58,15 +58,18 @@ public class IdfArrayNode extends IdfNode {
             switch (child.toString()) {
                 case AstNodes.CSTE_N:
                     indexes.add(new ConstantNumericNode(child));
+                    break;
 
                 case AstNodes.FUNC_CALL:
                     indexes.add(new FuncCallNode(child));
+                    break;
 
                 case AstNodes.MULT_NODE:
                 case AstNodes.DIV_NODE:
                 case AstNodes.POW_NODE:
                 case AstNodes.PLUS_NODE:
                     indexes.add(OperationNodeFactory.createOperationNode(child));
+                    break;
 
                 case AstNodes.ARRAY_INDEX:
                     IdfArrayNode ArrayNode = new IdfArrayNode(child);
