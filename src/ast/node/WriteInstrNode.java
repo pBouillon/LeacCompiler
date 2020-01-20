@@ -93,8 +93,25 @@ public class WriteInstrNode extends BaseNode {
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
+        StringBuilder vars = new StringBuilder();
+        StringBuilder types = new StringBuilder();
+        for (BaseNode item : items) {
+            switch(item.toString()) {
+                case AstNodes.CSTE_N:
+                    types.append("%d");
+                    vars.append(item.generateCode(prefix));
+                    break;
+                case AstNodes.CSTE_S:
+                    types.append("%s");
+                    vars.append(item.generateCode(prefix));
+                    break;
+                default:
+                    types.append("%s");
+                    vars.append(item.generateCode(prefix));
+            }
+        }
         // TODO: idf code gen
-        return prefix + "printf(\"\", " + "TODO" + ");\n";
+        return prefix + "printf(\"" + types.toString() +"\", " + vars.toString() + ");\n";
     }
 
     @Override
