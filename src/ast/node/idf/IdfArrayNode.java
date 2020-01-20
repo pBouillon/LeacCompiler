@@ -51,6 +51,8 @@ public class IdfArrayNode extends IdfNode {
      */
     @Override
     protected void extractChildren() throws AstBaseException {
+        indexes = new ArrayList<>();
+
         // Assign each child
         for (Tree child : children) {
             switch (child.toString()) {

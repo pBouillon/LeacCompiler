@@ -58,12 +58,14 @@ public class LMemberNode extends BaseNode {
      */
     @Override
     protected void extractChildren() throws AstBaseException {
+        idfs = new ArrayList<>();
+
         // Assign each child
         for (Tree child : children) {
             switch (child.toString()) {
                 case AstNodes.ARRAY_INDEX:
                     IdfArrayNode ArrayNode = new IdfArrayNode(child);
-                    ArrayNode.setName(idfs.get(idfs.size()).toString());
+                    ArrayNode.setName(idfs.get(idfs.size() - 1).toString());
                     idfs.set(idfs.size(), ArrayNode);
                     break;
 
