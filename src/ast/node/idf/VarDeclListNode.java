@@ -63,10 +63,10 @@ public class VarDeclListNode extends BaseNode {
     @Override
     public String generateCode(String prefix) throws AstBaseException {
         StringBuilder sb = new StringBuilder();
+        sb.append(prefix);
 
         for (VarDecNode var : vars) {
-            sb.append(prefix)
-                    .append(var.generateCode(prefix));
+            sb.append(var.generateCode(prefix));
         }
         return sb.toString();
     }

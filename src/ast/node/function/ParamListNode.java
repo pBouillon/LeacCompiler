@@ -50,10 +50,12 @@ public class ParamListNode extends BaseNode {
     public String generateCode(String prefix) throws AstBaseException {
         StringBuilder sb = new StringBuilder();
 
-        for (ParamNode param : paramNodes) {
-            sb.append(param.generateCode(prefix));
+        for (int i = 0; i < paramNodes.size(); ++i) {
+            sb.append(paramNodes.get(i).generateCode(prefix));
+            if (i + 1 != paramNodes.size()) {
+                sb.append(", ");
+            }
         }
-
         return sb.toString();
     }
 

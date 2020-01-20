@@ -69,8 +69,8 @@ public class RootNode extends BaseNode {
         StringBuilder codeBuilder = new StringBuilder();
 
         codeBuilder
-                .append("#include <math.h>\n\n")
-                .append("/* BEGIN OF THE AUTO GENERATED CODE FROM CUSTOM AST */\n")
+                .append("/* BEGIN OF THE AUTO GENERATED CODE FROM CUSTOM AST */\n\n")
+                .append("#include <math.h>\n")
                 .append("\n")
                 .append("/* Begin function definitions */\n").append(prefix).append(funcDeclListNode.generateCode(prefix))
                 .append("/* End function definitions */\n")

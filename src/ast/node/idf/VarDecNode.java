@@ -72,10 +72,9 @@ public class VarDecNode extends BaseNode {
         StringBuilder sb = new StringBuilder();
 
         for (String idf : idfs) {
-            sb.append(prefix)
-                    .append(idf);
+            sb.append(idf);
             if (!idf.equals(idfs.get(idfs.size()-1)))
-                sb.append(',');
+                sb.append(", ");
             else
                 sb.append(";\n");
         }

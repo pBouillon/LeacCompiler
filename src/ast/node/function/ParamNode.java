@@ -12,6 +12,7 @@ import utils.AstNodes;
 public class ParamNode extends BaseNode {
 
     private String paramName;
+    private String paramType;
 
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
@@ -42,17 +43,17 @@ public class ParamNode extends BaseNode {
 
     @Override
     protected void extractChildren() throws AstBaseException {
-        paramName = children.get(0).toString();
     }
 
     @Override
     protected void extractIdfs() throws AstBaseException {
-
+        paramName = children.get(0).toString();
+        paramType = children.get(1).toString();
     }
 
     @Override
     public String generateCode(String prefix) throws AstBaseException {
-        return null;
+        return paramType + " " + paramName;
     }
 
     @Override
