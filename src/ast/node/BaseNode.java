@@ -31,6 +31,10 @@ public abstract class BaseNode {
      */
     protected Tree currentNode;
 
+    public ArrayList<Tree> getChildren() {
+        return children;
+    }
+
     /**
      * Default constructor to ensure the usage of the ANTLR raw AST
      *
