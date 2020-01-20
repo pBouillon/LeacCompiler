@@ -14,7 +14,7 @@ public class ConstantBooleanNode extends ConstantNode {
      *
      * @param _currentNode ANTLR raw AST
      */
-    protected ConstantBooleanNode(Tree _currentNode) throws AstBaseException {
+    public ConstantBooleanNode(Tree _currentNode) throws AstBaseException {
         super(_currentNode);
 
         if (!nodeName.equals(AstNodes.CSTE_B)) {

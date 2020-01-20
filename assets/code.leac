@@ -17,8 +17,8 @@
                 i = i + 1
                 };
             return max
-            }
-        function theEnd () : void
+        }
+    function theEnd () : void
         { write "that’s all !" }
 
 { /* début du programme principal */
